@@ -4,22 +4,11 @@
     syncSection() {
         const sections = ['home', 'about', 'vision', 'focus', 'journey'];
         const threshold = document.querySelector('.site-header').getBoundingClientRect().height + 120;
-        this.currentSection = sections.reduce((current, id) => document.getElementById(id).getBoundingClientRect().top <= threshold ? id : current, 'home');
+        const section = sections.reduce((current, id) => document.getElementById(id).getBoundingClientRect().top <= threshold ? id : current, 'home');
+        this.currentSection = section === 'about' ? 'home' : section;
     }
 }" x-init="$nextTick(() => syncSection())" @scroll.window.throttle.100ms="syncSection()" @resize.window.debounce.150ms="if (window.innerWidth >= 1024) open = false; syncSection()">
-    <header class="site-header" @keydown.escape.window="if (open) { open = false; $refs.menuToggle.focus(); }" @click.outside="open = false">
-        <div class="shell header-inner">
-            <a href="{{ route('home') }}" class="brand" aria-label="The IMPACT home"><span class="brand-symbol" aria-hidden="true">↗</span><span><small>THE</small>IMPACT<span class="brand-dot">.</span></span></a>
-            <nav class="desktop-nav" aria-label="Main navigation">
-                <a href="#about">Who we are</a><a href="#focus">Our focus</a><a href="#journey">The journey</a>
-            </nav>
-            <a href="#vision" class="button button-dark header-cta">Discover our vision <span aria-hidden="true">↗</span></a>
-            <button type="button" class="menu-button" x-ref="menuToggle" @click="open = !open" :aria-expanded="open" aria-controls="mobile-navigation" aria-label="Toggle navigation"><span x-text="open ? 'Close −' : 'Menu +'">Menu +</span></button>
-        </div>
-        <nav id="mobile-navigation" x-cloak x-show="open" x-transition class="mobile-nav" aria-label="Mobile navigation" @click="if ($event.target.closest('a')) open = false">
-            <a href="#about">Who we are</a><a href="#vision">Our vision</a><a href="#focus">Our focus</a><a href="#journey">The journey</a>
-        </nav>
-    </header>
+    <x-site-header />
 
     <main id="main">
         <section id="home" class="hero">
@@ -28,7 +17,7 @@
                     <p class="eyebrow"><x-icon name="faith" class="tiny-cross" /> Faith-led. Service-driven. Africa-focused.</p>
                     <h1>Rooted in faith.<br>Built for <em>impact.</em></h1>
                     <p class="hero-description">A generation of Christ-centred young leaders. Equipped to serve. Ready to shape the future of our communities and nations.</p>
-                    <div class="hero-actions"><a href="#about" class="button button-gold">Discover The IMPACT <span aria-hidden="true">↗</span></a><a href="#journey" class="text-link">Explore the journey <span aria-hidden="true">→</span></a></div>
+                    <div class="hero-actions"><a href="{{ route('about') }}" class="button button-gold">Discover The IMPACT <span aria-hidden="true">↗</span></a><a href="#journey" class="text-link">Explore the journey <span aria-hidden="true">→</span></a></div>
                     <div class="hero-footnote"><span class="line"></span><span>Christian Youth Leadership<br>& Public Impact Network</span></div>
                 </div>
                 <figure class="hero-visual">
@@ -63,7 +52,7 @@
                     <figcaption><x-icon name="growth" /><span>Conviction grows through service.</span></figcaption>
                 </figure>
             </div>
-            <div class="about-copy"><p class="lead">We believe young Christians have a vital role to play in the future of Africa.</p><p>The IMPACT is a network of Christian young leaders focused on governance, public policy, leadership, service and societal transformation.</p><p>We bring faith and public responsibility together, connecting a generation with the purpose, competence and courage to turn conviction into meaningful contribution.</p><a href="#focus" class="underlined-link">See where we focus <span aria-hidden="true">↗</span></a></div>
+            <div class="about-copy"><p class="lead">We believe young Christians have a vital role to play in the future of Africa.</p><p>The IMPACT is a network of Christian young leaders focused on governance, public policy, leadership, service and societal transformation.</p><p>We bring faith and public responsibility together, connecting a generation with the purpose, competence and courage to turn conviction into meaningful contribution.</p><a href="{{ route('about') }}" class="underlined-link">More about THE IMPACT <span aria-hidden="true">↗</span></a></div>
         </section>
 
         <section id="vision" class="shell vision-grid">
@@ -109,27 +98,6 @@
 
         <section class="shell closing-section"><span class="closing-star"><x-icon name="growth" /></span><p class="eyebrow">THE FUTURE CALLS FOR MORE OF US</p><h2>A grounded faith.<br>A prepared generation.<br><em>A transformed society.</em></h2><a href="#vision" class="button button-dark">Return to our vision <span aria-hidden="true">↗</span></a></section>
     </main>
-    <footer class="site-footer"><div class="shell"><div class="footer-main"><a href="{{ route('home') }}" class="brand" aria-label="The IMPACT home"><span class="brand-symbol" aria-hidden="true">↗</span><span><small>THE</small>IMPACT<span class="brand-dot">.</span></span></a><p>Christian Youth Leadership<br>& Public Impact Network</p><nav aria-label="Footer navigation"><a href="#about">Who we are</a><a href="#focus">Our focus</a><a href="#journey">The journey</a></nav></div><p class="imagery-note">Imagery is AI-generated to illustrate our values.</p><div class="footer-bottom"><span>© {{ date('Y') }} The IMPACT. All rights reserved.</span><span>Faith → Leadership → Transformation</span><a href="#main">Back to top ↑</a></div></div></footer>
-    <nav class="app-nav" aria-label="Quick navigation">
-        <a href="#home" @click="open = false; currentSection = 'home'" :class="{ 'is-current': currentSection === 'home' }" :aria-current="currentSection === 'home' ? 'location' : null">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1Z"/></svg>
-            <span>Home</span>
-        </a>
-        <a href="#about" @click="open = false; currentSection = 'about'" :class="{ 'is-current': currentSection === 'about' }" :aria-current="currentSection === 'about' ? 'location' : null">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="7" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 4a3 3 0 0 1 0 6m2 4a5 5 0 0 1 3 4v3"/></svg>
-            <span>About</span>
-        </a>
-        <a href="#vision" @click="open = false; currentSection = 'vision'" :class="{ 'is-current': currentSection === 'vision' }" :aria-current="currentSection === 'vision' ? 'location' : null">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
-            <span>Vision</span>
-        </a>
-        <a href="#focus" @click="open = false; currentSection = 'focus'" :class="{ 'is-current': currentSection === 'focus' }" :aria-current="currentSection === 'focus' ? 'location' : null">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg>
-            <span>Focus</span>
-        </a>
-        <a href="#journey" @click="open = false; currentSection = 'journey'" :class="{ 'is-current': currentSection === 'journey' }" :aria-current="currentSection === 'journey' ? 'location' : null">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="18" r="2"/><circle cx="19" cy="6" r="2"/><path d="M7 18h8a4 4 0 0 0 0-8H9a4 4 0 0 1 0-8h6"/></svg>
-            <span>Journey</span>
-        </a>
-    </nav>
+    <x-site-footer />
+    <x-mobile-navigation />
 </div>
