@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#322238">
     <title>The IMPACT — Christian Youth Leadership &amp; Public Impact Network</title>
     <meta name="description" content="The IMPACT is a network of Christian young leaders focused on governance, public policy, leadership, service and societal transformation across Africa.">
