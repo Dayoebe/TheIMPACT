@@ -326,3 +326,129 @@ h2 { font-size: clamp(34px, 8.5vw, 48px); line-height: 1.1; letter-spacing: -.8p
     .about-values { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px 40px; }
     .about-approach-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 64px; }
 }
+
+/* Public page collection */
+.inner-hero { background: #f0e6df; border-bottom: 1px solid #dfd2ce; }
+.inner-hero-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; padding-block: 20px 36px; }
+.inner-hero h1 { font-size: clamp(42px, 10.5vw, 74px); margin-top: 0; max-width: 800px; }
+.inner-lead { color: #655460; max-width: 610px; font-size: 16px; line-height: 1.85; margin-bottom: 24px; }
+.inner-emblem { display: none; }
+.breadcrumb { flex-wrap: wrap; row-gap: 0; }
+.statement-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; }
+.vision-statement { background: #eee5ed; padding: 28px; border-radius: 20px; border-top: 3px solid #8d6c91; }
+.vision-statement > .icon { width: 36px; height: 36px; color: #754657; }
+.vision-statement > p { font-family: var(--font-display); font-size: 30px; line-height: 1.4; margin-block: 20px; }
+.vision-statement .eyebrow { color: #746470; font-size: 9px; }
+.mission-path, .matching-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
+.mission-path li, .matching-grid li { padding: 24px; border: 1px solid #d8c8d7; border-radius: 16px; }
+.mission-path h3, .matching-grid h3 { font-size: 30px; margin-block: 8px 14px; }
+.mission-path p, .matching-grid p { color: #746470; font-size: 14px; line-height: 1.85; }
+.preview-notice { display: flex; align-items: start; gap: 12px; background: #f3e9d9; border: 1px solid #ddc9a9; border-radius: 12px; padding: 16px; color: #65503d; margin-block: 24px; }
+.preview-notice p { font-size: 12px; line-height: 1.8; margin: 0; }
+.preview-notice .icon { width: 20px; height: 20px; }
+.directory-jumps { display: flex; flex-wrap: wrap; gap: 8px; }
+.directory-jumps a { display: inline-flex; align-items: center; min-height: 44px; padding: 10px 14px; border: 1px solid #dfd2da; border-radius: 24px; font-size: 12px; }
+.leadership-group { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; padding-block: 40px; border-bottom: 1px solid #dfd2da; }
+.group-heading { display: flex; align-items: start; gap: 16px; }
+.group-heading .purpose-icon { flex-shrink: 0; }
+.group-heading h2 { font-size: 34px; margin-bottom: 16px; }
+.group-heading p:not(.eyebrow) { font-size: 14px; color: #746470; line-height: 1.85; }
+.group-heading .section-label { font-size: 9px; margin-bottom: 10px; }
+.people-grid, .programme-grid, .participation-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
+.person-card { background: #f1e9e6; padding: 24px; border-radius: 20px; border: 1px solid #dfd2da; }
+.person-avatar { display: grid; place-items: center; width: 72px; height: 84px; border-radius: 40px 40px 10px 10px; background: #e4d5e3; color: #754657; font-family: var(--font-display); font-size: 34px; margin-bottom: 20px; }
+.person-card .eyebrow { font-size: 9px; color: #746470; }
+.person-card h3 { font-size: 32px; margin-block: 8px; }
+.person-card p { font-size: 14px; line-height: 1.85; color: #746470; }
+.person-card .person-role { color: #89543f; font-size: 12px; font-weight: 600; margin-bottom: 12px; }
+.empty-state { padding: 24px; border: 1px dashed #bfa6be; border-radius: 12px; font-size: 14px; line-height: 1.8; color: #746470; }
+.programme-card { display: flex; flex-direction: column; padding: 24px; border: 1px solid #dfd2da; border-radius: 20px; background: #f1e9e6; }
+.programme-card:nth-child(3n + 2) { background: #eee5ed; }
+.programme-card:nth-child(3n + 3) { background: #f0e4d2; }
+.programme-card-top { display: flex; align-items: start; justify-content: space-between; gap: 16px; }
+.programme-card-top .purpose-icon { flex-shrink: 0; }
+.programme-card-top .eyebrow { font-size: 9px; text-align: right; padding-top: 10px; }
+.programme-card h3 { font-size: 34px; margin-block: 6px 16px; }
+.programme-card h3 a { display: inline-block; }
+.programme-card p { font-size: 14px; line-height: 1.85; color: #746470; margin-bottom: 24px; }
+.programme-card-bottom { margin-top: auto; display: flex; flex-direction: column; align-items: start; gap: 8px; }
+.programme-card-bottom > span { font-size: 11px; color: #746470; }
+.programme-detail-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 36px; padding-top: 16px; }
+.programme-body > section { padding-block: 28px; border-bottom: 1px solid #dfd2da; }
+.programme-body h2 { font-size: 36px; margin-bottom: 20px; }
+.programme-body p { font-size: 15px; line-height: 1.9; color: #746470; }
+.objective-list { display: grid; gap: 18px; }
+.objective-list li { display: flex; gap: 14px; align-items: start; font-size: 15px; line-height: 1.8; }
+.objective-list .icon { color: #89543f; margin-top: 3px; }
+.curriculum-list details { border-bottom: 1px solid #dfd2da; }
+.curriculum-list summary { display: flex; align-items: center; gap: 12px; padding-block: 18px; min-height: 56px; cursor: pointer; font-size: 14px; font-weight: 600; list-style: none; }
+.curriculum-list summary::-webkit-details-marker { display: none; }
+.curriculum-list summary .eyebrow { color: #89543f; }
+.details-indicator { margin-left: auto; font-size: 22px; font-weight: 400; transition: transform .2s; }
+.curriculum-list details[open] .details-indicator { transform: rotate(45deg); }
+.curriculum-list details p { padding: 0 0 20px 30px; }
+.facilitator-row { display: flex; gap: 16px; padding: 20px; background: #eee5ed; border-radius: 16px; }
+.facilitator-row .purpose-icon { flex-shrink: 0; margin: 0; }
+.facilitator-row h3, .cohort-card h3 { font-size: 28px; }
+.facilitator-row p { font-size: 12px; }
+.cohort-card { padding: 24px; border: 1px solid #dfd2da; border-radius: 16px; margin-top: 16px; }
+.cohort-card h3 { margin-block: 16px; }
+.status-pill { display: inline-block; font-size: 10px; font-weight: 600; border-radius: 20px; background: #eee5ed; color: #754657; padding: 7px 12px; }
+.cohort-card dl > div, .programme-summary dl > div { padding-block: 12px; border-bottom: 1px solid #dfd2da; }
+.cohort-card dt, .programme-summary dt { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #746470; margin-bottom: 6px; }
+.cohort-card dd, .programme-summary dd { font-size: 13px; line-height: 1.8; }
+.programme-summary { background: #f0e6df; border: 1px solid #dfd2da; padding: 24px; border-radius: 20px; }
+.programme-summary h2 { font-size: 32px; margin-bottom: 20px; }
+.programme-summary nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 16px; margin-block: 20px; }
+.programme-summary nav a { display: flex; align-items: center; min-height: 44px; font-size: 12px; }
+.registration-panel { border-top: 1px solid #dfd2da; padding-top: 24px; }
+.registration-panel h3 { font-size: 28px; }
+.registration-panel p { color: #746470; font-size: 13px; line-height: 1.8; margin-block: 12px 20px; }
+.registration-panel .button { width: 100%; }
+.application-dialog { position: fixed; inset: 0; margin: auto; width: min(540px, calc(100% - 32px)); max-height: calc(100dvh - 48px); overflow-y: auto; border: 1px solid #dfd2da; border-radius: 20px; background: var(--color-paper); color: var(--color-ink); padding: 0; }
+.application-dialog::backdrop { background: #24172cc9; }
+.dialog-content { padding: 28px; }
+.dialog-content h2 { font-size: 34px; margin-bottom: 20px; }
+.dialog-content > p { font-size: 14px; line-height: 1.85; margin-bottom: 16px; }
+.dialog-close { display: block; margin-left: auto; width: 44px; height: 44px; font-size: 28px; border: 1px solid #dfd2da; border-radius: 50%; margin-bottom: 20px; }
+.participation-card { padding: 24px; border: 1px solid #dfd2da; background: var(--color-paper); border-radius: 20px; }
+.participation-card h3 { font-size: 32px; margin-block: 12px 20px; }
+.participation-card p, .participation-card li { font-size: 14px; line-height: 1.85; color: #746470; }
+.participation-card ul { list-style: disc; padding-left: 20px; margin-block: 20px; display: grid; gap: 8px; }
+.participation-card .status-pill { margin-block: 20px; }
+.participation-card > .button { margin-top: 20px; }
+.mentorship-areas { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
+.mentorship-areas > div { display: flex; align-items: center; gap: 16px; min-height: 80px; padding: 20px; border: 1px solid #624a65; border-radius: 16px; font-size: 15px; }
+.mentorship-areas .icon { color: var(--color-gold); }
+.mobile-nav a { justify-content: space-between; gap: 16px; }
+.footer-main nav { max-width: 570px; }
+
+@media (min-width: 640px) {
+    .programme-grid, .participation-grid, .people-grid, .mentorship-areas, .mission-path, .matching-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .mission-path li:last-child { grid-column: 1 / -1; }
+}
+@media (min-width: 1024px) {
+    .inner-hero-grid { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 64px; align-items: center; padding-block: 36px 64px; }
+    .inner-hero h1 { font-size: clamp(60px, 6vw, 86px); }
+    .inner-emblem { display: grid; justify-items: center; gap: 28px; color: #89543f; }
+    .inner-emblem > span { display: grid; place-items: center; width: 180px; height: 220px; border: 1px solid #b99885; border-radius: 100px 100px 6px 6px; }
+    .inner-emblem .icon { width: 76px; height: 76px; stroke-width: 1; }
+    .inner-emblem p { font-size: 8px; letter-spacing: 2px; }
+    .statement-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 64px; }
+    .vision-statement { padding: 40px; border-radius: 6px; }
+    .vision-statement > p { font-size: 36px; }
+    .mission-path { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+    .mission-path li { padding: 20px; border-radius: 6px; }
+    .mission-path li:last-child { grid-column: auto; }
+    .matching-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .matching-grid li { border-radius: 6px; }
+    .leadership-group { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 40px; padding-block: 56px; }
+    .group-heading { flex-direction: column; }
+    .person-card, .programme-card, .participation-card { border-radius: 6px; padding: 28px; }
+    .programme-grid, .mentorship-areas { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .programme-detail-grid { grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr); gap: 64px; }
+    .programme-summary { border-radius: 6px; }
+    .programme-body h2 { font-size: 42px; }
+    .programme-body > section { padding-block: 36px; }
+    .desktop-nav { gap: 20px; }
+}

@@ -1,13 +1,4 @@
-<div class="page" x-data="{
-    open: false,
-    currentSection: 'home',
-    syncSection() {
-        const sections = ['home', 'about', 'vision', 'focus', 'journey'];
-        const threshold = document.querySelector('.site-header').getBoundingClientRect().height + 120;
-        const section = sections.reduce((current, id) => document.getElementById(id).getBoundingClientRect().top <= threshold ? id : current, 'home');
-        this.currentSection = section === 'about' ? 'home' : section;
-    }
-}" x-init="$nextTick(() => syncSection())" @scroll.window.throttle.100ms="syncSection()" @resize.window.debounce.150ms="if (window.innerWidth >= 1024) open = false; syncSection()">
+<div class="page" x-data="{ open: false }" @resize.window.debounce.150ms="if (window.innerWidth >= 1024) open = false">
     <x-site-header />
 
     <main id="main">
@@ -80,7 +71,7 @@
                 <div class="focus-content">
                     @foreach ($focusAreas as $area)
                         <article id="focus-panel-{{ $loop->index }}" role="tabpanel" aria-labelledby="focus-tab-{{ $loop->index }}" tabindex="0" x-show="active === {{ $loop->index }}" @if(!$loop->first) x-cloak @endif>
-                            <div class="focus-icon"><x-icon :name="['governance', 'policy', 'leadership', 'service', 'growth'][$loop->index]" /></div><p class="eyebrow">{{ $area[3] }}</p><h3>{{ $area[1] }}</h3><p>{{ $area[2] }}</p><a href="#journey" class="underlined-link">Our path to impact <span aria-hidden="true">→</span></a>
+                            <div class="focus-icon"><x-icon :name="['governance', 'policy', 'leadership', 'service', 'growth'][$loop->index]" /></div><p class="eyebrow">{{ $area[3] }}</p><h3>{{ $area[1] }}</h3><p>{{ $area[2] }}</p><a href="{{ route('programmes.index') }}" class="underlined-link">Explore our programmes <span aria-hidden="true">→</span></a>
                         </article>
                     @endforeach
                 </div>
@@ -96,7 +87,7 @@
             </ol>
         </div></section>
 
-        <section class="shell closing-section"><span class="closing-star"><x-icon name="growth" /></span><p class="eyebrow">THE FUTURE CALLS FOR MORE OF US</p><h2>A grounded faith.<br>A prepared generation.<br><em>A transformed society.</em></h2><a href="#vision" class="button button-dark">Return to our vision <span aria-hidden="true">↗</span></a></section>
+        <section class="shell closing-section"><span class="closing-star"><x-icon name="growth" /></span><p class="eyebrow">THE FUTURE CALLS FOR MORE OF US</p><h2>A grounded faith.<br>A prepared generation.<br><em>A transformed society.</em></h2><a href="{{ route('about.vision-mission') }}" class="button button-dark">Explore our Vision &amp; Mission <span aria-hidden="true">↗</span></a></section>
     </main>
     <x-site-footer />
     <x-mobile-navigation />

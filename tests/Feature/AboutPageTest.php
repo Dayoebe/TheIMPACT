@@ -31,7 +31,7 @@ class AboutPageTest extends TestCase
 
         $response->assertSee('<title>About THE IMPACT — Faith, Leadership &amp; Service in Africa</title>', false)
             ->assertSee('Discover why THE IMPACT exists, the gap we seek to address')
-            ->assertSee('href="'.route('home').'#focus"', false)
+            ->assertSee('href="'.route('programmes.index').'"', false)
             ->assertSee('href="'.route('about').'"', false)
             ->assertSee('aria-current="page"', false);
 

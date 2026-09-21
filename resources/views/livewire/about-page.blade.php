@@ -33,7 +33,7 @@
         <section id="why-we-exist" class="about-purpose-section">
             <div class="shell section about-editorial">
                 <div><p class="eyebrow section-label">02 / WHY THE IMPACT EXISTS</p><h2>Conviction needs<br><em>a way into action.</em></h2><span class="about-feature-icon"><x-icon name="faith" /></span></div>
-                <div class="about-prose"><p class="lead">We exist to help young Christians turn a sense of calling into meaningful contribution.</p><p>A desire to make a difference needs direction, preparation and people to walk alongside us. THE IMPACT brings these priorities together through a mission to identify, connect, equip, mentor and deploy young leaders.</p><p>Our vision is to become Africa’s leading network for developing Christ-centred young leaders who shape institutions, influence public policy and build solutions that transform communities and nations.</p><p>That vision begins with a practical question: how can our faith, abilities and opportunities serve the people around us?</p></div>
+                <div class="about-prose"><p class="lead">We exist to help young Christians turn a sense of calling into meaningful contribution.</p><p>A desire to make a difference needs direction, preparation and people to walk alongside us. THE IMPACT brings these priorities together through a mission to identify, connect, equip, mentor and deploy young leaders.</p><p>Our vision is to become Africa’s leading network for developing Christ-centred young leaders who shape institutions, influence public policy and build solutions that transform communities and nations.</p><a href="{{ route('about.vision-mission') }}" class="underlined-link">Read our Vision &amp; Mission <span aria-hidden="true">↗</span></a><p>That vision begins with a practical question: how can our faith, abilities and opportunities serve the people around us?</p></div>
             </div>
         </section>
 
@@ -49,11 +49,7 @@
         <section id="our-philosophy" class="about-philosophy-section">
             <div class="shell section">
                 <div class="section-heading"><div><p class="eyebrow section-label">04 / OUR PHILOSOPHY</p><h2>Faith is the foundation.<br><em>Transformation is the aim.</em></h2></div><p>Six connected ideas guide how we think about leadership and the contribution it should make.</p></div>
-                <ol class="about-values">
-                    @foreach ([['Faith', 'Our relationship with Christ shapes our values, our motives and our responsibility to others.'], ['Leadership', 'We understand leadership as accepting responsibility and helping others move towards a worthwhile purpose.'], ['Competence', 'We value the knowledge, skills and discipline needed to turn good intentions into thoughtful action.'], ['Service', 'The needs and dignity of people give our leadership its direction. Contribution begins with listening.'], ['Influence', 'We seek to earn trust and bring constructive ideas to the decisions that shape communities and institutions.'], ['Transformation', 'We look towards lasting improvements in people’s lives and the systems that serve them.']] as [$heading, $copy])
-                        <li><span class="value-index">0{{ $loop->iteration }}</span><div><h3>{{ $heading }}</h3><p>{{ $copy }}</p></div></li>
-                    @endforeach
-                </ol>
+                <x-philosophy />
             </div>
         </section>
 
@@ -83,7 +79,7 @@
             </div>
         </section>
 
-        <section class="shell closing-section"><span class="closing-star"><x-icon name="growth" /></span><p class="eyebrow">PURPOSE, PUT INTO PRACTICE</p><h2>See where our<br><em>convictions lead.</em></h2><a href="{{ route('home') }}#focus" class="button button-dark">Explore our focus areas <span aria-hidden="true">↗</span></a></section>
+        <section class="shell closing-section"><span class="closing-star"><x-icon name="growth" /></span><p class="eyebrow">PURPOSE, PUT INTO PRACTICE</p><h2>See where our<br><em>convictions lead.</em></h2><a href="{{ route('programmes.index') }}" class="button button-dark">Explore our programmes <span aria-hidden="true">↗</span></a></section>
     </main>
 
     <x-site-footer />
