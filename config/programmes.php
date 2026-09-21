@@ -1,0 +1,88 @@
+<?php
+
+return [
+    'christian-leadership' => [
+        'name' => 'Leadership Development', 'headline' => 'Lead with character. Serve with purpose.', 'icon' => 'leadership', 'category' => 'Leadership',
+        'summary' => 'Explore Christ-centred leadership, personal responsibility and the practical work of guiding others.',
+        'overview' => 'Leadership begins with the person you are becoming. This programme outline brings Christian conviction together with self-awareness, ethical judgement and the everyday skills of leading a team. It connects personal growth to responsibility for others.',
+        'objectives' => ['Reflect on personal values, strengths and areas for growth.', 'Practise ethical decision-making and responsible communication.', 'Develop a practical plan for leading through service.'],
+        'audience' => 'Young Christians preparing for leadership in student communities, workplaces, churches, civic initiatives or local organisations.',
+        'curriculum' => [
+            ['title' => 'Identity, purpose and calling', 'description' => 'Reflect on the relationship between faith, motivation and the responsibility to lead.'],
+            ['title' => 'Character and ethical judgement', 'description' => 'Explore integrity, accountability and how to respond when values and pressures collide.'],
+            ['title' => 'Leading people', 'description' => 'Build communication, listening, teamwork and conflict-resolution skills.'],
+            ['title' => 'Leadership in practice', 'description' => 'Translate learning into a service-focused personal leadership plan.'],
+        ],
+        'duration' => null, 'facilitators' => [], 'cohorts' => [], 'registration_url' => null,
+    ],
+    'governance-public-policy' => [
+        'name' => 'Governance & Public Policy', 'headline' => 'Understand institutions. Contribute thoughtfully.', 'icon' => 'governance', 'category' => 'Public life',
+        'summary' => 'Build an informed understanding of institutions, public decisions and responsible civic participation.',
+        'overview' => 'Public decisions affect everyday lives. This programme outline introduces the relationship between institutions, citizens and policy, with an emphasis on listening, examining evidence and contributing constructively to public life.',
+        'objectives' => ['Understand the roles of institutions and public accountability.', 'Explore how public problems become policy questions.', 'Practise presenting a clear, evidence-informed recommendation.'],
+        'audience' => 'Young Christians interested in governance, civic engagement, public administration, advocacy or policy research.',
+        'curriculum' => [
+            ['title' => 'Institutions and accountability', 'description' => 'Explore public responsibility, institutional roles and the importance of accountability.'],
+            ['title' => 'Understanding a policy problem', 'description' => 'Learn to frame a question, listen to affected people and consider different perspectives.'],
+            ['title' => 'Evidence and policy options', 'description' => 'Compare possible responses, their trade-offs and the evidence behind them.'],
+            ['title' => 'Constructive public contribution', 'description' => 'Develop a concise policy brief and practise communicating ideas respectfully.'],
+        ],
+        'duration' => null, 'facilitators' => [], 'cohorts' => [], 'registration_url' => null,
+    ],
+    'competence-development' => [
+        'name' => 'Competence Development', 'headline' => 'Give your purpose practical skills.', 'icon' => 'equip', 'category' => 'Practical skills',
+        'summary' => 'Strengthen the communication, problem-solving and delivery skills that make contribution effective.',
+        'overview' => 'Good intentions need practical ability. This programme outline focuses on the habits and tools that help young leaders understand problems, work with people and carry a useful idea through to completion.',
+        'objectives' => ['Communicate ideas clearly for different audiences.', 'Break a practical challenge into manageable steps.', 'Plan work, collaborate effectively and reflect on results.'],
+        'audience' => 'Emerging leaders who want to strengthen their readiness for work, volunteering, team responsibilities or community projects.',
+        'curriculum' => [
+            ['title' => 'Communication that connects', 'description' => 'Practise clear writing, listening and presenting ideas.'],
+            ['title' => 'Critical thinking and problem-solving', 'description' => 'Examine assumptions, ask useful questions and compare possible solutions.'],
+            ['title' => 'Planning and collaboration', 'description' => 'Define tasks, responsibilities and realistic milestones for a shared project.'],
+            ['title' => 'Learning from delivery', 'description' => 'Review progress and use feedback to improve the next attempt.'],
+        ],
+        'duration' => null, 'facilitators' => [], 'cohorts' => [], 'registration_url' => null,
+    ],
+    'christian-character-faith' => [
+        'name' => 'Christian Character & Faith', 'headline' => 'Let conviction shape everyday choices.', 'icon' => 'faith', 'category' => 'Faith & character',
+        'summary' => 'Connect Christian identity, personal formation and integrity in everyday leadership and public life.',
+        'overview' => 'Faith is the foundation of THE IMPACT. This programme outline creates space to consider how a relationship with Christ shapes motives, choices and treatment of others, especially when leadership brings responsibility and pressure.',
+        'objectives' => ['Reflect on faith as a foundation for service.', 'Recognise the relationship between private habits and public responsibility.', 'Develop practices that support integrity, humility and accountability.'],
+        'audience' => 'Young Christians seeking to connect spiritual growth with responsible leadership in their everyday contexts.',
+        'curriculum' => [
+            ['title' => 'Faith and identity', 'description' => 'Explore Christian identity and the purpose behind leadership.'],
+            ['title' => 'Habits of character', 'description' => 'Reflect on humility, honesty, discipline and accountability.'],
+            ['title' => 'Integrity under pressure', 'description' => 'Consider how to respond to competing expectations and difficult choices.'],
+            ['title' => 'Faith expressed through service', 'description' => 'Identify practical ways to put conviction into action for others.'],
+        ],
+        'duration' => null, 'facilitators' => [], 'cohorts' => [], 'registration_url' => null,
+    ],
+    'community-service' => [
+        'name' => 'Community Service', 'headline' => 'Listen first. Serve where you are.', 'icon' => 'service', 'category' => 'Community',
+        'summary' => 'Learn to understand community needs and shape thoughtful, collaborative responses.',
+        'overview' => 'Meaningful service starts with people. This programme outline connects listening and local understanding with the planning, teamwork and reflection needed to contribute responsibly to a community initiative.',
+        'objectives' => ['Listen to community priorities with respect and care.', 'Design a realistic response alongside the people it concerns.', 'Consider how to review contribution and sustain learning.'],
+        'audience' => 'Young Christians interested in volunteering, neighbourhood initiatives or leading service-focused teams.',
+        'curriculum' => [
+            ['title' => 'Listening to a community', 'description' => 'Explore needs, strengths and priorities through respectful engagement.'],
+            ['title' => 'Designing a useful response', 'description' => 'Set a clear purpose and consider resources, responsibilities and practical boundaries.'],
+            ['title' => 'Working together', 'description' => 'Plan a small initiative with collaboration, dignity and accountability at its centre.'],
+            ['title' => 'Reflection and continuity', 'description' => 'Think about feedback, the usefulness of an activity and what should happen next.'],
+        ],
+        'duration' => null, 'facilitators' => [], 'cohorts' => [], 'registration_url' => null,
+    ],
+    'mentorship' => [
+        'name' => 'Mentorship', 'headline' => 'Grow through guidance and reflection.', 'icon' => 'mentor', 'category' => 'Guided growth',
+        'summary' => 'Explore purposeful mentoring relationships that connect experience with emerging potential.',
+        'overview' => 'Guidance can help a young leader turn questions into considered next steps. This programme outline introduces the goals, habits and shared responsibilities that make a mentoring relationship useful to both participants.',
+        'objectives' => ['Set meaningful development goals for a mentoring relationship.', 'Build habits of listening, preparation and honest reflection.', 'Translate conversations into achievable next steps.'],
+        'audience' => 'Young Christians seeking guidance and experienced Christians interested in supporting emerging leaders.',
+        'curriculum' => [
+            ['title' => 'Starting with purpose', 'description' => 'Identify growth areas and agree what a useful mentoring relationship should support.'],
+            ['title' => 'Expectations and boundaries', 'description' => 'Discuss commitment, respect, confidentiality and the limits of the relationship.'],
+            ['title' => 'Conversations that support growth', 'description' => 'Practise preparation, active listening, thoughtful questions and feedback.'],
+            ['title' => 'Turning insight into action', 'description' => 'Set next steps, review progress and reflect on what has been learned.'],
+        ],
+        'duration' => null, 'facilitators' => [], 'cohorts' => [], 'registration_url' => null,
+    ],
+];
