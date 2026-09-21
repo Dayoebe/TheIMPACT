@@ -13,7 +13,7 @@ return [
             ['title' => 'Leading people', 'description' => 'Build communication, listening, teamwork and conflict-resolution skills.'],
             ['title' => 'Leadership in practice', 'description' => 'Translate learning into a service-focused personal leadership plan.'],
         ],
-        'duration' => null, 'facilitators' => [], 'cohorts' => [], 'registration_url' => null,
+        'duration' => '6 weeks · sample', 'facilitators' => [['name' => 'Ruth Nwosu', 'role' => 'Leadership development facilitator · sample profile']], 'cohorts' => [['name' => 'Foundations cohort · preview', 'starts' => '7 November 2026 · illustrative date', 'format' => 'Hybrid · proposed', 'location' => 'Online / 12 Purpose Avenue, Lagos · fictional address']], 'registration_url' => null,
     ],
     'governance-public-policy' => [
         'name' => 'Governance & Public Policy', 'headline' => 'Understand institutions. Contribute thoughtfully.', 'icon' => 'governance', 'category' => 'Public life',
@@ -27,7 +27,7 @@ return [
             ['title' => 'Evidence and policy options', 'description' => 'Compare possible responses, their trade-offs and the evidence behind them.'],
             ['title' => 'Constructive public contribution', 'description' => 'Develop a concise policy brief and practise communicating ideas respectfully.'],
         ],
-        'duration' => null, 'facilitators' => [], 'cohorts' => [], 'registration_url' => null,
+        'duration' => '8 weeks · sample', 'facilitators' => [['name' => 'David Asante', 'role' => 'Public policy facilitator · sample profile']], 'cohorts' => [['name' => 'Foundations cohort · preview', 'starts' => '7 November 2026 · illustrative date', 'format' => 'Hybrid · proposed', 'location' => 'Online / 12 Purpose Avenue, Lagos · fictional address']], 'registration_url' => null,
     ],
     'competence-development' => [
         'name' => 'Competence Development', 'headline' => 'Give your purpose practical skills.', 'icon' => 'equip', 'category' => 'Practical skills',
@@ -41,7 +41,7 @@ return [
             ['title' => 'Planning and collaboration', 'description' => 'Define tasks, responsibilities and realistic milestones for a shared project.'],
             ['title' => 'Learning from delivery', 'description' => 'Review progress and use feedback to improve the next attempt.'],
         ],
-        'duration' => null, 'facilitators' => [], 'cohorts' => [], 'registration_url' => null,
+        'duration' => '4 weeks · sample', 'facilitators' => [['name' => 'Michael Adebayo', 'role' => 'Practical skills facilitator · sample profile']], 'cohorts' => [['name' => 'Foundations cohort · preview', 'starts' => '7 November 2026 · illustrative date', 'format' => 'Hybrid · proposed', 'location' => 'Online / 12 Purpose Avenue, Lagos · fictional address']], 'registration_url' => null,
     ],
     'christian-character-faith' => [
         'name' => 'Christian Character & Faith', 'headline' => 'Let conviction shape everyday choices.', 'icon' => 'faith', 'category' => 'Faith & character',
@@ -55,7 +55,7 @@ return [
             ['title' => 'Integrity under pressure', 'description' => 'Consider how to respond to competing expectations and difficult choices.'],
             ['title' => 'Faith expressed through service', 'description' => 'Identify practical ways to put conviction into action for others.'],
         ],
-        'duration' => null, 'facilitators' => [], 'cohorts' => [], 'registration_url' => null,
+        'duration' => '6 weeks · sample', 'facilitators' => [['name' => 'Abigail Eze', 'role' => 'Christian character facilitator · sample profile']], 'cohorts' => [['name' => 'Foundations cohort · preview', 'starts' => '7 November 2026 · illustrative date', 'format' => 'Hybrid · proposed', 'location' => 'Online / 12 Purpose Avenue, Lagos · fictional address']], 'registration_url' => null,
     ],
     'community-service' => [
         'name' => 'Community Service', 'headline' => 'Listen first. Serve where you are.', 'icon' => 'service', 'category' => 'Community',
@@ -69,7 +69,7 @@ return [
             ['title' => 'Working together', 'description' => 'Plan a small initiative with collaboration, dignity and accountability at its centre.'],
             ['title' => 'Reflection and continuity', 'description' => 'Think about feedback, the usefulness of an activity and what should happen next.'],
         ],
-        'duration' => null, 'facilitators' => [], 'cohorts' => [], 'registration_url' => null,
+        'duration' => '4 weeks · sample', 'facilitators' => [['name' => 'Peter Owusu', 'role' => 'Community service facilitator · sample profile']], 'cohorts' => [['name' => 'Foundations cohort · preview', 'starts' => '7 November 2026 · illustrative date', 'format' => 'Hybrid · proposed', 'location' => 'Online / 12 Purpose Avenue, Lagos · fictional address']], 'registration_url' => null,
     ],
     'mentorship' => [
         'name' => 'Mentorship', 'headline' => 'Grow through guidance and reflection.', 'icon' => 'mentor', 'category' => 'Guided growth',
@@ -83,6 +83,6 @@ return [
             ['title' => 'Conversations that support growth', 'description' => 'Practise preparation, active listening, thoughtful questions and feedback.'],
             ['title' => 'Turning insight into action', 'description' => 'Set next steps, review progress and reflect on what has been learned.'],
         ],
-        'duration' => null, 'facilitators' => [], 'cohorts' => [], 'registration_url' => null,
+        'duration' => '12 weeks · sample', 'facilitators' => [['name' => 'Esther Bello', 'role' => 'Mentorship coordinator · sample profile']], 'cohorts' => [['name' => 'Foundations cohort · preview', 'starts' => '7 November 2026 · illustrative date', 'format' => 'Hybrid · proposed', 'location' => 'Online / 12 Purpose Avenue, Lagos · fictional address']], 'registration_url' => null,
     ],
 ];
