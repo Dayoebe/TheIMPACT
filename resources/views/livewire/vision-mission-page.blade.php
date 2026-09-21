@@ -1,3 +1,9 @@
-<div>
-    {{-- I have not failed. I've just found 10,000 ways that won't work. - Thomas Edison --}}
-</div>
+<x-public-page>
+    <x-page-intro eyebrow="Vision & Mission" title="A clear calling. A shared direction." description="Our vision names the future we hope to help shape. Our mission describes how we prepare a generation to contribute to it." icon="faith" parent="About" :parent-url="route('about')">
+        <div class="hero-actions"><a href="#vision" class="button button-dark">Our vision <span aria-hidden="true">↓</span></a><a href="#philosophy" class="underlined-link">Explore our philosophy <span aria-hidden="true">↗</span></a></div>
+    </x-page-intro>
+    <section id="vision" class="shell section statement-grid"><div><p class="eyebrow section-label">01 / OUR VISION</p><h2>Africa’s future.<br><em>A generation prepared.</em></h2></div><div class="vision-statement"><x-icon name="compass" /><p>{{ config('impact.vision') }}</p><span class="eyebrow">THE FUTURE WE ARE WORKING TOWARDS</span></div></section>
+    <section id="mission" class="about-purpose-section"><div class="shell section"><div class="section-heading"><div><p class="eyebrow section-label">02 / OUR MISSION</p><h2>Purpose needs<br><em>a practical path.</em></h2></div><p>{{ config('impact.mission') }}</p></div><ol class="mission-path">@foreach(config('impact.mission_steps') as $step)<li><span class="purpose-icon"><x-icon :name="$step['icon']" /></span><span class="eyebrow">0{{ $loop->iteration }}</span><h3>{{ $step['name'] }}</h3><p>{{ $step['description'] }}</p></li>@endforeach</ol></div></section>
+    <section id="philosophy" class="about-philosophy-section"><div class="shell section"><div class="section-heading"><div><p class="eyebrow section-label">03 / OUR SIX-PART PHILOSOPHY</p><h2>From faith<br>to <em>transformation.</em></h2></div><p>Faith shapes leadership. Competence strengthens it. Service gives it direction. Influence extends its reach. Transformation is the lasting change we seek.</p></div><x-philosophy /></div></section>
+    <section class="shell closing-section"><span class="closing-star"><x-icon name="growth" /></span><p class="eyebrow">THE MISSION IN PRACTICE</p><h2>Find your next<br><em>step in growth.</em></h2><a href="{{ route('programmes.index') }}" class="button button-dark">Explore programmes <span aria-hidden="true">↗</span></a></section>
+</x-public-page>

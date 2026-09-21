@@ -1,3 +1,11 @@
-<div>
-    {{-- He who is contented is rich. - Laozi --}}
-</div>
+<x-public-page>
+    <x-page-intro eyebrow="Programmes" title="Grow in purpose. Prepare to contribute." description="Explore six connected pathways for Christ-centred leadership, practical competence and meaningful service." icon="equip">
+        <a href="#programme-directory" class="button button-dark">Find a programme <span aria-hidden="true">↓</span></a>
+    </x-page-intro>
+    <section class="shell section" id="programme-directory"><div class="section-heading"><div><p class="eyebrow section-label">THE PROGRAMME DIRECTORY</p><h2>Where conviction<br><em>meets preparation.</em></h2></div><p>Explore each outline to understand its purpose, learning objectives and who it is for.</p></div><div class="preview-notice"><x-icon name="identify" /><p><strong>Programme preview.</strong> Curricula, facilitators and cohort schedules are illustrative. Applications are not being collected.</p></div><div class="programme-grid">
+        @foreach(config('programmes') as $slug => $programme)
+            <article class="programme-card"><div class="programme-card-top"><span class="purpose-icon"><x-icon :name="$programme['icon']" /></span><span class="eyebrow">0{{ $loop->iteration }} / {{ $programme['category'] }}</span></div><h3><a href="{{ route('programmes.show', $slug) }}">{{ $programme['name'] }}</a></h3><p>{{ $programme['summary'] }}</p><div class="programme-card-bottom"><span>{{ $programme['duration'] ?? 'Duration to be announced' }}</span><a href="{{ route('programmes.show', $slug) }}" class="underlined-link" aria-label="Explore {{ $programme['name'] }}">Explore programme <span aria-hidden="true">↗</span></a></div></article>
+        @endforeach
+    </div></section>
+    <section class="about-purpose-section"><div class="shell section statement-grid"><div><p class="eyebrow section-label">GROWTH IS PERSONAL</p><h2>Looking for<br><em>guidance along the way?</em></h2></div><div class="about-prose"><p class="lead">Mentorship connects the learning journey with reflection, experience and encouragement.</p><p>Discover the initiative, explore the intended matching process and see how you could participate as a mentor or mentee.</p><a href="{{ route('mentorship') }}" class="button button-dark">Explore mentorship <span aria-hidden="true">↗</span></a></div></div></section>
+</x-public-page>
