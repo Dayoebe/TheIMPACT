@@ -14,7 +14,7 @@ class HomePageTest extends TestCase
             ->assertOk()
             ->assertSeeLivewire(HomePage::class)
             ->assertSee('Christian Youth Leadership &amp; Public Impact Network', false)
-            ->assertSee("To become Africa's leading network", false)
+            ->assertSee("To become Africa's leading network")
             ->assertSee('The IMPACT exists to identify, connect, equip, mentor and deploy')
             ->assertSee('id="mobile-navigation"', false);
     }

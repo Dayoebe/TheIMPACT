@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+@php($menuGroups = $menuGroups ?? config('menu.groups', []))
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -47,7 +48,7 @@
                 <div><small>THE IMPACT</small><strong>Content administration</strong></div>
                 <a href="{{ route('home') }}" target="_blank" rel="noopener noreferrer">View website <span aria-hidden="true">↗</span></a>
             </header>
-            <main id="admin-main" class="admin-main">@yield('content')</main>
+            <main id="admin-main" class="admin-main">@isset($slot){{ $slot }}@else @yield('content') @endisset</main>
         </div>
     </div>
     @livewireScripts
