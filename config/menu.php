@@ -40,7 +40,7 @@ return [
             'items' => [
                 ['label' => 'SEO & social sharing', 'icon' => 'seo', 'url' => '#'],
                 ['label' => 'Website settings', 'icon' => 'settings', 'url' => '#'],
-                ['label' => 'Users & access', 'icon' => 'users', 'url' => '#'],
+                ['label' => 'Users & access', 'icon' => 'users', 'url' => '/admin/users', 'active' => 'admin.users.*'],
             ],
         ],
     ],

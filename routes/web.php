@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\PublicSessionController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Livewire\AboutPage;
 use App\Livewire\HomePage;
 use App\Livewire\LeadershipPage;
@@ -22,11 +25,19 @@ Route::get('/programmes/{slug}', ProgrammeDetailPage::class)->where('slug', '[a-
 Route::get('/mentorship', MentorshipPage::class)->name('mentorship');
 
 Route::middleware('guest')->group(function (): void {
+    Route::get('/login', [PublicSessionController::class, 'create'])->name('login');
+    Route::post('/login', [PublicSessionController::class, 'store'])->name('login.store');
+    Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
+    Route::post('/register', [RegisteredUserController::class, 'store'])->name('register.store');
     Route::get('/admin/login', [AuthenticatedSessionController::class, 'create'])->name('admin.login');
     Route::post('/admin/login', [AuthenticatedSessionController::class, 'store'])->name('admin.login.store');
 });
 
+Route::post('/logout', [PublicSessionController::class, 'destroy'])->middleware('auth')->name('logout');
+
 Route::middleware(['auth', 'super_admin'])->prefix('admin')->name('admin.')->group(function (): void {
     Route::get('/', DashboardController::class)->name('dashboard');
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::patch('/users/{user}/administrator', [UserController::class, 'update'])->name('users.administrator.update');
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });
