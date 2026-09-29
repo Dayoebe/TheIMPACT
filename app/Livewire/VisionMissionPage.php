@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\VisionMissionContent;
 use Illuminate\View\View;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -11,9 +12,11 @@ class VisionMissionPage extends Component
 {
     public function render(): View
     {
-        return view('livewire.vision-mission-page')->layoutData([
-            'title' => 'Vision & Mission — THE IMPACT',
-            'description' => 'Our vision for Christ-centred leadership in Africa, our five-step mission and the six-part philosophy that guides THE IMPACT.',
+        $content = VisionMissionContent::current()->content;
+
+        return view('livewire.vision-mission-page', ['content' => $content])->layoutData([
+            'title' => $content['meta']['title'],
+            'description' => $content['meta']['description'],
         ]);
     }
 }

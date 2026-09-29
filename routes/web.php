@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Livewire\AboutPage;
 use App\Livewire\Admin\AboutPageEditor;
 use App\Livewire\Admin\HomepageEditor;
+use App\Livewire\Admin\VisionMissionEditor;
 use App\Livewire\HomePage;
 use App\Livewire\LeadershipPage;
 use App\Livewire\MentorshipPage;
@@ -41,6 +42,7 @@ Route::middleware(['auth', 'super_admin'])->prefix('admin')->name('admin.')->gro
     Route::get('/', DashboardController::class)->name('dashboard');
     Route::get('/homepage', HomepageEditor::class)->name('homepage.edit');
     Route::get('/about-page', AboutPageEditor::class)->name('about-page.edit');
+    Route::get('/vision-mission', VisionMissionEditor::class)->name('vision-mission.edit');
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::patch('/users/{user}/administrator', [UserController::class, 'update'])->name('users.administrator.update');
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
