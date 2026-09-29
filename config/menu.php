@@ -15,7 +15,7 @@ return [
                 ['label' => 'Home page', 'icon' => 'home', 'url' => '/admin/homepage', 'active' => 'admin.homepage.edit'],
                 ['label' => 'About THE IMPACT', 'icon' => 'about', 'url' => '/admin/about-page', 'active' => 'admin.about-page.edit'],
                 ['label' => 'Vision & mission', 'icon' => 'vision', 'url' => '/admin/vision-mission', 'active' => 'admin.vision-mission.edit'],
-                ['label' => 'Philosophy & focus areas', 'icon' => 'philosophy', 'url' => '#'],
+                ['label' => 'Philosophy & focus areas', 'icon' => 'philosophy', 'url' => '/admin/philosophy-focus-areas', 'active' => 'admin.philosophy-focus.edit'],
             ],
         ],
         [

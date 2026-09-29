@@ -8,10 +8,12 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Livewire\AboutPage;
 use App\Livewire\Admin\AboutPageEditor;
 use App\Livewire\Admin\HomepageEditor;
+use App\Livewire\Admin\PhilosophyFocusEditor;
 use App\Livewire\Admin\VisionMissionEditor;
 use App\Livewire\HomePage;
 use App\Livewire\LeadershipPage;
 use App\Livewire\MentorshipPage;
+use App\Livewire\PhilosophyFocusPage;
 use App\Livewire\ProgrammeDetailPage;
 use App\Livewire\ProgrammesPage;
 use App\Livewire\VisionMissionPage;
@@ -22,6 +24,7 @@ Route::get('/', HomePage::class)->name('home');
 Route::get('/about', AboutPage::class)->name('about');
 
 Route::get('/about/vision-mission', VisionMissionPage::class)->name('about.vision-mission');
+Route::get('/about/philosophy-focus-areas', PhilosophyFocusPage::class)->name('about.philosophy-focus');
 Route::get('/leadership', LeadershipPage::class)->name('leadership');
 Route::get('/programmes', ProgrammesPage::class)->name('programmes.index');
 Route::get('/programmes/{slug}', ProgrammeDetailPage::class)->where('slug', '[a-z0-9]+(?:-[a-z0-9]+)*')->name('programmes.show');
@@ -43,6 +46,7 @@ Route::middleware(['auth', 'super_admin'])->prefix('admin')->name('admin.')->gro
     Route::get('/homepage', HomepageEditor::class)->name('homepage.edit');
     Route::get('/about-page', AboutPageEditor::class)->name('about-page.edit');
     Route::get('/vision-mission', VisionMissionEditor::class)->name('vision-mission.edit');
+    Route::get('/philosophy-focus-areas', PhilosophyFocusEditor::class)->name('philosophy-focus.edit');
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::patch('/users/{user}/administrator', [UserController::class, 'update'])->name('users.administrator.update');
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');

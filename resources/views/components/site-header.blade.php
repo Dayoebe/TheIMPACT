@@ -7,6 +7,7 @@
                 <div class="nav-dropdown-menu">
                     <a href="{{ route('about') }}" @if(request()->routeIs('about')) aria-current="page" @endif><strong>About overview</strong><small>Who we are and why we exist</small></a>
                     <a href="{{ route('about.vision-mission') }}" @if(request()->routeIs('about.vision-mission')) aria-current="page" @endif><strong>Vision & Mission</strong><small>Our direction and philosophy</small></a>
+                    <a href="{{ route('about.philosophy-focus') }}" @if(request()->routeIs('about.philosophy-focus')) aria-current="page" @endif><strong>Philosophy & Focus Areas</strong><small>What guides us and where we contribute</small></a>
                 </div>
             </details>
             @foreach(['leadership' => 'Leadership', 'programmes.index' => 'Programmes', 'mentorship' => 'Mentorship'] as $routeName => $label)
@@ -31,7 +32,7 @@
     <nav id="mobile-navigation" x-cloak x-show="open" x-transition class="mobile-nav" aria-label="Mobile navigation" @click="if ($event.target.closest('a')) open = false">
         <a href="{{ route('home') }}" @if(request()->routeIs('home')) aria-current="page" @endif>Home<span aria-hidden="true">↗</span></a>
         <p class="mobile-nav-group">About</p>
-        @foreach(['about' => 'About overview', 'about.vision-mission' => 'Vision & Mission'] as $routeName => $label)
+        @foreach(['about' => 'About overview', 'about.vision-mission' => 'Vision & Mission', 'about.philosophy-focus' => 'Philosophy & Focus Areas'] as $routeName => $label)
             <a class="mobile-nav-child" href="{{ route($routeName) }}" @if(request()->routeIs($routeName)) aria-current="page" @endif>{{ $label }}<span aria-hidden="true">↗</span></a>
         @endforeach
         @foreach(['leadership' => 'Leadership', 'programmes.index' => 'Programmes', 'mentorship' => 'Mentorship'] as $routeName => $label)
