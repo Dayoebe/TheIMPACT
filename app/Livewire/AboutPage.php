@@ -2,6 +2,8 @@
 
 namespace App\Livewire;
 
+use App\Models\AboutPageContent;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -11,9 +13,20 @@ class AboutPage extends Component
 {
     public function render(): View
     {
-        return view('livewire.about-page')->layoutData([
-            'title' => 'About THE IMPACT — Faith, Leadership & Service in Africa',
-            'description' => 'Discover why THE IMPACT exists, the gap we seek to address, and our approach to developing Christ-centred young leaders for public service and societal transformation.',
+        $content = AboutPageContent::current()->content;
+
+        return view('livewire.about-page', [
+            'content' => $content,
+            'heroImageUrl' => $this->imageUrl($content['hero']['image']),
+            'approachImageUrl' => $this->imageUrl($content['approach']['image']),
+        ])->layoutData([
+            'title' => $content['meta']['title'],
+            'description' => $content['meta']['description'],
         ]);
+    }
+
+    private function imageUrl(string $path): string
+    {
+        return str_starts_with($path, 'images/') ? asset($path) : Storage::disk('public')->url($path);
     }
 }

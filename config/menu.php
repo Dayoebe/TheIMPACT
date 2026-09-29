@@ -13,7 +13,7 @@ return [
             'label' => 'Website content',
             'items' => [
                 ['label' => 'Home page', 'icon' => 'home', 'url' => '/admin/homepage', 'active' => 'admin.homepage.edit'],
-                ['label' => 'About THE IMPACT', 'icon' => 'about', 'url' => '#'],
+                ['label' => 'About THE IMPACT', 'icon' => 'about', 'url' => '/admin/about-page', 'active' => 'admin.about-page.edit'],
                 ['label' => 'Vision & mission', 'icon' => 'vision', 'url' => '#'],
                 ['label' => 'Philosophy & focus areas', 'icon' => 'philosophy', 'url' => '#'],
             ],
