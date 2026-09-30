@@ -9,6 +9,7 @@ use App\Livewire\AboutPage;
 use App\Livewire\Admin\AboutPageEditor;
 use App\Livewire\Admin\CohortRegistrationManager;
 use App\Livewire\Admin\HomepageEditor;
+use App\Livewire\Admin\MentorshipEditor;
 use App\Livewire\Admin\PhilosophyFocusEditor;
 use App\Livewire\Admin\ProgrammeManager;
 use App\Livewire\Admin\VisionMissionEditor;
@@ -53,6 +54,7 @@ Route::middleware(['auth', 'super_admin'])->prefix('admin')->name('admin.')->gro
     Route::get('/philosophy-focus-areas', PhilosophyFocusEditor::class)->name('philosophy-focus.edit');
     Route::get('/programmes', ProgrammeManager::class)->name('programmes.index');
     Route::get('/cohorts-registration', CohortRegistrationManager::class)->name('cohorts.index');
+    Route::get('/mentorship', MentorshipEditor::class)->name('mentorship.edit');
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::patch('/users/{user}/administrator', [UserController::class, 'update'])->name('users.administrator.update');
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');

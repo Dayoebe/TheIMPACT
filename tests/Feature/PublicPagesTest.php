@@ -5,10 +5,14 @@ namespace Tests\Feature;
 use App\Livewire\LeadershipPage;
 use App\Livewire\MentorshipPage;
 use App\Livewire\VisionMissionPage;
+use App\Models\MentorshipPageContent;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class PublicPagesTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_vision_and_mission_page_contains_the_complete_statements_and_philosophy(): void
     {
         $response = $this->get(route('about.vision-mission'));
@@ -60,10 +64,11 @@ class PublicPagesTest extends TestCase
 
     public function test_confirmed_mentorship_application_links_can_replace_preview_actions(): void
     {
-        config([
-            'impact.mentorship.mentor_application_url' => 'https://example.org/apply/mentor',
-            'impact.mentorship.mentee_application_url' => 'https://example.org/apply/mentee',
-        ]);
+        $record = MentorshipPageContent::current();
+        $content = $record->content;
+        $content['take_part']['roles']['mentor']['application_url'] = 'https://example.org/apply/mentor';
+        $content['take_part']['roles']['mentee']['application_url'] = 'https://example.org/apply/mentee';
+        $record->update(['content' => $content]);
 
         $this->get(route('mentorship'))->assertOk()
             ->assertSee('href="https://example.org/apply/mentor"', false)
