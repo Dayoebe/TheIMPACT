@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Livewire\LeadershipPage;
 use App\Livewire\MentorshipPage;
 use App\Livewire\VisionMissionPage;
+use App\Models\LeadershipPageContent;
 use App\Models\MentorshipPageContent;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -44,7 +45,10 @@ class PublicPagesTest extends TestCase
 
     public function test_unfilled_leadership_group_has_a_useful_empty_state(): void
     {
-        config(['impact.leadership.board.people' => []]);
+        $record = LeadershipPageContent::current();
+        $content = $record->content;
+        $content['directory']['groups'][1]['people'] = [];
+        $record->update(['content' => $content]);
 
         $this->get(route('leadership'))->assertOk()
             ->assertSee('Leadership profiles for this group will be published once confirmed.')
