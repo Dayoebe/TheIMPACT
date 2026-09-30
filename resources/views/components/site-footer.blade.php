@@ -6,8 +6,7 @@
                 @foreach(['about' => 'About', 'about.vision-mission' => 'Vision & Mission', 'leadership' => 'Leadership', 'programmes.index' => 'Programmes', 'mentorship' => 'Mentorship'] as $routeName => $label)<a
                 href="{{ route($routeName) }}">{{ $label }}</a>@endforeach</nav>
         </div>
-        <p class="imagery-note">Imagery is AI-generated to illustrate our values.</p>
-        <div class="footer-bottom"><span>© {{ date('Y') }} <a href="https://dayoebe.github.io" target="_blank" rel="noopener noreferrer">Wireless Terminal</a>. All rights reserved.</span><span>Faith →
+                <div class="footer-bottom"><span>© {{ date('Y') }} <a href="https://dayoebe.github.io" target="_blank" rel="noopener noreferrer">Wireless Terminal</a>. All rights reserved.</span><span>Faith →
                 Leadership → Transformation</span><a href="#main">Back to top ↑</a></div>
     </div>
 </footer>
