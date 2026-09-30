@@ -4,12 +4,16 @@ namespace Tests\Feature;
 
 use App\Livewire\ProgrammeDetailPage;
 use App\Livewire\ProgrammesPage;
+use App\Models\Programme;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Features\SupportLockedProperties\CannotUpdateLockedPropertyException;
 use Livewire\Livewire;
 use Tests\TestCase;
 
 class ProgrammePagesTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_directory_links_to_all_six_programme_details(): void
     {
         $programmes = config('programmes');
@@ -55,11 +59,8 @@ class ProgrammePagesTest extends TestCase
 
     public function test_missing_programme_schedule_fields_have_honest_fallbacks(): void
     {
-        config([
-            'programmes.christian-leadership.duration' => null,
-            'programmes.christian-leadership.facilitators' => [],
-            'programmes.christian-leadership.cohorts' => [],
-        ]);
+        Programme::importDefaultsIfEmpty();
+        Programme::query()->where('slug', 'christian-leadership')->update(['duration' => null, 'facilitators' => [], 'cohorts' => []]);
 
         $this->get(route('programmes.show', 'christian-leadership'))->assertOk()
             ->assertSee('To be announced')
@@ -70,7 +71,8 @@ class ProgrammePagesTest extends TestCase
 
     public function test_programme_content_is_escaped(): void
     {
-        config(['programmes.christian-leadership.headline' => '<script>alert("test")</script>']);
+        Programme::importDefaultsIfEmpty();
+        Programme::query()->where('slug', 'christian-leadership')->update(['headline' => '<script>alert("test")</script>']);
 
         $this->get(route('programmes.show', 'christian-leadership'))->assertOk()
             ->assertSee('&lt;script&gt;', false)
@@ -79,7 +81,8 @@ class ProgrammePagesTest extends TestCase
 
     public function test_confirmed_programme_registration_link_can_replace_the_preview(): void
     {
-        config(['programmes.christian-leadership.registration_url' => 'https://example.org/apply/leadership']);
+        Programme::importDefaultsIfEmpty();
+        Programme::query()->where('slug', 'christian-leadership')->update(['registration_url' => 'https://example.org/apply/leadership']);
 
         $this->get(route('programmes.show', 'christian-leadership'))->assertOk()
             ->assertSee('href="https://example.org/apply/leadership"', false)

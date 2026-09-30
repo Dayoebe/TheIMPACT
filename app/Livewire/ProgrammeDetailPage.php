@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Programme;
 use Illuminate\View\View;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Locked;
@@ -15,18 +16,18 @@ class ProgrammeDetailPage extends Component
 
     public function mount(string $slug): void
     {
-        abort_unless(array_key_exists($slug, config('programmes')), 404);
+        Programme::importDefaultsIfEmpty();
+        abort_unless(Programme::query()->published()->where('slug', $slug)->exists(), 404);
         $this->slug = $slug;
     }
 
     public function render(): View
     {
-        $programme = config('programmes')[$this->slug] ?? null;
-        abort_if($programme === null, 404);
+        $programme = Programme::query()->published()->where('slug', $this->slug)->firstOrFail();
 
         return view('livewire.programme-detail-page', ['programme' => $programme])->layoutData([
-            'title' => $programme['name'].' — Programmes | THE IMPACT',
-            'description' => $programme['summary'],
+            'title' => $programme->name.' — Programmes | THE IMPACT',
+            'description' => $programme->summary,
         ]);
     }
 }

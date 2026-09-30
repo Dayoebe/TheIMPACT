@@ -709,9 +709,9 @@ h2 { font-size: clamp(34px, 8.5vw, 48px); line-height: 1.1; letter-spacing: -.8p
 .editor-section-heading > .admin-icon { width: 27px; height: 27px; color: #0f5d5e; }
 .editor-field-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
 .editor-field-grid label, .editor-two-column label { display: grid; align-content: start; color: #273e50; font-size: 9px; font-weight: 800; letter-spacing: .15px; }
-.editor-field-grid input, .editor-field-grid textarea, .editor-two-column input, .editor-two-column textarea { width: 100%; margin-top: 7px; padding: 12px 13px; border: 1px solid #cfd1cb; border-radius: 8px; background: #fff; color: #102a43; font-family: var(--font-sans); font-size: 12px; font-weight: 500; line-height: 1.65; outline: none; resize: vertical; }
-.editor-field-grid input, .editor-two-column input { height: 46px; }
-.editor-field-grid input:focus, .editor-field-grid textarea:focus, .editor-two-column input:focus, .editor-two-column textarea:focus { border-color: #0f5d5e; box-shadow: 0 0 0 3px #0f5d5e14; }
+.editor-field-grid input, .editor-field-grid textarea, .editor-field-grid select, .editor-two-column input, .editor-two-column textarea { width: 100%; margin-top: 7px; padding: 12px 13px; border: 1px solid #cfd1cb; border-radius: 8px; background: #fff; color: #102a43; font-family: var(--font-sans); font-size: 12px; font-weight: 500; line-height: 1.65; outline: none; resize: vertical; }
+.editor-field-grid input, .editor-field-grid select, .editor-two-column input { height: 46px; }
+.editor-field-grid input:focus, .editor-field-grid textarea:focus, .editor-field-grid select:focus, .editor-two-column input:focus, .editor-two-column textarea:focus { border-color: #0f5d5e; box-shadow: 0 0 0 3px #0f5d5e14; }
 .editor-field-grid label small { margin-top: 5px; color: #a33c34; font-size: 8px; }
 .editor-image-control { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; margin-block: 20px; padding: 16px; border-radius: 12px; background: #eef2ed; }
 .editor-image-preview { overflow: hidden; border-radius: 8px; background: #dce5e3; aspect-ratio: 3 / 2; }
@@ -742,6 +742,25 @@ h2 { font-size: clamp(34px, 8.5vw, 48px); line-height: 1.1; letter-spacing: -.8p
 .editor-danger-zone strong { color: #7f302a; font-size: 11px; }
 .editor-danger-zone p { margin-top: 5px; color: #795e5b; font-size: 9px; line-height: 1.6; }
 .editor-danger-zone button { min-height: 40px; padding: 9px 12px; border: 1px solid #c98981; border-radius: 7px; color: #8b332d; font-size: 9px; font-weight: 800; }
+.editor-inline-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.editor-inline-actions button, .editor-add-button { min-height: 40px; padding: 9px 13px; border-radius: 7px; background: #102a43; color: #fff; font-size: 9px; font-weight: 800; }
+.editor-inline-actions button.is-secondary, .editor-add-button { border: 1px solid #c7ccc8; background: #fff; color: #102a43; }
+.programme-manager-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; margin-top: 18px; }
+.programme-admin-list { display: grid; align-content: start; gap: 7px; padding: 12px; border: 1px solid #dedbd2; border-radius: 12px; background: #faf8f2; }
+.programme-admin-list > div { display: grid; gap: 4px; padding: 8px; }
+.programme-admin-list > div .eyebrow { color: #0f5d5e; }
+.programme-admin-list > div strong { font-size: 12px; }
+.programme-admin-list > button { display: flex; min-height: 54px; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 12px; border-radius: 8px; text-align: left; }
+.programme-admin-list > button span:first-child { display: grid; gap: 4px; min-width: 0; }
+.programme-admin-list > button strong { overflow: hidden; font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+.programme-admin-list > button small { color: #6a787f; font-size: 7px; text-transform: capitalize; }
+.programme-admin-list > button.is-active { background: #102a43; color: #fff; }
+.programme-admin-list > button.is-active small { color: #c4d0d4; }
+.programme-admin-list > .programme-new-button { justify-content: center; min-height: 42px; border: 1px dashed #9ba7a5; color: #0f5d5e; font-size: 9px; font-weight: 800; text-align: center; }
+.editor-repeat-row { display: grid; gap: 9px; }
+.editor-repeat-row textarea { width: 100%; padding: 12px 13px; border: 1px solid #cfd1cb; border-radius: 8px; background: #fff; font: 500 12px/1.65 var(--font-sans); }
+.editor-repeat-row button, .editor-remove-button { justify-self: start; padding: 8px 10px; border: 1px solid #ddb9b4; border-radius: 6px; color: #8b332d; font-size: 8px; font-weight: 800; }
+.admin-empty-state { padding: 24px; border: 1px dashed #c7ccc8; border-radius: 9px; color: #6a787f; font-size: 10px; text-align: center; }
 
 @media (min-width: 720px) {
     .editor-field-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -758,4 +777,6 @@ h2 { font-size: clamp(34px, 8.5vw, 48px); line-height: 1.1; letter-spacing: -.8p
     .homepage-editor-nav { position: sticky; top: 98px; display: grid; overflow: visible; padding: 10px; border-radius: 8px; }
     .homepage-editor-nav button { width: 100%; }
     .editor-section { padding: 28px; border-radius: 8px; }
+    .programme-manager-layout { grid-template-columns: 240px minmax(0, 1fr); align-items: start; }
+    .programme-admin-list { position: sticky; top: 98px; border-radius: 8px; }
 }

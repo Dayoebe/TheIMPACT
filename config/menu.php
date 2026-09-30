@@ -21,7 +21,7 @@ return [
         [
             'label' => 'Programmes & people',
             'items' => [
-                ['label' => 'Programmes', 'icon' => 'programmes', 'url' => '#'],
+                ['label' => 'Programmes', 'icon' => 'programmes', 'url' => '/admin/programmes', 'active' => 'admin.programmes.*'],
                 ['label' => 'Cohorts & registration', 'icon' => 'cohorts', 'url' => '#'],
                 ['label' => 'Mentorship', 'icon' => 'mentorship', 'url' => '#'],
                 ['label' => 'Leadership directory', 'icon' => 'leadership', 'url' => '#'],
