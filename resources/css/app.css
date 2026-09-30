@@ -761,6 +761,21 @@ h2 { font-size: clamp(34px, 8.5vw, 48px); line-height: 1.1; letter-spacing: -.8p
 .editor-repeat-row textarea { width: 100%; padding: 12px 13px; border: 1px solid #cfd1cb; border-radius: 8px; background: #fff; font: 500 12px/1.65 var(--font-sans); }
 .editor-repeat-row button, .editor-remove-button { justify-self: start; padding: 8px 10px; border: 1px solid #ddb9b4; border-radius: 6px; color: #8b332d; font-size: 8px; font-weight: 800; }
 .admin-empty-state { padding: 24px; border: 1px dashed #c7ccc8; border-radius: 9px; color: #6a787f; font-size: 10px; text-align: center; }
+.cohort-directory-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; margin-top: 24px; }
+.cohort-directory-card { display: flex; flex-direction: column; padding: 24px; border: 1px solid #d8d8d0; border-radius: 16px; background: #faf8f2; }
+.cohort-directory-card > .eyebrow { margin-top: 22px; color: #0f5d5e; }
+.cohort-directory-card > h3 { margin: 8px 0 12px; font-size: 34px; }
+.cohort-directory-card > p:not(.eyebrow) { color: #5d6b73; font-size: 13px; line-height: 1.8; }
+.status-pill.is-open { border-color: #8eb7a4; background: #e4f0e9; color: #235f46; }
+.cohort-schedule-list { display: grid; gap: 10px; margin-block: 22px; }
+.cohort-schedule-list > div { padding: 16px; border-radius: 10px; background: #f1eee6; }
+.cohort-schedule-list strong { font-family: var(--font-display); font-size: 21px; }
+.cohort-schedule-list dl { display: grid; gap: 8px; margin-top: 12px; }
+.cohort-schedule-list dl div { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 10px; }
+.cohort-schedule-list dt { color: #6b787d; font-size: 8px; font-weight: 800; text-transform: uppercase; }
+.cohort-schedule-list dd { font-size: 10px; line-height: 1.6; }
+.cohort-card-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; margin-top: auto; }
+.cohort-card-actions .button { min-height: 44px; padding: 10px 14px; }
 
 @media (min-width: 720px) {
     .editor-field-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -769,6 +784,7 @@ h2 { font-size: clamp(34px, 8.5vw, 48px); line-height: 1.1; letter-spacing: -.8p
     .editor-repeat-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .editor-two-column { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .editor-save-bar, .editor-danger-zone { flex-direction: row; align-items: center; justify-content: space-between; }
+    .cohort-directory-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (min-width: 1180px) {
@@ -779,4 +795,6 @@ h2 { font-size: clamp(34px, 8.5vw, 48px); line-height: 1.1; letter-spacing: -.8p
     .editor-section { padding: 28px; border-radius: 8px; }
     .programme-manager-layout { grid-template-columns: 240px minmax(0, 1fr); align-items: start; }
     .programme-admin-list { position: sticky; top: 98px; border-radius: 8px; }
+    .cohort-directory-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .cohort-directory-card { border-radius: 6px; }
 }

@@ -7,10 +7,12 @@ use App\Http\Controllers\Auth\PublicSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Livewire\AboutPage;
 use App\Livewire\Admin\AboutPageEditor;
+use App\Livewire\Admin\CohortRegistrationManager;
 use App\Livewire\Admin\HomepageEditor;
 use App\Livewire\Admin\PhilosophyFocusEditor;
 use App\Livewire\Admin\ProgrammeManager;
 use App\Livewire\Admin\VisionMissionEditor;
+use App\Livewire\CohortsRegistrationPage;
 use App\Livewire\HomePage;
 use App\Livewire\LeadershipPage;
 use App\Livewire\MentorshipPage;
@@ -28,6 +30,7 @@ Route::get('/about/vision-mission', VisionMissionPage::class)->name('about.visio
 Route::get('/about/philosophy-focus-areas', PhilosophyFocusPage::class)->name('about.philosophy-focus');
 Route::get('/leadership', LeadershipPage::class)->name('leadership');
 Route::get('/programmes', ProgrammesPage::class)->name('programmes.index');
+Route::get('/programmes/cohorts-registration', CohortsRegistrationPage::class)->name('programmes.cohorts');
 Route::get('/programmes/{slug}', ProgrammeDetailPage::class)->where('slug', '[a-z0-9]+(?:-[a-z0-9]+)*')->name('programmes.show');
 Route::get('/mentorship', MentorshipPage::class)->name('mentorship');
 
@@ -49,6 +52,7 @@ Route::middleware(['auth', 'super_admin'])->prefix('admin')->name('admin.')->gro
     Route::get('/vision-mission', VisionMissionEditor::class)->name('vision-mission.edit');
     Route::get('/philosophy-focus-areas', PhilosophyFocusEditor::class)->name('philosophy-focus.edit');
     Route::get('/programmes', ProgrammeManager::class)->name('programmes.index');
+    Route::get('/cohorts-registration', CohortRegistrationManager::class)->name('cohorts.index');
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::patch('/users/{user}/administrator', [UserController::class, 'update'])->name('users.administrator.update');
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');

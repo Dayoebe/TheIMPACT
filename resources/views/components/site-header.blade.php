@@ -10,9 +10,15 @@
                     <a href="{{ route('about.philosophy-focus') }}" @if(request()->routeIs('about.philosophy-focus')) aria-current="page" @endif><strong>Philosophy & Focus Areas</strong><small>What guides us and where we contribute</small></a>
                 </div>
             </details>
-            @foreach(['leadership' => 'Leadership', 'programmes.index' => 'Programmes', 'mentorship' => 'Mentorship'] as $routeName => $label)
-                <a href="{{ route($routeName) }}" @if(request()->routeIs($routeName) || ($routeName === 'programmes.index' && request()->routeIs('programmes.show'))) aria-current="page" @endif>{{ $label }}</a>
-            @endforeach
+            <a href="{{ route('leadership') }}" @if(request()->routeIs('leadership')) aria-current="page" @endif>Leadership</a>
+            <details class="nav-dropdown" @if(request()->routeIs('programmes.*')) data-current="true" @endif>
+                <summary @if(request()->routeIs('programmes.*')) aria-current="page" @endif>Programmes <span aria-hidden="true">⌄</span></summary>
+                <div class="nav-dropdown-menu">
+                    <a href="{{ route('programmes.index') }}" @if(request()->routeIs('programmes.index', 'programmes.show')) aria-current="page" @endif><strong>Programme Directory</strong><small>Explore every learning pathway</small></a>
+                    <a href="{{ route('programmes.cohorts') }}" @if(request()->routeIs('programmes.cohorts')) aria-current="page" @endif><strong>Cohorts & Registration</strong><small>Schedules and application availability</small></a>
+                </div>
+            </details>
+            <a href="{{ route('mentorship') }}" @if(request()->routeIs('mentorship')) aria-current="page" @endif>Mentorship</a>
         </nav>
         <div class="header-account">
             @guest
@@ -35,9 +41,11 @@
         @foreach(['about' => 'About overview', 'about.vision-mission' => 'Vision & Mission', 'about.philosophy-focus' => 'Philosophy & Focus Areas'] as $routeName => $label)
             <a class="mobile-nav-child" href="{{ route($routeName) }}" @if(request()->routeIs($routeName)) aria-current="page" @endif>{{ $label }}<span aria-hidden="true">↗</span></a>
         @endforeach
-        @foreach(['leadership' => 'Leadership', 'programmes.index' => 'Programmes', 'mentorship' => 'Mentorship'] as $routeName => $label)
-            <a href="{{ route($routeName) }}" @if(request()->routeIs($routeName) || ($routeName === 'programmes.index' && request()->routeIs('programmes.show'))) aria-current="page" @endif>{{ $label }}<span aria-hidden="true">↗</span></a>
-        @endforeach
+        <a href="{{ route('leadership') }}" @if(request()->routeIs('leadership')) aria-current="page" @endif>Leadership<span aria-hidden="true">↗</span></a>
+        <p class="mobile-nav-group">Programmes</p>
+        <a class="mobile-nav-child" href="{{ route('programmes.index') }}" @if(request()->routeIs('programmes.index', 'programmes.show')) aria-current="page" @endif>Programme Directory<span aria-hidden="true">↗</span></a>
+        <a class="mobile-nav-child" href="{{ route('programmes.cohorts') }}" @if(request()->routeIs('programmes.cohorts')) aria-current="page" @endif>Cohorts & Registration<span aria-hidden="true">↗</span></a>
+        <a href="{{ route('mentorship') }}" @if(request()->routeIs('mentorship')) aria-current="page" @endif>Mentorship<span aria-hidden="true">↗</span></a>
         <div class="mobile-auth-links">
             @guest
                 <a href="{{ route('login') }}">Log in<span aria-hidden="true">→</span></a>

@@ -73,9 +73,9 @@ class PublicPagesTest extends TestCase
 
     public function test_shared_navigation_reaches_every_public_page_and_has_one_active_mobile_item(): void
     {
-        foreach (['home', 'about', 'about.vision-mission', 'about.philosophy-focus', 'leadership', 'programmes.index', 'mentorship'] as $routeName) {
+        foreach (['home', 'about', 'about.vision-mission', 'about.philosophy-focus', 'leadership', 'programmes.index', 'programmes.cohorts', 'mentorship'] as $routeName) {
             $response = $this->get(route($routeName))->assertOk();
-            foreach (['home', 'about', 'about.vision-mission', 'about.philosophy-focus', 'leadership', 'programmes.index', 'mentorship'] as $destination) {
+            foreach (['home', 'about', 'about.vision-mission', 'about.philosophy-focus', 'leadership', 'programmes.index', 'programmes.cohorts', 'mentorship'] as $destination) {
                 $response->assertSee('href="'.route($destination).'"', false);
             }
             preg_match('/<nav class="app-nav".*?<\/nav>/s', $response->getContent(), $matches);
