@@ -43,6 +43,7 @@ class LeadershipEditor extends Component
             'content.directory.groups.*.people.*.name' => ['required', 'string', 'max:200'],
             'content.directory.groups.*.people.*.role' => ['required', 'string', 'max:200'],
             'content.directory.groups.*.people.*.bio' => ['required', 'string', 'max:1500'],
+            'content.directory.groups.*.people.*.profile_label' => ['required', 'string', 'max:100'],
             'content.closing.*' => ['required', 'string', 'max:200'],
         ];
     }
@@ -60,7 +61,7 @@ class LeadershipEditor extends Component
 
     public function addPerson(int $groupIndex): void
     {
-        $this->content['directory']['groups'][$groupIndex]['people'][] = ['initials' => 'NP', 'name' => 'New profile', 'role' => 'Leadership role', 'bio' => 'Add a clear, factual biography before publishing this profile.'];
+        $this->content['directory']['groups'][$groupIndex]['people'][] = ['initials' => 'NP', 'name' => 'New profile', 'role' => 'Leadership role', 'bio' => 'Add a clear, factual biography before publishing this profile.', 'profile_label' => 'SAMPLE PROFILE'];
     }
 
     public function removePerson(int $groupIndex, int $personIndex): void

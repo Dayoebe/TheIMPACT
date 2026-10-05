@@ -8,7 +8,7 @@
         @foreach($content['directory']['groups'] as $group)
             <section id="{{ $group['id'] }}" class="leadership-group"><div class="group-heading"><span class="purpose-icon"><x-icon :name="$group['icon']" /></span><div><p class="eyebrow section-label">{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }} / {{ $content['directory']['label'] }}</p><h2>{{ $group['title'] }}</h2><p>{{ $group['description'] }}</p></div></div><div class="people-grid">
                 @forelse($group['people'] as $person)
-                    <article class="person-card"><div class="person-avatar" aria-hidden="true">{{ $person['initials'] }}</div><span class="eyebrow">{{ $content['directory']['sample_label'] }}</span><h3>{{ $person['name'] }}</h3><p class="person-role">{{ $person['role'] }}</p><p>{{ $person['bio'] }}</p></article>
+                    <article class="person-card"><div class="person-avatar" aria-hidden="true">{{ $person['initials'] }}</div><span class="eyebrow">{{ $person['profile_label'] ?? $content['directory']['sample_label'] }}</span><h3>{{ $person['name'] }}</h3><p class="person-role">{{ $person['role'] }}</p><p>{{ $person['bio'] }}</p></article>
                 @empty
                     <div class="empty-state"><p class="eyebrow">{{ $content['directory']['empty_label'] }}</p><p>{{ $content['directory']['empty_text'] }}</p></div>
                 @endforelse
