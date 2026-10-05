@@ -9,7 +9,7 @@
 
     <div class="homepage-editor-layout">
         <nav class="homepage-editor-nav" aria-label="Homepage sections">
-            @foreach(['hero' => 'Hero', 'philosophy' => 'Philosophy', 'about' => 'Who we are', 'purpose' => 'Vision & mission', 'focus' => 'Focus areas', 'journey' => 'The journey', 'closing' => 'Closing message'] as $key => $label)
+            @foreach(['hero' => 'Hero', 'philosophy' => 'Philosophy', 'about' => 'Who we are', 'founder' => 'President & Convener', 'purpose' => 'Vision & mission', 'focus' => 'Focus areas', 'journey' => 'The journey', 'closing' => 'Closing message'] as $key => $label)
                 <button type="button" @click="section = '{{ $key }}'; document.getElementById('editor-{{ $key }}').scrollIntoView({ behavior: 'smooth' })" :class="{ 'is-active': section === '{{ $key }}' }"><span>{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>{{ $label }}</button>
             @endforeach
         </nav>
@@ -41,8 +41,15 @@
                 <div class="editor-field-grid"><label class="is-wide">Image alternative text<textarea rows="2" wire:model="content.about.image_alt"></textarea></label><label class="is-wide">Image caption<input type="text" wire:model="content.about.image_caption"></label></div>
             </section>
 
+            <section id="editor-founder" class="editor-section" @mouseenter="section = 'founder'">
+                <div class="editor-section-heading"><div><span>04</span><h2>President &amp; Convener</h2><p>Introduce the person behind the initiative.</p></div><x-admin-icon name="leadership" /></div>
+                <div class="editor-field-grid"><label class="is-wide">Section label<input type="text" wire:model="content.founder.eyebrow"></label><label>Name<input type="text" wire:model="content.founder.name"></label><label>Role<input type="text" wire:model="content.founder.role"></label><label>Heading<input type="text" wire:model="content.founder.title_line_one"></label><label>Highlighted heading<input type="text" wire:model="content.founder.title_emphasis"></label><label class="is-wide">Introduction<textarea rows="4" wire:model="content.founder.description"></textarea></label><label>Leadership link label<input type="text" wire:model="content.founder.link_label"></label></div>
+                <div class="editor-image-control"><div class="editor-image-preview is-portrait"><img src="{{ $founderImage?->temporaryUrl() ?? $this->imageUrl($content['founder']['image']) }}" alt="Current President and Convener portrait preview"></div><div><h3>President portrait</h3><p>Use a clear portrait in JPG, PNG or WebP format, up to 5 MB.</p><label class="editor-file-button">Choose replacement<input type="file" wire:model="founderImage" accept="image/jpeg,image/png,image/webp"></label><div wire:loading wire:target="founderImage" class="editor-uploading">Preparing image…</div>@error('founderImage')<small class="editor-error">{{ $message }}</small>@enderror</div></div>
+                <div class="editor-field-grid"><label class="is-wide">Image alternative text<textarea rows="2" wire:model="content.founder.image_alt"></textarea></label></div>
+            </section>
+
             <section id="editor-purpose" class="editor-section" @mouseenter="section = 'purpose'">
-                <div class="editor-section-heading"><div><span>04</span><h2>Vision & mission</h2><p>Edit both purpose statements and their supporting captions.</p></div><x-admin-icon name="vision" /></div>
+                <div class="editor-section-heading"><div><span>05</span><h2>Vision & mission</h2><p>Edit both purpose statements and their supporting captions.</p></div><x-admin-icon name="vision" /></div>
                 <div class="editor-two-column">@foreach(['vision' => 'Vision', 'mission' => 'Mission'] as $key => $label)<fieldset><legend>{{ $label }}</legend><label>Eyebrow<input type="text" wire:model="content.{{ $key }}.eyebrow"></label><label>Title<input type="text" wire:model="content.{{ $key }}.title"></label><label>Statement<textarea rows="8" wire:model="content.{{ $key }}.statement"></textarea></label><label>Caption<input type="text" wire:model="content.{{ $key }}.caption"></label></fieldset>@endforeach</div>
             </section>
 

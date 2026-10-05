@@ -42,6 +42,17 @@ class HomepageDefaults
                 ],
                 'link_label' => 'More about THE IMPACT',
             ],
+            'founder' => [
+                'eyebrow' => 'THE VISION BEHIND THE IMPACT',
+                'name' => 'Pst. Feyisara Samuel',
+                'role' => 'President & Convener',
+                'title_line_one' => 'Purpose needs',
+                'title_emphasis' => 'a vision carrier.',
+                'description' => 'Pst. Feyisara Samuel is the President and Convener of THE IMPACT—the person behind the initiative and its commitment to developing Christ-centred young leaders for meaningful service and public impact.',
+                'image' => 'images/pst-feyisara-samuel.jpg',
+                'image_alt' => 'Portrait of Pst. Feyisara Samuel, President and Convener of THE IMPACT.',
+                'link_label' => 'Meet the leadership',
+            ],
             'vision' => [
                 'eyebrow' => 'THE FUTURE WE SEE',
                 'title' => 'Our vision',

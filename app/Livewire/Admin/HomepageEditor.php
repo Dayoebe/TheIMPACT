@@ -22,6 +22,8 @@ class HomepageEditor extends Component
 
     public mixed $aboutImage = null;
 
+    public mixed $founderImage = null;
+
     public bool $saved = false;
 
     public function mount(): void
@@ -48,6 +50,7 @@ class HomepageEditor extends Component
             'content.about.paragraphs' => ['required', 'array', 'size:2'],
             'content.about.paragraphs.*' => ['required', 'string', 'max:2000'],
             'content.about.link_label' => ['required', 'string', 'max:100'],
+            'content.founder.*' => ['required', 'string', 'max:1500'],
             'content.vision.*' => ['required', 'string', 'max:2000'],
             'content.mission.*' => ['required', 'string', 'max:2000'],
             'content.focus.label' => ['required', 'string', 'max:100'],
@@ -74,6 +77,7 @@ class HomepageEditor extends Component
             'content.closing.*' => ['required', 'string', 'max:300'],
             'heroImage' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
             'aboutImage' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
+            'founderImage' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
         ];
 
         return $rules;
@@ -96,13 +100,18 @@ class HomepageEditor extends Component
             $content['about']['image'] = $this->aboutImage->store('homepage', 'public');
         }
 
+        if ($this->founderImage) {
+            $this->deleteManagedImage($content['founder']['image']);
+            $content['founder']['image'] = $this->founderImage->store('homepage', 'public');
+        }
+
         $record->update([
             'content' => $content,
             'updated_by' => auth()->id(),
         ]);
 
         $this->content = $content;
-        $this->reset('heroImage', 'aboutImage');
+        $this->reset('heroImage', 'aboutImage', 'founderImage');
         $this->saved = true;
     }
 
@@ -111,10 +120,11 @@ class HomepageEditor extends Component
         $record = HomepageContent::current();
         $this->deleteManagedImage($record->content['hero']['image'] ?? '');
         $this->deleteManagedImage($record->content['about']['image'] ?? '');
+        $this->deleteManagedImage($record->content['founder']['image'] ?? '');
 
         $this->content = HomepageDefaults::content();
         $record->update(['content' => $this->content, 'updated_by' => auth()->id()]);
-        $this->reset('heroImage', 'aboutImage');
+        $this->reset('heroImage', 'aboutImage', 'founderImage');
         $this->saved = true;
     }
 

@@ -34,6 +34,7 @@ class HomepageContentManagementTest extends TestCase
             ->assertSee('Edit homepage.')
             ->assertSee('Hero section')
             ->assertSee('Philosophy strip')
+            ->assertSee('President &amp; Convener', false)
             ->assertSee('Vision &amp; mission', false)
             ->assertSee('Focus areas')
             ->assertSee('The journey')
@@ -72,12 +73,23 @@ class HomepageContentManagementTest extends TestCase
             ->test(HomepageEditor::class)
             ->set('heroImage', UploadedFile::fake()->image('hero.jpg', 1200, 800))
             ->set('aboutImage', UploadedFile::fake()->image('community.png', 1200, 800))
+            ->set('founderImage', UploadedFile::fake()->image('president.jpg', 900, 1200))
             ->call('save')
             ->assertHasNoErrors();
 
         $content = HomepageContent::current()->content;
         Storage::disk('public')->assertExists($content['hero']['image']);
         Storage::disk('public')->assertExists($content['about']['image']);
+        Storage::disk('public')->assertExists($content['founder']['image']);
+    }
+
+    public function test_homepage_introduces_the_president_and_convener(): void
+    {
+        $this->get(route('home'))->assertOk()
+            ->assertSee('Pst. Feyisara Samuel')
+            ->assertSee('President &amp; Convener', false)
+            ->assertSee('the person behind the initiative')
+            ->assertSee('images/pst-feyisara-samuel.jpg', false);
     }
 
     public function test_restore_defaults_replaces_edited_content(): void

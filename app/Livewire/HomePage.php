@@ -19,6 +19,7 @@ class HomePage extends Component
             'content' => $content,
             'heroImageUrl' => $this->imageUrl($content['hero']['image']),
             'aboutImageUrl' => $this->imageUrl($content['about']['image']),
+            'founderImageUrl' => $this->imageUrl($content['founder']['image']),
         ]);
     }
 

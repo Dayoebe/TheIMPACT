@@ -44,6 +44,21 @@
             <div class="about-copy"><p class="lead">{{ $content['about']['lead'] }}</p>@foreach($content['about']['paragraphs'] as $paragraph)<p>{{ $paragraph }}</p>@endforeach<a href="{{ route('about') }}" class="underlined-link">{{ $content['about']['link_label'] }} <span aria-hidden="true">↗</span></a></div>
         </section>
 
+        <section class="founder-section" aria-labelledby="founder-heading">
+            <div class="shell founder-grid">
+                <figure class="founder-portrait">
+                    <img src="{{ $founderImageUrl }}" width="960" height="1280" loading="lazy" decoding="async" alt="{{ $content['founder']['image_alt'] }}">
+                    <figcaption><span>{{ $content['founder']['name'] }}</span><strong>{{ $content['founder']['role'] }}</strong></figcaption>
+                </figure>
+                <div class="founder-copy">
+                    <p class="eyebrow">{{ $content['founder']['eyebrow'] }}</p>
+                    <h2 id="founder-heading">{{ $content['founder']['title_line_one'] }}<br><em>{{ $content['founder']['title_emphasis'] }}</em></h2>
+                    <p>{{ $content['founder']['description'] }}</p>
+                    <a href="{{ route('leadership') }}" class="underlined-link">{{ $content['founder']['link_label'] }} <span aria-hidden="true">↗</span></a>
+                </div>
+            </div>
+        </section>
+
         <section id="vision" class="shell vision-grid">
             <article class="vision-card"><span class="purpose-icon"><x-icon name="compass" /></span><p class="eyebrow">{{ $content['vision']['eyebrow'] }}</p><span class="card-number" aria-hidden="true">01</span><h2>{{ $content['vision']['title'] }}<span>.</span></h2><p>{{ $content['vision']['statement'] }}</p><div class="card-caption"><span aria-hidden="true">↗</span> {{ $content['vision']['caption'] }}</div></article>
             <article class="mission-card"><span class="purpose-icon"><x-icon name="deploy" /></span><p class="eyebrow">{{ $content['mission']['eyebrow'] }}</p><span class="card-number" aria-hidden="true">02</span><h2>{{ $content['mission']['title'] }}<span>.</span></h2><p>{{ $content['mission']['statement'] }}</p><div class="card-caption"><span aria-hidden="true">↗</span> {{ $content['mission']['caption'] }}</div></article>
