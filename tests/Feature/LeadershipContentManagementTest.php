@@ -7,6 +7,8 @@ use App\Models\LeadershipPageContent;
 use App\Models\User;
 use App\Support\LeadershipPageDefaults;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -28,7 +30,7 @@ class LeadershipContentManagementTest extends TestCase
             ->assertSee('Edit Leadership.')
             ->assertSee('Directory disclosure')
             ->assertSee('Founder / President')
-            ->assertSee('Pastor Feyisara Samuel');
+            ->assertSee('Pst. Feyisara Samuel');
     }
 
     public function test_administrator_can_publish_page_and_profile_changes(): void
@@ -60,6 +62,28 @@ class LeadershipContentManagementTest extends TestCase
             ->assertSet('content.directory.groups.0.people.1.name', 'New profile')
             ->call('removePerson', 0, 1)
             ->assertCount('content.directory.groups.0.people', 1);
+    }
+
+    public function test_administrator_can_upload_a_profile_picture_while_other_profiles_use_initials(): void
+    {
+        Storage::fake('public');
+        $administrator = User::factory()->superAdmin()->create();
+
+        Livewire::actingAs($administrator)
+            ->test(LeadershipEditor::class)
+            ->set('profileImages.1.0', UploadedFile::fake()->image('board-chair.jpg', 800, 1000))
+            ->set('content.directory.groups.1.people.0.photo_alt', 'Portrait of the board chair.')
+            ->call('save')
+            ->assertHasNoErrors();
+
+        $content = LeadershipPageContent::current()->content;
+        $photo = $content['directory']['groups'][1]['people'][0]['photo'];
+        Storage::disk('public')->assertExists($photo);
+
+        $this->get(route('leadership'))->assertOk()
+            ->assertSee(Storage::disk('public')->url($photo), false)
+            ->assertSee('Portrait of the board chair.')
+            ->assertSee('SM');
     }
 
     public function test_restore_defaults_replaces_edited_content(): void

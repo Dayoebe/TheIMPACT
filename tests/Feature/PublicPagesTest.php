@@ -32,8 +32,8 @@ class PublicPagesTest extends TestCase
     public function test_leadership_directory_renders_every_group_and_marks_profiles_as_samples(): void
     {
         $response = $this->get(route('leadership'))->assertOk()->assertSeeLivewire(LeadershipPage::class)
-            ->assertSee('Illustrative leadership directory.')
-            ->assertSee('not confirmed appointments');
+            ->assertSee('Leadership directory.')
+            ->assertSee('Profiles labelled SAMPLE PROFILE are illustrative content, not confirmed appointments.');
 
         foreach (config('impact.leadership') as $id => $group) {
             $response->assertSee($group['title'])->assertSee('id="'.$id.'"', false);

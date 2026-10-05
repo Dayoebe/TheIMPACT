@@ -204,6 +204,10 @@ h2 { font-size: clamp(34px, 8.5vw, 48px); line-height: 1.1; letter-spacing: -.8p
 .founder-copy > p:not(.eyebrow) { max-width: 610px; color: #eadfe4; font-size: 15px; line-height: 1.9; }
 .founder-copy .underlined-link { margin-top: 22px; border-color: #c4985b80; color: #fff; }
 .editor-image-preview.is-portrait { max-width: 280px; aspect-ratio: 3 / 4; }
+.profile-image-control { align-items: center; }
+.profile-image-control .editor-image-preview { width: min(220px, 100%); }
+.profile-image-control .editor-remove-button { display: inline-flex; min-height: 42px; align-items: center; margin: 8px 0 0 8px; }
+.profile-initials-preview { display: grid; width: 100%; height: 100%; place-items: center; background: var(--brand-plum-pale); color: var(--brand-plum-soft); font-family: var(--font-display); font-size: 58px; }
 
 @media (min-width: 480px) {
     .hero-actions { flex-direction: row; align-items: center; flex-wrap: wrap; gap: 20px; }
@@ -531,6 +535,7 @@ h2 { font-size: clamp(34px, 8.5vw, 48px); line-height: 1.1; letter-spacing: -.8p
 .people-grid, .programme-grid, .participation-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
 .person-card { background: #f3f0e8; padding: 24px; border-radius: 20px; border: 1px solid #d8d8d0; }
 .person-avatar { display: grid; place-items: center; width: 72px; height: 84px; border-radius: 40px 40px 10px 10px; background: #d8e7e5; color: #0f5d5e; font-family: var(--font-display); font-size: 34px; margin-bottom: 20px; }
+.person-photo { display: block; width: 120px; height: 144px; object-fit: cover; object-position: center top; background: var(--brand-plum-pale); }
 .person-card .eyebrow { font-size: 9px; color: #5d6b73; }
 .person-card h3 { font-size: 32px; margin-block: 8px; }
 .person-card p { font-size: 14px; line-height: 1.85; color: #5d6b73; }
