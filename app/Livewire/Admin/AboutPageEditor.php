@@ -4,6 +4,7 @@ namespace App\Livewire\Admin;
 
 use App\Models\AboutPageContent;
 use App\Support\AboutPageDefaults;
+use App\Support\InteractsWithDashboardNotifications;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Livewire\Attributes\Layout;
@@ -13,6 +14,7 @@ use Livewire\Features\SupportFileUploads\WithFileUploads;
 #[Layout('layouts.admin')]
 class AboutPageEditor extends Component
 {
+    use InteractsWithDashboardNotifications;
     use WithFileUploads;
 
     /** @var array<string, mixed> */
@@ -104,6 +106,7 @@ class AboutPageEditor extends Component
         $this->content = $content;
         $this->reset('heroImage', 'approachImage');
         $this->saved = true;
+        $this->notifyDashboard('About page changes were saved and published.');
     }
 
     public function restoreDefaults(): void
@@ -115,6 +118,7 @@ class AboutPageEditor extends Component
         $record->update(['content' => $this->content, 'updated_by' => auth()->id()]);
         $this->reset('heroImage', 'approachImage');
         $this->saved = true;
+        $this->notifyDashboard('The About page defaults were restored.');
     }
 
     public function imageUrl(string $path): string

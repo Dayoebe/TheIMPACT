@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin;
 
 use App\Models\MentorshipPageContent;
+use App\Support\InteractsWithDashboardNotifications;
 use App\Support\MentorshipPageDefaults;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
@@ -13,6 +14,7 @@ use Livewire\Features\SupportFileUploads\WithFileUploads;
 #[Layout('layouts.admin')]
 class MentorshipEditor extends Component
 {
+    use InteractsWithDashboardNotifications;
     use WithFileUploads;
 
     /** @var array<string, mixed> */
@@ -85,6 +87,7 @@ class MentorshipEditor extends Component
         $this->content = $content;
         $this->reset('whyImage');
         $this->saved = true;
+        $this->notifyDashboard('Mentorship changes were saved and published.');
     }
 
     public function restoreDefaults(): void
@@ -95,6 +98,7 @@ class MentorshipEditor extends Component
         $record->update(['content' => $this->content, 'updated_by' => auth()->id()]);
         $this->reset('whyImage');
         $this->saved = true;
+        $this->notifyDashboard('The mentorship defaults were restored.');
     }
 
     public function imageUrl(string $path): string

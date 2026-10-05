@@ -43,7 +43,8 @@ class LeadershipContentManagementTest extends TestCase
             ->set('content.directory.groups.0.people.0.role', 'Founding Convener')
             ->call('save')
             ->assertHasNoErrors()
-            ->assertSet('saved', true);
+            ->assertSet('saved', true)
+            ->assertDispatched('dashboard-toast', message: 'Leadership changes were saved and published.', type: 'success');
 
         $record = LeadershipPageContent::current();
         $this->assertSame($administrator->id, $record->updated_by);

@@ -45,7 +45,8 @@ class ProgrammeContentManagementTest extends TestCase
             ->set('programme.status', 'published')
             ->call('saveProgramme')
             ->assertHasNoErrors()
-            ->assertSet('saved', true);
+            ->assertSet('saved', true)
+            ->assertDispatched('dashboard-toast', message: 'The programme was saved successfully.', type: 'success');
 
         $this->assertSame($administrator->id, $programme->fresh()->updated_by);
         $this->get(route('programmes.show', $programme->slug))->assertOk()->assertSee('A renewed leadership pathway.');

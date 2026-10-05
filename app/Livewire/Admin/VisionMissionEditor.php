@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin;
 
 use App\Models\VisionMissionContent;
+use App\Support\InteractsWithDashboardNotifications;
 use App\Support\VisionMissionDefaults;
 use Illuminate\View\View;
 use Livewire\Attributes\Layout;
@@ -11,6 +12,8 @@ use Livewire\Component;
 #[Layout('layouts.admin')]
 class VisionMissionEditor extends Component
 {
+    use InteractsWithDashboardNotifications;
+
     /** @var array<string, mixed> */
     public array $content = [];
 
@@ -53,6 +56,7 @@ class VisionMissionEditor extends Component
         $this->validate();
         VisionMissionContent::current()->update(['content' => $this->content, 'updated_by' => auth()->id()]);
         $this->saved = true;
+        $this->notifyDashboard('Vision and mission changes were saved and published.');
     }
 
     public function restoreDefaults(): void
@@ -60,6 +64,7 @@ class VisionMissionEditor extends Component
         $this->content = VisionMissionDefaults::content();
         VisionMissionContent::current()->update(['content' => $this->content, 'updated_by' => auth()->id()]);
         $this->saved = true;
+        $this->notifyDashboard('The vision and mission defaults were restored.');
     }
 
     public function render(): View

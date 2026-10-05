@@ -4,6 +4,7 @@ namespace App\Livewire\Admin;
 
 use App\Models\Programme;
 use App\Models\ProgrammePageContent;
+use App\Support\InteractsWithDashboardNotifications;
 use App\Support\ProgrammeDefaults;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Validation\Rule;
@@ -14,6 +15,8 @@ use Livewire\Component;
 #[Layout('layouts.admin')]
 class ProgrammeManager extends Component
 {
+    use InteractsWithDashboardNotifications;
+
     /** @var array<string, mixed> */
     public array $pageContent = [];
 
@@ -105,6 +108,7 @@ class ProgrammeManager extends Component
         ]);
         ProgrammePageContent::current()->update(['content' => $this->pageContent, 'updated_by' => auth()->id()]);
         $this->saved = true;
+        $this->notifyDashboard('Programme directory settings were saved and published.');
     }
 
     public function saveProgramme(): void
@@ -114,6 +118,7 @@ class ProgrammeManager extends Component
         $record->fill([...$validated, 'updated_by' => auth()->id()])->save();
         $this->selectProgramme($record->id);
         $this->saved = true;
+        $this->notifyDashboard('The programme was saved successfully.');
     }
 
     public function deleteProgramme(): void
@@ -123,6 +128,7 @@ class ProgrammeManager extends Component
         $next = Programme::query()->orderBy('sort_order')->orderBy('id')->first();
         $next ? $this->selectProgramme($next->id) : $this->newProgramme();
         $this->saved = true;
+        $this->notifyDashboard('The programme was deleted.');
     }
 
     public function addObjective(): void
@@ -174,6 +180,7 @@ class ProgrammeManager extends Component
         $this->pageContent = ProgrammeDefaults::page();
         ProgrammePageContent::current()->update(['content' => $this->pageContent, 'updated_by' => auth()->id()]);
         $this->saved = true;
+        $this->notifyDashboard('The programme directory defaults were restored.');
     }
 
     public function render(): View

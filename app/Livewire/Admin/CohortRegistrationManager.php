@@ -5,6 +5,7 @@ namespace App\Livewire\Admin;
 use App\Models\CohortPageContent;
 use App\Models\Programme;
 use App\Support\CohortPageDefaults;
+use App\Support\InteractsWithDashboardNotifications;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\View\View;
 use Livewire\Attributes\Layout;
@@ -13,6 +14,8 @@ use Livewire\Component;
 #[Layout('layouts.admin')]
 class CohortRegistrationManager extends Component
 {
+    use InteractsWithDashboardNotifications;
+
     /** @var array<string, mixed> */
     public array $pageContent = [];
 
@@ -80,6 +83,7 @@ class CohortRegistrationManager extends Component
             'updated_by' => auth()->id(),
         ]);
         $this->saved = true;
+        $this->notifyDashboard('Cohort schedule and registration details were saved.');
     }
 
     public function savePage(): void
@@ -92,6 +96,7 @@ class CohortRegistrationManager extends Component
         ]);
         CohortPageContent::current()->update(['content' => $this->pageContent, 'updated_by' => auth()->id()]);
         $this->saved = true;
+        $this->notifyDashboard('Cohort page settings were saved and published.');
     }
 
     public function restorePageDefaults(): void
@@ -99,6 +104,7 @@ class CohortRegistrationManager extends Component
         $this->pageContent = CohortPageDefaults::content();
         CohortPageContent::current()->update(['content' => $this->pageContent, 'updated_by' => auth()->id()]);
         $this->saved = true;
+        $this->notifyDashboard('The cohort page defaults were restored.');
     }
 
     public function render(): View

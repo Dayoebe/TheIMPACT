@@ -48,7 +48,8 @@ class VisionMissionContentManagementTest extends TestCase
             ->set('content.mission.steps.0.description', 'A renewed first step for emerging leaders.')
             ->call('save')
             ->assertHasNoErrors()
-            ->assertSet('saved', true);
+            ->assertSet('saved', true)
+            ->assertDispatched('dashboard-toast', message: 'Vision and mission changes were saved and published.', type: 'success');
 
         $record = VisionMissionContent::current();
         $this->assertSame($administrator->id, $record->updated_by);

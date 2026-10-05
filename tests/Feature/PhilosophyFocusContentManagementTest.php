@@ -47,7 +47,8 @@ class PhilosophyFocusContentManagementTest extends TestCase
             ->set('content.focus.areas.0.title', 'Govern with renewed integrity.')
             ->call('save')
             ->assertHasNoErrors()
-            ->assertSet('saved', true);
+            ->assertSet('saved', true)
+            ->assertDispatched('dashboard-toast', message: 'Philosophy and focus area changes were saved and published.', type: 'success');
 
         $record = PhilosophyFocusContent::current();
         $this->assertSame($administrator->id, $record->updated_by);

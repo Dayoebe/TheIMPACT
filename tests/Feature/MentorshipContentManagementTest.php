@@ -44,7 +44,8 @@ class MentorshipContentManagementTest extends TestCase
             ->set('content.take_part.roles.mentor.application_url', 'https://example.org/mentor/apply')
             ->call('save')
             ->assertHasNoErrors()
-            ->assertSet('saved', true);
+            ->assertSet('saved', true)
+            ->assertDispatched('dashboard-toast', message: 'Mentorship changes were saved and published.', type: 'success');
 
         $record = MentorshipPageContent::current();
         $this->assertSame($administrator->id, $record->updated_by);

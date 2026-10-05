@@ -4,7 +4,6 @@
         <div class="admin-editor-heading-actions"><a href="{{ route('home') }}" target="_blank" rel="noopener noreferrer">Preview homepage ↗</a><button type="button" wire:click="save" wire:loading.attr="disabled"><span wire:loading.remove wire:target="save">Save all changes</span><span wire:loading wire:target="save">Saving…</span></button></div>
     </section>
 
-    @if($saved)<div class="admin-alert is-success" role="status" x-data x-init="setTimeout(() => $el.remove(), 4500)">Homepage changes were saved and are now live.</div>@endif
     @if($errors->any())<div class="admin-alert is-error" role="alert">Some fields need attention. Review the highlighted inputs and save again.</div>@endif
 
     <div class="homepage-editor-layout">

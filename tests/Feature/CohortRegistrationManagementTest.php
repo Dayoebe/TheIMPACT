@@ -49,7 +49,8 @@ class CohortRegistrationManagementTest extends TestCase
             ->set('registrationUrl', 'https://example.org/register/leadership')
             ->call('saveProgrammeSchedule')
             ->assertHasNoErrors()
-            ->assertSet('saved', true);
+            ->assertSet('saved', true)
+            ->assertDispatched('dashboard-toast', message: 'Cohort schedule and registration details were saved.', type: 'success');
 
         $programme->refresh();
         $this->assertSame($administrator->id, $programme->updated_by);

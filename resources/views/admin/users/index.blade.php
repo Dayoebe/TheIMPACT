@@ -10,9 +10,6 @@
         <div class="admin-user-summary"><strong>{{ $users->total() }}</strong><span>Registered users</span><small>{{ $administratorCount }} {{ str('administrator')->plural($administratorCount) }}</small></div>
     </section>
 
-    @if(session('status'))<div class="admin-alert is-success" role="status">{{ session('status') }}</div>@endif
-    @if(session('error'))<div class="admin-alert is-error" role="alert">{{ session('error') }}</div>@endif
-
     <section class="admin-panel admin-users-panel">
         <div class="admin-users-toolbar">
             <div><p class="eyebrow">Access directory</p><h2>Registered accounts</h2></div>

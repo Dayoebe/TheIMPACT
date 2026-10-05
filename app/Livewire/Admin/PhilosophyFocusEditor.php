@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin;
 
 use App\Models\PhilosophyFocusContent;
+use App\Support\InteractsWithDashboardNotifications;
 use App\Support\PhilosophyFocusDefaults;
 use Illuminate\View\View;
 use Livewire\Attributes\Layout;
@@ -11,6 +12,8 @@ use Livewire\Component;
 #[Layout('layouts.admin')]
 class PhilosophyFocusEditor extends Component
 {
+    use InteractsWithDashboardNotifications;
+
     /** @var array<string, mixed> */
     public array $content = [];
 
@@ -54,6 +57,7 @@ class PhilosophyFocusEditor extends Component
         $this->validate();
         PhilosophyFocusContent::current()->update(['content' => $this->content, 'updated_by' => auth()->id()]);
         $this->saved = true;
+        $this->notifyDashboard('Philosophy and focus area changes were saved and published.');
     }
 
     public function restoreDefaults(): void
@@ -61,6 +65,7 @@ class PhilosophyFocusEditor extends Component
         $this->content = PhilosophyFocusDefaults::content();
         PhilosophyFocusContent::current()->update(['content' => $this->content, 'updated_by' => auth()->id()]);
         $this->saved = true;
+        $this->notifyDashboard('The philosophy and focus area defaults were restored.');
     }
 
     public function render(): View

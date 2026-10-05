@@ -52,7 +52,8 @@ class HomepageContentManagementTest extends TestCase
             ->set('content.focus.areas.0.description', 'A changed governance description.')
             ->call('save')
             ->assertHasNoErrors()
-            ->assertSet('saved', true);
+            ->assertSet('saved', true)
+            ->assertDispatched('dashboard-toast', message: 'Homepage changes were saved and published.', type: 'success');
 
         $record = HomepageContent::current();
         $this->assertSame('A changed homepage heading.', $record->content['hero']['title_line_one']);

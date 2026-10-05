@@ -1,6 +1,5 @@
 <div class="homepage-editor programme-manager">
     <section class="admin-editor-heading"><div><p class="eyebrow">Programmes & people</p><h1>Manage programmes.</h1><p>Edit the public directory, create programme drafts, and control every published programme detail.</p></div><div class="admin-editor-heading-actions"><a href="{{ route('programmes.index') }}" target="_blank" rel="noopener noreferrer">Preview directory ↗</a><button type="button" wire:click="newProgramme">New programme</button></div></section>
-    @if($saved)<div class="admin-alert is-success" role="status" x-data x-init="setTimeout(() => $el.remove(), 4500)">Your programme changes were saved.</div>@endif
     @if($errors->any())<div class="admin-alert is-error" role="alert">Some fields need attention. Review the highlighted programme fields.</div>@endif
 
     <section class="editor-section"><div class="editor-section-heading"><div><span>01</span><h2>Programme directory page</h2><p>Manage the public listing introduction, preview notice and mentorship callout.</p></div><x-admin-icon name="programmes" /></div>

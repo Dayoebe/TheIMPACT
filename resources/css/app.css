@@ -246,6 +246,12 @@
 @utility admin-alert { @apply mb-3.5 rounded-lg p-3.5 text-[11px]; }
 @utility is-success { @apply bg-emerald-100 text-emerald-800; }
 @utility is-error { @apply bg-red-100 text-red-800; }
+@utility admin-toast-region { @apply pointer-events-none fixed inset-x-4 top-4 z-100 grid justify-items-end gap-3 sm:inset-x-auto sm:right-6 sm:top-6 sm:w-100; }
+@utility admin-toast { @apply pointer-events-auto grid w-full grid-cols-[auto_1fr_auto] items-center gap-3 rounded-2xl border border-emerald-200 bg-white p-4 text-emerald-950 shadow-2xl; }
+@utility admin-toast-icon { @apply grid size-10 place-items-center rounded-full bg-emerald-100 text-emerald-700; }
+@utility admin-toast-copy { @apply grid gap-0.5 text-[12px] leading-[1.5]; }
+@utility admin-toast-error { @apply border-red-200 text-red-950; }
+@utility admin-toast-error-icon { @apply bg-red-100 text-red-700; }
 @utility admin-users-toolbar { @apply flex flex-col gap-4 border-b border-line pb-5 lg:flex-row lg:items-end lg:justify-between; }
 @utility admin-user-row { @apply grid grid-cols-[auto_1fr] gap-3.5 border-b border-line py-5 lg:grid-cols-[auto_1.4fr_.7fr_auto] lg:items-center; }
 @utility admin-user-avatar { @apply grid size-11 place-items-center rounded-full bg-[#f1e7ec] font-display text-lg text-plum; }

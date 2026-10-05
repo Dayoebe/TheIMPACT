@@ -4,6 +4,7 @@ namespace App\Livewire\Admin;
 
 use App\Models\HomepageContent;
 use App\Support\HomepageDefaults;
+use App\Support\InteractsWithDashboardNotifications;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Livewire\Attributes\Layout;
@@ -13,6 +14,7 @@ use Livewire\Features\SupportFileUploads\WithFileUploads;
 #[Layout('layouts.admin')]
 class HomepageEditor extends Component
 {
+    use InteractsWithDashboardNotifications;
     use WithFileUploads;
 
     /** @var array<string, mixed> */
@@ -113,6 +115,7 @@ class HomepageEditor extends Component
         $this->content = $content;
         $this->reset('heroImage', 'aboutImage', 'founderImage');
         $this->saved = true;
+        $this->notifyDashboard('Homepage changes were saved and published.');
     }
 
     public function restoreDefaults(): void
@@ -126,6 +129,7 @@ class HomepageEditor extends Component
         $record->update(['content' => $this->content, 'updated_by' => auth()->id()]);
         $this->reset('heroImage', 'aboutImage', 'founderImage');
         $this->saved = true;
+        $this->notifyDashboard('The homepage defaults were restored.');
     }
 
     public function imageUrl(string $path): string

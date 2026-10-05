@@ -1,6 +1,5 @@
 <div class="homepage-editor" x-data="{ section: 'hero' }">
     <section class="admin-editor-heading"><div><p class="eyebrow">Website content</p><h1>Edit About page.</h1><p>Manage the complete organisation story, philosophy, approach, imagery and discovery metadata.</p></div><div class="admin-editor-heading-actions"><a href="{{ route('about') }}" target="_blank" rel="noopener noreferrer">Preview About page ↗</a><button type="button" wire:click="save" wire:loading.attr="disabled"><span wire:loading.remove wire:target="save">Save all changes</span><span wire:loading wire:target="save">Saving…</span></button></div></section>
-    @if($saved)<div class="admin-alert is-success" role="status" x-data x-init="setTimeout(() => $el.remove(), 4500)">About page changes were saved and are now live.</div>@endif
     @if($errors->any())<div class="admin-alert is-error" role="alert">Some fields need attention. Review the editor and save again.</div>@endif
 
     <div class="homepage-editor-layout">

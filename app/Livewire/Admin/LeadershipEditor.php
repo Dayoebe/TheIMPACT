@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin;
 
 use App\Models\LeadershipPageContent;
+use App\Support\InteractsWithDashboardNotifications;
 use App\Support\LeadershipPageDefaults;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
@@ -13,6 +14,7 @@ use Livewire\Features\SupportFileUploads\WithFileUploads;
 #[Layout('layouts.admin')]
 class LeadershipEditor extends Component
 {
+    use InteractsWithDashboardNotifications;
     use WithFileUploads;
 
     /** @var array<string, mixed> */
@@ -107,6 +109,7 @@ class LeadershipEditor extends Component
         $this->reset('profileImages');
         $this->photosToDelete = [];
         $this->saved = true;
+        $this->notifyDashboard('Leadership changes were saved and published.');
     }
 
     public function removePhoto(int $groupIndex, int $personIndex): void
@@ -132,6 +135,7 @@ class LeadershipEditor extends Component
         $this->reset('profileImages');
         $this->photosToDelete = [];
         $this->saved = true;
+        $this->notifyDashboard('The leadership defaults were restored.');
     }
 
     public function imageUrl(string $path): string

@@ -53,7 +53,8 @@ class AboutPageContentManagementTest extends TestCase
             ->set('content.difference.cards.0.description', 'A changed public leadership commitment.')
             ->call('save')
             ->assertHasNoErrors()
-            ->assertSet('saved', true);
+            ->assertSet('saved', true)
+            ->assertDispatched('dashboard-toast', message: 'About page changes were saved and published.', type: 'success');
 
         $record = AboutPageContent::current();
         $this->assertSame('A renewed shared purpose.', $record->content['hero']['title_line_one']);

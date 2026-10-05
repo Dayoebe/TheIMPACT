@@ -51,6 +51,36 @@
             <main id="admin-main" class="admin-main">@isset($slot){{ $slot }}@else @yield('content') @endisset</main>
         </div>
     </div>
+    <div
+        class="admin-toast-region"
+        aria-live="polite"
+        aria-atomic="true"
+        x-data="{
+            toasts: [],
+            sequence: 0,
+            show(detail) {
+                const id = ++this.sequence;
+                this.toasts.push({ id, message: detail.message, type: detail.type ?? 'success' });
+                setTimeout(() => this.remove(id), 5000);
+            },
+            remove(id) {
+                this.toasts = this.toasts.filter((toast) => toast.id !== id);
+            }
+        }"
+        x-init="@if(session('status')) show({ message: @js(session('status')), type: 'success' }) @elseif(session('error')) show({ message: @js(session('error')), type: 'error' }) @endif"
+        @dashboard-toast.window="show($event.detail)"
+    >
+        <template x-for="toast in toasts" :key="toast.id">
+            <div class="admin-toast animate__animated animate__fadeInRight" :class="toast.type === 'error' ? 'admin-toast-error' : ''" role="status">
+                <span class="admin-toast-icon" :class="toast.type === 'error' ? 'admin-toast-error-icon' : ''" aria-hidden="true">
+                    <svg x-show="toast.type === 'success'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4 4L19 6" /></svg>
+                    <svg x-show="toast.type !== 'success'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v5m0 3h.01" /><circle cx="12" cy="12" r="9" /></svg>
+                </span>
+                <span class="admin-toast-copy"><strong x-text="toast.type === 'success' ? 'Done' : 'Notice'"></strong><span x-text="toast.message"></span></span>
+                <button type="button" @click="remove(toast.id)" aria-label="Dismiss notification">×</button>
+            </div>
+        </template>
+    </div>
     @livewireScripts
 </body>
 </html>
