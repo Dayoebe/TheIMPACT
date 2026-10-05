@@ -190,6 +190,21 @@ h2 { font-size: clamp(34px, 8.5vw, 48px); line-height: 1.1; letter-spacing: -.8p
 .closing-star .icon { width: 52px; height: 52px; }
 .imagery-note { font-size: 11px; line-height: 1.7; color: #5d6b73; margin-bottom: 16px; }
 
+.founder-section { padding-block: 54px; background: var(--brand-plum); color: #fff; overflow: hidden; }
+.founder-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 30px; align-items: center; }
+.founder-portrait { position: relative; width: min(100%, 520px); justify-self: center; overflow: hidden; border-radius: 90px 8px 8px 8px; background: #571b3d; }
+.founder-portrait::before { content: ''; position: absolute; inset: 14px; z-index: 1; border: 1px solid #c4985b80; border-radius: 78px 4px 4px 4px; pointer-events: none; }
+.founder-portrait img { display: block; width: 100%; aspect-ratio: 3 / 3.35; object-fit: cover; object-position: center 22%; }
+.founder-portrait figcaption { position: absolute; inset: auto 0 0; z-index: 2; display: grid; gap: 3px; padding: 42px 26px 24px; background: linear-gradient(transparent, #26091ce8); }
+.founder-portrait figcaption span { font-family: var(--font-display); font-size: 27px; }
+.founder-portrait figcaption strong { color: var(--brand-gold); font-size: 9px; letter-spacing: 1.4px; text-transform: uppercase; }
+.founder-copy .eyebrow { color: var(--brand-gold); }
+.founder-copy h2 { margin: 18px 0 22px; font-size: clamp(40px, 10vw, 62px); }
+.founder-copy h2 em { color: var(--brand-gold); }
+.founder-copy > p:not(.eyebrow) { max-width: 610px; color: #eadfe4; font-size: 15px; line-height: 1.9; }
+.founder-copy .underlined-link { margin-top: 22px; border-color: #c4985b80; color: #fff; }
+.editor-image-preview.is-portrait { max-width: 280px; aspect-ratio: 3 / 4; }
+
 @media (min-width: 480px) {
     .hero-actions { flex-direction: row; align-items: center; flex-wrap: wrap; gap: 20px; }
     .philosophy ol { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -257,6 +272,9 @@ h2 { font-size: clamp(34px, 8.5vw, 48px); line-height: 1.1; letter-spacing: -.8p
     .hero-photo-frame { border-radius: 80px 6px 0 0; }
     .hero-photo-caption { border-radius: 0 0 6px 6px; }
     .community-visual { border-radius: 6px; }
+    .founder-section { padding-block: 90px; }
+    .founder-grid { grid-template-columns: minmax(340px, .82fr) minmax(0, 1.18fr); gap: clamp(60px, 8vw, 120px); }
+    .founder-portrait { justify-self: start; }
     .about-copy .lead { font-size: 21px; }
     .vision-card, .mission-card { padding: 40px; border-radius: 6px; }
     .vision-grid h2 { font-size: 48px; }
