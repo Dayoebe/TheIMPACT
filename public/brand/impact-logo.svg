@@ -1,15 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 430 112" role="img" aria-labelledby="title description">
-  <title id="title">The IMPACT primary logo</title>
-  <desc id="description">A cross anchored within a rising path, beside The IMPACT wordmark and the words Faith, Leadership, Transformation.</desc>
-  <g transform="translate(4 4)">
-    <circle cx="52" cy="52" r="49" fill="#102a43"/>
-    <path d="M22 73c14-4 24-12 32-24 7-10 16-17 29-21" fill="none" stroke="#4fa7a4" stroke-width="5.6" stroke-linecap="round"/>
-    <path d="m70 23 15 4-8 13" fill="none" stroke="#4fa7a4" stroke-width="5.6" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M52 21v51M37 37h30" fill="none" stroke="#e1b65a" stroke-width="7" stroke-linecap="round"/>
-  </g>
-  <g fill="#102a43" font-family="Manrope, Arial, sans-serif">
-    <text x="126" y="31" font-size="15" font-weight="800" letter-spacing="8">THE</text>
-    <text x="124" y="76" font-size="46" font-weight="800" letter-spacing="-2">IMPACT</text>
-    <text x="127" y="99" fill="#0f5d5e" font-size="11" font-weight="700" letter-spacing="2">FAITH · LEADERSHIP · TRANSFORMATION</text>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 128" role="img" aria-labelledby="title description"><title id="title">The IMPACT logo</title><desc id="description">The IMPACT, Christian Youth Leadership and Public Impact Network.</desc><g transform="translate(10 10)"><path fill="#c4985b" d="M0 92C22 81 65 81 88 92c-27-6-62-6-88 0Zm25-59c14 10 18 28 20 53h-8c-2-22-5-39-12-53ZM40 0h9v12h12l-10 8h-2v19h-9V20H29l11-8V0Z"/><path fill="#341027" d="M3 96c21-9 61-9 82 0-25-5-57-5-82 0Zm8-44c14 5 20 17 23 34l-12 1c-2-14-6-25-11-35Zm66 0c-14 5-20 17-23 34l12 1c2-14 6-25 11-35ZM64 33C51 43 47 61 46 86h8c1-22 4-39 10-53Z"/><g fill="#341027"><circle cx="14" cy="46" r="7"/><circle cx="74" cy="46" r="7"/><circle cx="52" cy="37" r="7"/></g></g><g fill="#341027"><text x="123" y="38" font-family="Manrope,Arial,sans-serif" font-size="12" font-weight="700" letter-spacing="8">THE</text><text x="120" y="84" font-family="Cormorant Garamond,Georgia,serif" font-size="54" font-weight="600" letter-spacing="1">IMPACT</text><text x="123" y="108" font-family="Manrope,Arial,sans-serif" font-size="11" font-weight="600" letter-spacing="1.35">CHRISTIAN YOUTH LEADERSHIP &amp; PUBLIC IMPACT NETWORK</text></g><path stroke="#c4985b" stroke-width="2" d="M100 104h16m421 0h15"/></svg>

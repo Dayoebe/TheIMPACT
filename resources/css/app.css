@@ -16,13 +16,27 @@
 @theme {
     --font-display: 'Cormorant Garamond', Georgia, serif;
     --font-sans: 'Manrope', sans-serif;
-    --color-ink: #102a43;
-    --color-teal: #0f5d5e;
-    --color-gold: #e1b65a;
-    --color-paper: #faf8f2;
+    --color-ink: #341027;
+    --color-teal: #6f294f;
+    --color-gold: #c4985b;
+    --color-paper: #faf7f3;
 }
 
-:root { color: var(--color-ink); background: var(--color-paper); font-synthesis: none; }
+:root {
+    --brand-plum: #341027;
+    --brand-plum-soft: #6f294f;
+    --brand-plum-pale: #f1e7ec;
+    --brand-gold: #c4985b;
+    --brand-gold-deep: #95682f;
+    --brand-gold-pale: #f3e8d7;
+    --brand-ivory: #faf7f3;
+    --brand-surface: #f5f0eb;
+    --brand-line: #ded2d7;
+    --brand-muted: #71646b;
+    color: var(--color-ink);
+    background: var(--color-paper);
+    font-synthesis: none;
+}
 html { scroll-behavior: smooth; scroll-padding-top: 88px; }
 body { margin: 0; font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 [x-cloak] { display: none !important; }
@@ -42,14 +56,13 @@ p, h1, h2, h3 { overflow-wrap: break-word; }
 .site-header { background: var(--color-paper); border-bottom: 1px solid #dedbd2; position: sticky; top: 0; z-index: 40; padding-top: env(safe-area-inset-top, 0px); }
 .header-inner { min-height: 70px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .brand { display: inline-flex; align-items: center; flex-shrink: 0; min-height: 48px; }
-.brand-lockup { display: inline-flex; align-items: center; gap: 11px; }
-.brand-mark { width: 42px; height: 42px; flex-shrink: 0; overflow: visible; }
-.brand-mark-field { fill: var(--color-ink); }
-.brand-mark-path, .brand-mark-arrow { fill: none; stroke: #4fa7a4; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
-.brand-mark-cross { fill: none; stroke: var(--color-gold); stroke-width: 3.4; stroke-linecap: round; }
+.brand-lockup { display: inline-flex; align-items: center; gap: 10px; }
+.brand-mark { width: 48px; height: 48px; flex-shrink: 0; overflow: visible; }
+.brand-mark-base, .brand-mark-person, .brand-mark-growth { fill: var(--brand-plum); }
+.brand-mark-base-gold, .brand-mark-growth-gold, .brand-mark-cross { fill: var(--brand-gold); }
 .brand-wordmark { display: grid; grid-template-columns: auto 1fr; align-items: end; column-gap: 4px; line-height: .88; }
-.brand-wordmark small { grid-column: 1 / -1; color: var(--color-teal); font-size: 8px; font-weight: 800; letter-spacing: 4.4px; margin: 0 0 4px 2px; }
-.brand-wordmark strong { grid-column: 1 / -1; font-size: 21px; font-weight: 800; letter-spacing: -.9px; }
+.brand-wordmark small { grid-column: 1 / -1; color: var(--brand-gold-deep); font-family: var(--font-sans); font-size: 7px; font-weight: 700; letter-spacing: 4.8px; margin: 0 0 5px 2px; }
+.brand-wordmark strong { grid-column: 1 / -1; color: var(--brand-plum); font-family: var(--font-display); font-size: 23px; font-weight: 600; letter-spacing: .2px; }
 .brand-wordmark > span { display: none; }
 .desktop-nav, .button.header-cta { display: none; }
 .site-header nav a { font-size: 13px; font-weight: 600; }
@@ -797,4 +810,167 @@ h2 { font-size: clamp(34px, 8.5vw, 48px); line-height: 1.1; letter-spacing: -.8p
     .programme-admin-list { position: sticky; top: 98px; border-radius: 8px; }
     .cohort-directory-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .cohort-directory-card { border-radius: 6px; }
+}
+
+/* Supplied brand identity: aubergine, champagne gold and warm ivory. */
+body,
+.member-auth-body,
+.admin-login-body { background: var(--brand-ivory); color: var(--brand-plum); }
+
+.site-header,
+.mobile-nav,
+.app-nav,
+.nav-dropdown-menu,
+.admin-topbar,
+.admin-stat-grid article,
+.admin-panel,
+.homepage-editor-nav,
+.editor-section,
+.programme-admin-list,
+.cohort-directory-card { background-color: var(--brand-ivory); border-color: var(--brand-line); }
+
+.hero,
+.journey-section,
+.about-philosophy-section,
+.admin-sidebar,
+.admin-welcome,
+.admin-page-heading,
+.admin-editor-heading,
+.member-auth-intro,
+.admin-login-story,
+.editor-save-bar,
+.homepage-editor-nav button.is-active,
+.programme-admin-list > button.is-active,
+.button-dark,
+.member-auth-form > button,
+.admin-login-button,
+.admin-users-toolbar button,
+.admin-role-action button,
+.editor-file-button,
+.editor-inline-actions button,
+.editor-add-button { background-color: var(--brand-plum); }
+
+.site-footer,
+.philosophy,
+.about-hero,
+.inner-hero,
+.about-difference-section { background-color: var(--brand-surface); border-color: var(--brand-line); }
+
+.vision-card,
+.about-purpose-section,
+.vision-statement,
+.focus-icon,
+.admin-stat-icon,
+.admin-next-step,
+.admin-user-avatar,
+.approach-icon,
+.mobile-nav a.mobile-nav-child { background-color: var(--brand-plum-pale); }
+
+.mission-card,
+.admin-panel-heading > span,
+.admin-user-details h3 small,
+.cohort-schedule-list > div { background-color: var(--brand-gold-pale); }
+
+.section-label,
+.mobile-nav-group,
+.site-header nav a:hover,
+.site-footer nav a:hover,
+.nav-dropdown[data-current="true"] summary,
+.nav-dropdown-menu a[aria-current="page"],
+.admin-topbar small,
+.admin-topbar > a,
+.admin-login-card > .eyebrow,
+.member-auth-card > .eyebrow,
+.member-auth-header > a:last-child,
+.member-auth-switch a,
+.header-login,
+.programme-admin-list > div .eyebrow,
+.programme-admin-list > .programme-new-button,
+.editor-section-heading > .admin-icon,
+.editor-two-column legend,
+.editor-stack legend,
+.cohort-directory-card > .eyebrow { color: var(--brand-plum-soft); }
+
+.site-header a[aria-current="page"],
+.closing-section h2 em,
+.about-hero h1 em,
+.focus-icon,
+.focus-content .focus-icon,
+.about-contents a > span:first-child,
+.admin-control-list article > span,
+.homepage-editor-nav button span,
+.editor-section-heading > div > span,
+.editor-stack legend span { color: var(--brand-gold-deep); }
+
+.button-gold,
+.admin-primary-action,
+.admin-avatar,
+.admin-editor-heading-actions button,
+.editor-save-bar button { background-color: var(--brand-gold); color: var(--brand-plum); }
+
+.vision-card { border-top-color: var(--brand-plum-soft); }
+.mission-card { border-top-color: var(--brand-gold); }
+.hero-photo-frame { background: #571b3d; }
+.hero-photo-caption { background: #26091c; border-color: #6f294f; }
+.hero-bottom,
+.journey-grid li,
+.about-values li { border-color: #6f294f; }
+.philosophy li span,
+.community-visual figcaption .icon { color: var(--brand-plum-soft); }
+.purpose-icon,
+.about-feature-icon { border-color: #c7aebb; color: var(--brand-plum-soft); }
+.mission-card .purpose-icon { border-color: #d7bd98; color: var(--brand-gold-deep); }
+.focus-tabs button.is-active { background: var(--brand-plum); box-shadow: inset 3px 0 var(--brand-gold); }
+.nav-dropdown-menu a:hover,
+.nav-dropdown-menu a:focus-visible,
+.focus-tabs button:not(.is-active):hover,
+.app-nav a:hover,
+.app-nav a.is-current { background-color: var(--brand-plum-pale); }
+
+.hero-description,
+.journey-section .section-heading > p,
+.journey-grid p,
+.about-philosophy-section .section-heading > p,
+.about-values p,
+.admin-welcome p:not(.eyebrow),
+.admin-page-heading > div > p:not(.eyebrow),
+.admin-editor-heading > div:first-child > p:not(.eyebrow),
+.member-auth-intro > p:not(.eyebrow),
+.admin-login-story div > p:not(.eyebrow) { color: #eadfe4; }
+
+.about-copy p,
+.section-heading > p,
+.footer-main > p,
+.footer-bottom,
+.inner-lead,
+.about-prose p,
+.about-info-card p,
+.about-steps p,
+.cohort-directory-card > p:not(.eyebrow) { color: var(--brand-muted); }
+
+.admin-body { background: #f4efeb; color: var(--brand-plum); }
+.admin-sidebar-brand .brand-mark-base,
+.admin-sidebar-brand .brand-mark-person,
+.admin-sidebar-brand .brand-mark-growth,
+.admin-login-story .brand-mark-base,
+.admin-login-story .brand-mark-person,
+.admin-login-story .brand-mark-growth { fill: #fff; }
+.admin-sidebar-brand .brand-wordmark strong,
+.admin-login-story .brand-wordmark strong { color: #fff; }
+.admin-sidebar-brand .brand-wordmark small,
+.admin-login-story .brand-wordmark small { color: #e4c590; }
+.admin-menu a.is-active { box-shadow: inset 3px 0 var(--brand-gold); }
+.admin-welcome::after { border-color: #ffffff24; box-shadow: 0 0 0 38px #ffffff08, 0 0 0 76px #c4985b12; }
+
+.editor-field-grid input:focus,
+.editor-field-grid textarea:focus,
+.editor-field-grid select:focus,
+.editor-two-column input:focus,
+.editor-two-column textarea:focus,
+.admin-login-form > input:focus,
+.member-auth-form > input:focus { border-color: var(--brand-plum-soft); box-shadow: 0 0 0 3px #6f294f1a; }
+
+@media (hover: hover) {
+    .button-dark:hover { background: #571b3d; }
+    .button-gold:hover { background: #d8b47f; }
 }

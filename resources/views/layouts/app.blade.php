@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="theme-color" content="#102a43">
+    <meta name="theme-color" content="#341027">
     <title>{{ $title ?? 'The IMPACT — Christian Youth Leadership & Public Impact Network' }}</title>
     <meta name="description" content="{{ $description ?? 'The IMPACT is a network of Christian young leaders focused on governance, public policy, leadership, service and societal transformation across Africa.' }}">
     <meta property="og:title" content="{{ $title ?? 'The IMPACT — Faith-led. Service-driven. Africa-focused.' }}">

@@ -1,8 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 112 112" role="img" aria-labelledby="title description">
-  <title id="title">The IMPACT brand mark</title>
-  <desc id="description">A cross anchored within a rising path.</desc>
-  <circle cx="56" cy="56" r="52" fill="#102a43"/>
-  <path d="M24 78c15-4 26-13 34-25 7-11 17-18 31-22" fill="none" stroke="#4fa7a4" stroke-width="6" stroke-linecap="round"/>
-  <path d="m76 26 16 4-8 14" fill="none" stroke="#4fa7a4" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M56 22v55M40 39h32" fill="none" stroke="#e1b65a" stroke-width="7" stroke-linecap="round"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 82 82" role="img" aria-labelledby="title description"><title id="title">The IMPACT emblem</title><desc id="description">A cross rising above three people, representing Christian faith, leadership, people and public impact.</desc><path fill="#c4985b" d="M7 69.5C24 60.8 57.4 60.8 75 69.5C54.2 64.2 27.3 64.2 7 69.5ZM25.8 24.3C36.1 31.7 39.6 45.8 40.6 64.4H34.3C33.3 47.8 30.8 34.8 25.8 24.3ZM37 7.2h7v8.9h9.1L46 22.2h-2v14.3h-7V22.2h-8.1L37 15.8V7.2Z"/><path fill="#341027" d="M9 72.5C25.5 65.5 56.5 65.5 73 72.5C53 68.8 28.8 68.8 9 72.5ZM15.3 38.8C26 42.7 31.1 51.5 33.4 64.6l-9 .8c-1.7-10.6-5.1-19-9.1-26.6Zm51.5 0C56.1 42.7 51 51.5 48.7 64.6l9 .8c1.7-10.6 5.1-19 9.1-26.6ZM56.8 24.3C46.5 31.7 43 45.8 42 64.4h6.3c1-16.6 3.5-29.6 8.5-40.1Z"/><g fill="#341027"><circle cx="17.8" cy="34.2" r="5.1"/><circle cx="64.3" cy="34.2" r="5.1"/><circle cx="47.2" cy="27.1" r="5.4"/></g></svg>
