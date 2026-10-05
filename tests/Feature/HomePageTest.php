@@ -26,6 +26,12 @@ class HomePageTest extends TestCase
             ->assertSee('Governance')
             ->assertSee('Public policy')
             ->assertSee('Societal transformation')
-            ->assertSeeInOrder(['Recognise purpose', 'Find your people', 'Build competence', 'Grow with guidance', 'Put faith into action']);
+            ->assertSeeInOrder(['Recognise purpose', 'Find your people', 'Build competence', 'Grow with guidance', 'Put faith into action'])
+            ->assertSee('PROGRAMME PATHWAYS')
+            ->assertSee('Experience shared.')
+            ->assertSee('WHERE TO BEGIN')
+            ->assertSee('Build practical competence')
+            ->assertSee('Grow through mentorship')
+            ->assertSee('Understand the calling');
     }
 }

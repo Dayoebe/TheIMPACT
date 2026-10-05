@@ -8,7 +8,7 @@
 
     <div class="homepage-editor-layout">
         <nav class="homepage-editor-nav" aria-label="Homepage sections">
-            @foreach(['hero' => 'Hero', 'philosophy' => 'Philosophy', 'about' => 'Who we are', 'founder' => 'President & Convener', 'purpose' => 'Vision & mission', 'focus' => 'Focus areas', 'journey' => 'The journey', 'closing' => 'Closing message'] as $key => $label)
+            @foreach(['hero' => 'Hero', 'philosophy' => 'Philosophy', 'about' => 'Who we are', 'founder' => 'President & Convener', 'purpose' => 'Vision & mission', 'focus' => 'Focus areas', 'journey' => 'The journey', 'programmes' => 'Programmes', 'mentorship' => 'Mentorship', 'participate' => 'Where to begin', 'closing' => 'Closing message'] as $key => $label)
                 <button type="button" @click="section = '{{ $key }}'; document.getElementById('editor-{{ $key }}').scrollIntoView({ behavior: 'smooth' })" :class="{ 'is-active': section === '{{ $key }}' }"><span>{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>{{ $label }}</button>
             @endforeach
         </nav>
@@ -64,8 +64,24 @@
                 <div class="editor-stack">@foreach($content['journey']['steps'] as $index => $step)<fieldset><legend><span>0{{ $index + 1 }}</span>{{ $step['name'] }}</legend><div class="editor-field-grid"><label>Name<input type="text" wire:model="content.journey.steps.{{ $index }}.name"></label><label>Supporting label<input type="text" wire:model="content.journey.steps.{{ $index }}.label"></label><label class="is-wide">Description<textarea rows="3" wire:model="content.journey.steps.{{ $index }}.description"></textarea></label></div></fieldset>@endforeach</div>
             </section>
 
+            <section id="editor-programmes" class="editor-section" @mouseenter="section = 'programmes'">
+                <div class="editor-section-heading"><div><span>08</span><h2>Programme pathways</h2><p>Introduce the programme cards. Programme names and descriptions come from the Programme manager.</p></div><x-admin-icon name="programmes" /></div>
+                <div class="editor-field-grid"><label>Section label<input type="text" wire:model="content.programmes.label"></label><label>Heading<input type="text" wire:model="content.programmes.title_line_one"></label><label>Highlighted heading<input type="text" wire:model="content.programmes.title_emphasis"></label><label>Button label<input type="text" wire:model="content.programmes.button_label"></label><label class="is-wide">Introduction<textarea rows="3" wire:model="content.programmes.introduction"></textarea></label></div>
+            </section>
+
+            <section id="editor-mentorship" class="editor-section" @mouseenter="section = 'mentorship'">
+                <div class="editor-section-heading"><div><span>09</span><h2>Mentorship invitation</h2><p>Connect homepage visitors to the mentorship initiative.</p></div><x-admin-icon name="mentorship" /></div>
+                <div class="editor-field-grid"><label>Eyebrow<input type="text" wire:model="content.mentorship.eyebrow"></label><label>Heading<input type="text" wire:model="content.mentorship.title_line_one"></label><label>Highlighted heading<input type="text" wire:model="content.mentorship.title_emphasis"></label><label>Button label<input type="text" wire:model="content.mentorship.button_label"></label><label class="is-wide">Lead paragraph<textarea rows="3" wire:model="content.mentorship.lead"></textarea></label><label class="is-wide">Description<textarea rows="4" wire:model="content.mentorship.description"></textarea></label></div>
+            </section>
+
+            <section id="editor-participate" class="editor-section" @mouseenter="section = 'participate'">
+                <div class="editor-section-heading"><div><span>10</span><h2>Where to begin</h2><p>Manage the three clear routes visitors can take from the homepage.</p></div><x-admin-icon name="external" /></div>
+                <div class="editor-field-grid"><label>Section label<input type="text" wire:model="content.participate.label"></label><label>Heading<input type="text" wire:model="content.participate.title_line_one"></label><label>Highlighted heading<input type="text" wire:model="content.participate.title_emphasis"></label><label class="is-wide">Introduction<textarea rows="3" wire:model="content.participate.introduction"></textarea></label></div>
+                <div class="editor-stack">@foreach($content['participate']['pathways'] as $index => $pathway)<fieldset><legend><span>0{{ $index + 1 }}</span>{{ $pathway['title'] }}</legend><div class="editor-field-grid"><label class="is-wide">Title<input type="text" wire:model="content.participate.pathways.{{ $index }}.title"></label><label class="is-wide">Description<textarea rows="3" wire:model="content.participate.pathways.{{ $index }}.description"></textarea></label><label>Button label<input type="text" wire:model="content.participate.pathways.{{ $index }}.button_label"></label></div></fieldset>@endforeach</div>
+            </section>
+
             <section id="editor-closing" class="editor-section" @mouseenter="section = 'closing'">
-                <div class="editor-section-heading"><div><span>07</span><h2>Closing message</h2><p>The final invitation at the bottom of the homepage.</p></div><x-admin-icon name="external" /></div>
+                <div class="editor-section-heading"><div><span>11</span><h2>Closing message</h2><p>The final invitation at the bottom of the homepage.</p></div><x-admin-icon name="external" /></div>
                 <div class="editor-field-grid"><label class="is-wide">Eyebrow<input type="text" wire:model="content.closing.eyebrow"></label><label>First line<input type="text" wire:model="content.closing.title_line_one"></label><label>Second line<input type="text" wire:model="content.closing.title_line_two"></label><label>Highlighted final line<input type="text" wire:model="content.closing.title_emphasis"></label><label>Button label<input type="text" wire:model="content.closing.button_label"></label></div>
             </section>
 

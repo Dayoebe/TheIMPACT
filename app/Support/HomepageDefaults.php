@@ -93,6 +93,32 @@ class HomepageDefaults
                     ['name' => 'Deploy', 'icon' => 'deploy', 'label' => 'Put faith into action', 'description' => 'Deploy leaders to serve their communities and contribute to transformational change.'],
                 ],
             ],
+            'programmes' => [
+                'label' => '04 / PROGRAMME PATHWAYS',
+                'title_line_one' => 'Preparation for',
+                'title_emphasis' => 'meaningful contribution.',
+                'introduction' => 'Explore connected learning pathways that bring faith, character, practical competence and public responsibility together.',
+                'button_label' => 'View all programmes',
+            ],
+            'mentorship' => [
+                'eyebrow' => 'GROW WITH GUIDANCE',
+                'title_line_one' => 'Experience shared.',
+                'title_emphasis' => 'Potential encouraged.',
+                'lead' => 'Purpose becomes clearer when there is room for thoughtful conversation, honest reflection and practical next steps.',
+                'description' => 'THE IMPACT mentorship initiative connects emerging leaders with Christians willing to share relevant leadership, professional and community experience. It is a relationship built around listening, responsibility and growth.',
+                'button_label' => 'Explore mentorship',
+            ],
+            'participate' => [
+                'label' => '05 / WHERE TO BEGIN',
+                'title_line_one' => 'Choose your',
+                'title_emphasis' => 'next step.',
+                'introduction' => 'Whether you are exploring the vision, building competence or looking for guidance, there is a clear place to continue.',
+                'pathways' => [
+                    ['icon' => 'equip', 'title' => 'Build practical competence', 'description' => 'Explore learning pathways in leadership, governance, public policy, service, Christian character and guided growth.', 'button_label' => 'Browse programmes'],
+                    ['icon' => 'mentor', 'title' => 'Grow through mentorship', 'description' => 'Discover how purposeful mentoring can connect experience with questions, development goals and emerging potential.', 'button_label' => 'Discover mentorship'],
+                    ['icon' => 'compass', 'title' => 'Understand the calling', 'description' => 'Read the vision and mission that shape the network’s commitment to Christ-centred leadership and public impact.', 'button_label' => 'Our vision and mission'],
+                ],
+            ],
             'closing' => [
                 'eyebrow' => 'THE FUTURE CALLS FOR MORE OF US',
                 'title_line_one' => 'A grounded faith.',

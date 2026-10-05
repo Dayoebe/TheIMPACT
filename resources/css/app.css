@@ -130,6 +130,16 @@
 @utility journey-grid { @apply mt-7 grid grid-cols-1 gap-3 md:grid-cols-2 lg:mt-12 lg:grid-cols-5 lg:gap-0; }
 @utility step-top { @apply flex items-center justify-between text-[11px] text-gold; }
 @utility step-label { @apply mb-3 text-xs text-gold; }
+@utility homepage-programmes { @apply overflow-hidden; }
+@utility homepage-programme-grid { @apply grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3; }
+@utility homepage-programme-card { @apply flex min-h-80 flex-col rounded-2xl border border-line bg-paper p-5 transition hover:-translate-y-1 hover:border-plum hover:shadow-xl lg:rounded-md lg:p-7; }
+@utility homepage-section-action { @apply mt-7 flex justify-center lg:mt-10; }
+@utility homepage-mentorship { @apply overflow-hidden bg-plum py-14 text-white lg:py-22; }
+@utility homepage-mentorship-grid { @apply grid items-center gap-9 lg:grid-cols-[.8fr_1.2fr] lg:gap-20; }
+@utility homepage-mentorship-mark { @apply relative grid min-h-75 place-content-center justify-items-center rounded-t-[100px] border border-white/20 bg-white/5 text-gold; }
+@utility homepage-participate { @apply border-b border-line; }
+@utility homepage-pathway-grid { @apply grid grid-cols-1 gap-3 md:grid-cols-3; }
+@utility homepage-pathway-card { @apply relative flex min-h-75 flex-col rounded-2xl border border-line bg-surface p-6 lg:rounded-md lg:p-8; }
 @utility closing-section { @apply py-12 text-center lg:py-20; }
 @utility closing-star { @apply mb-5 grid place-items-center text-plum; }
 
@@ -366,6 +376,21 @@
     .journey-grid li { @apply rounded-2xl border border-plum bg-white/5 p-5 lg:rounded-none lg:border-0 lg:border-t lg:p-5; }
     .journey-grid h3 { @apply my-2 font-display text-3xl lg:mt-6; }
     .journey-grid p { @apply text-sm leading-[1.8] text-[#eadfe4]; }
+    .homepage-programme-card > div { @apply flex items-start justify-between gap-4; }
+    .homepage-programme-card .purpose-icon { @apply mb-0; }
+    .homepage-programme-card h3 { @apply mt-8 mb-3 text-3xl; }
+    .homepage-programme-card > p { @apply text-sm leading-[1.8] text-muted; }
+    .homepage-programme-card .underlined-link { @apply mt-auto self-start pt-6; }
+    .homepage-mentorship-mark > svg { @apply mb-8 size-20; }
+    .homepage-mentorship-mark span { @apply font-display text-[clamp(44px,7vw,82px)] leading-[.85]; }
+    .homepage-mentorship .eyebrow { @apply text-gold; }
+    .homepage-mentorship h2 { @apply my-5 text-[clamp(42px,8vw,72px)]; }
+    .homepage-mentorship h2 em { @apply font-normal text-gold; }
+    .homepage-mentorship .lead { @apply mb-4 text-white; }
+    .homepage-mentorship p:not(.eyebrow):not(.lead) { @apply mb-7 max-w-175 text-[15px] leading-[1.9] text-[#eadfe4]; }
+    .homepage-pathway-card h3 { @apply mt-5 mb-3 text-3xl; }
+    .homepage-pathway-card > p { @apply text-sm leading-[1.8] text-muted; }
+    .homepage-pathway-card .underlined-link { @apply mt-auto self-start pt-6; }
     .closing-section h2 { @apply my-5 text-[clamp(36px,9vw,58px)] lg:text-[clamp(62px,5.5vw,78px)]; }
     .footer-main > p { @apply text-xs leading-[1.8] text-muted; }
     .footer-main nav { @apply flex flex-wrap gap-x-6 gap-y-2 text-xs; }

@@ -91,6 +91,44 @@
             </ol>
         </div></section>
 
+        <section id="programmes" class="shell section homepage-programmes">
+            <div class="section-heading"><div><p class="eyebrow section-label">{{ $content['programmes']['label'] }}</p><h2>{{ $content['programmes']['title_line_one'] }}<br><em>{{ $content['programmes']['title_emphasis'] }}</em></h2></div><p>{{ $content['programmes']['introduction'] }}</p></div>
+            <div class="homepage-programme-grid">
+                @foreach($programmes as $programme)
+                    <article class="homepage-programme-card">
+                        <div><span class="purpose-icon"><x-icon :name="$programme->icon" /></span><span class="eyebrow">{{ $programme->category }}</span></div>
+                        <h3><a href="{{ route('programmes.show', $programme->slug) }}">{{ $programme->name }}</a></h3>
+                        <p>{{ $programme->summary }}</p>
+                        <a href="{{ route('programmes.show', $programme->slug) }}" class="underlined-link" aria-label="Explore {{ $programme->name }}">Explore pathway <span aria-hidden="true">↗</span></a>
+                    </article>
+                @endforeach
+            </div>
+            <div class="homepage-section-action"><a href="{{ route('programmes.index') }}" class="button button-dark">{{ $content['programmes']['button_label'] }} <span aria-hidden="true">↗</span></a></div>
+        </section>
+
+        <section class="homepage-mentorship">
+            <div class="shell homepage-mentorship-grid">
+                <div class="homepage-mentorship-mark" aria-hidden="true"><x-icon name="mentor" /><span>Experience</span><span>Potential</span></div>
+                <div>
+                    <p class="eyebrow">{{ $content['mentorship']['eyebrow'] }}</p>
+                    <h2>{{ $content['mentorship']['title_line_one'] }}<br><em>{{ $content['mentorship']['title_emphasis'] }}</em></h2>
+                    <p class="lead">{{ $content['mentorship']['lead'] }}</p>
+                    <p>{{ $content['mentorship']['description'] }}</p>
+                    <a href="{{ route('mentorship') }}" class="button button-gold">{{ $content['mentorship']['button_label'] }} <span aria-hidden="true">↗</span></a>
+                </div>
+            </div>
+        </section>
+
+        <section class="shell section homepage-participate">
+            <div class="section-heading"><div><p class="eyebrow section-label">{{ $content['participate']['label'] }}</p><h2>{{ $content['participate']['title_line_one'] }}<br><em>{{ $content['participate']['title_emphasis'] }}</em></h2></div><p>{{ $content['participate']['introduction'] }}</p></div>
+            <div class="homepage-pathway-grid">
+                @foreach($content['participate']['pathways'] as $pathway)
+                    @php($pathwayRoute = ['programmes.index', 'mentorship', 'about.vision-mission'][$loop->index])
+                    <article class="homepage-pathway-card"><span class="purpose-icon"><x-icon :name="$pathway['icon']" /></span><span class="card-number" aria-hidden="true">0{{ $loop->iteration }}</span><h3>{{ $pathway['title'] }}</h3><p>{{ $pathway['description'] }}</p><a href="{{ route($pathwayRoute) }}" class="underlined-link">{{ $pathway['button_label'] }} <span aria-hidden="true">↗</span></a></article>
+                @endforeach
+            </div>
+        </section>
+
         <section class="shell closing-section"><span class="closing-star"><x-icon name="growth" /></span><p class="eyebrow">{{ $content['closing']['eyebrow'] }}</p><h2>{{ $content['closing']['title_line_one'] }}<br>{{ $content['closing']['title_line_two'] }}<br><em>{{ $content['closing']['title_emphasis'] }}</em></h2><a href="{{ route('about.vision-mission') }}" class="button button-dark">{{ $content['closing']['button_label'] }} <span aria-hidden="true">↗</span></a></section>
     </main>
     <x-site-footer />

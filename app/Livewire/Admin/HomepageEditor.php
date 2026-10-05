@@ -30,7 +30,7 @@ class HomepageEditor extends Component
 
     public function mount(): void
     {
-        $this->content = HomepageContent::current()->content;
+        $this->content = array_replace_recursive(HomepageDefaults::content(), HomepageContent::current()->content);
     }
 
     /**
@@ -76,6 +76,17 @@ class HomepageEditor extends Component
             'content.journey.steps.*.icon' => ['required', 'string', 'max:50'],
             'content.journey.steps.*.label' => ['required', 'string', 'max:150'],
             'content.journey.steps.*.description' => ['required', 'string', 'max:1000'],
+            'content.programmes.*' => ['required', 'string', 'max:1000'],
+            'content.mentorship.*' => ['required', 'string', 'max:2000'],
+            'content.participate.label' => ['required', 'string', 'max:100'],
+            'content.participate.title_line_one' => ['required', 'string', 'max:150'],
+            'content.participate.title_emphasis' => ['required', 'string', 'max:150'],
+            'content.participate.introduction' => ['required', 'string', 'max:1000'],
+            'content.participate.pathways' => ['required', 'array', 'size:3'],
+            'content.participate.pathways.*.icon' => ['required', 'string', 'max:50'],
+            'content.participate.pathways.*.title' => ['required', 'string', 'max:200'],
+            'content.participate.pathways.*.description' => ['required', 'string', 'max:1000'],
+            'content.participate.pathways.*.button_label' => ['required', 'string', 'max:100'],
             'content.closing.*' => ['required', 'string', 'max:300'],
             'heroImage' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
             'aboutImage' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],

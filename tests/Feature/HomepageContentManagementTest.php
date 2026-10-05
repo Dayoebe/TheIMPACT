@@ -38,6 +38,9 @@ class HomepageContentManagementTest extends TestCase
             ->assertSee('Vision &amp; mission', false)
             ->assertSee('Focus areas')
             ->assertSee('The journey')
+            ->assertSee('Programme pathways')
+            ->assertSee('Mentorship invitation')
+            ->assertSee('Where to begin')
             ->assertSee('Closing message');
     }
 
@@ -50,6 +53,7 @@ class HomepageContentManagementTest extends TestCase
             ->test(HomepageEditor::class)
             ->set('content.hero.title_line_one', 'A changed homepage heading.')
             ->set('content.focus.areas.0.description', 'A changed governance description.')
+            ->set('content.participate.title_emphasis', 'clear next step.')
             ->call('save')
             ->assertHasNoErrors()
             ->assertSet('saved', true)
@@ -61,7 +65,8 @@ class HomepageContentManagementTest extends TestCase
 
         $this->get(route('home'))->assertOk()
             ->assertSee('A changed homepage heading.')
-            ->assertSee('A changed governance description.');
+            ->assertSee('A changed governance description.')
+            ->assertSee('clear next step.');
     }
 
     public function test_administrator_can_replace_homepage_images(): void
