@@ -19,6 +19,18 @@ class LeadershipPage extends Component
     public function render(): View
     {
         $content = LeadershipPageContent::current()->content;
+        $content['directory']['groups'] = collect($content['directory']['groups'])
+            ->map(function (array $group): array {
+                $group['people'] = collect($group['people'])
+                    ->reject(fn (array $person): bool => strtoupper($person['profile_label'] ?? '') === 'SAMPLE PROFILE')
+                    ->values()
+                    ->all();
+
+                return $group;
+            })
+            ->filter(fn (array $group): bool => filled($group['people']))
+            ->values()
+            ->all();
 
         return view('livewire.leadership-page', compact('content'))->layoutData([
             'title' => $content['meta']['title'],

@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Livewire\LeadershipPage;
 use App\Livewire\MentorshipPage;
 use App\Livewire\VisionMissionPage;
-use App\Models\LeadershipPageContent;
 use App\Models\MentorshipPageContent;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -29,44 +28,29 @@ class PublicPagesTest extends TestCase
         }
     }
 
-    public function test_leadership_directory_renders_every_group_and_marks_profiles_as_samples(): void
+    public function test_leadership_directory_only_renders_confirmed_profiles(): void
     {
         $response = $this->get(route('leadership'))->assertOk()->assertSeeLivewire(LeadershipPage::class)
-            ->assertSee('Leadership directory.')
-            ->assertSee('Profiles labelled SAMPLE PROFILE are illustrative content, not confirmed appointments.');
-
-        foreach (config('impact.leadership') as $id => $group) {
-            $response->assertSee($group['title'])->assertSee('id="'.$id.'"', false);
-            foreach ($group['people'] as $person) {
-                $response->assertSee($person['name'])->assertSee($person['role']);
-            }
-        }
-    }
-
-    public function test_unfilled_leadership_group_has_a_useful_empty_state(): void
-    {
-        $record = LeadershipPageContent::current();
-        $content = $record->content;
-        $content['directory']['groups'][1]['people'] = [];
-        $record->update(['content' => $content]);
-
-        $this->get(route('leadership'))->assertOk()
-            ->assertSee('Leadership profiles for this group will be published once confirmed.')
+            ->assertSee('Pst. Feyisara Samuel')
+            ->assertSee('PRESIDENT &amp; CONVENER', false)
+            ->assertDontSee('SAMPLE PROFILE')
+            ->assertDontSee('illustrative content')
             ->assertDontSee('Grace Okafor');
     }
 
-    public function test_mentorship_explains_participation_matching_and_preview_actions(): void
+    public function test_mentorship_explains_participation_without_inactive_application_controls(): void
     {
         $this->get(route('mentorship'))->assertOk()->assertSeeLivewire(MentorshipPage::class)
             ->assertSeeInOrder(['WHY MENTORSHIP MATTERS', 'WHO THE INITIATIVE IS FOR', 'HOW MATCHING WORKS', 'MENTORSHIP AREAS', 'TAKE PART'])
             ->assertSee('id="become-a-mentor"', false)
             ->assertSee('id="join-as-a-mentee"', false)
-            ->assertSee('Applications not yet open')
-            ->assertSee('Applications are not being collected in this preview.')
+            ->assertSee('Consider the areas where you can offer useful guidance')
+            ->assertDontSee('Applications not yet open')
+            ->assertDontSee('<dialog', false)
             ->assertDontSee('type="email"', false);
     }
 
-    public function test_confirmed_mentorship_application_links_can_replace_preview_actions(): void
+    public function test_confirmed_mentorship_application_links_are_displayed(): void
     {
         $record = MentorshipPageContent::current();
         $content = $record->content;

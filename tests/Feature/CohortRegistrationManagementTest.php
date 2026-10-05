@@ -15,13 +15,13 @@ class CohortRegistrationManagementTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_public_page_lists_published_programme_cohorts_and_registration_state(): void
+    public function test_public_page_lists_published_programmes_without_placeholder_schedules(): void
     {
         $response = $this->get(route('programmes.cohorts'))->assertOk()
             ->assertSeeLivewire(CohortsRegistrationPage::class)
             ->assertSee('Leadership Development')
-            ->assertSee('Foundations cohort · preview')
-            ->assertSee('Registration not open');
+            ->assertDontSee('Foundations cohort · preview')
+            ->assertDontSee('Registration not open');
 
         $this->assertDatabaseCount('programmes', 6);
     }
@@ -41,8 +41,11 @@ class CohortRegistrationManagementTest extends TestCase
         Livewire::actingAs($administrator)
             ->test(CohortRegistrationManager::class)
             ->call('selectProgramme', $programme->id)
+            ->call('addCohort')
             ->set('cohorts.0.name', 'Confirmed leadership cohort')
             ->set('cohorts.0.starts', '15 January 2027')
+            ->set('cohorts.0.format', 'In person')
+            ->set('cohorts.0.location', 'Lagos')
             ->set('registrationUrl', 'https://example.org/register/leadership')
             ->call('saveProgrammeSchedule')
             ->assertHasNoErrors()

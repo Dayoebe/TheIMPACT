@@ -10,7 +10,7 @@ class LeadershipPageDefaults
         $groups = collect(config('impact.leadership'))->map(function (array $group, string $id): array {
             $group['people'] = collect($group['people'])->map(fn (array $person): array => [
                 ...$person,
-                'profile_label' => $id === 'founder-president' ? 'PRESIDENT & CONVENER' : 'SAMPLE PROFILE',
+                'profile_label' => $id === 'founder-president' ? 'PRESIDENT & CONVENER' : 'LEADERSHIP',
                 'photo' => $id === 'founder-president' ? 'images/pst-feyisara-samuel.jpg' : null,
                 'photo_alt' => $id === 'founder-president' ? 'Portrait of Pst. Feyisara Samuel, President and Convener of THE IMPACT.' : '',
             ])->all();
@@ -21,8 +21,7 @@ class LeadershipPageDefaults
         return [
             'meta' => ['title' => 'Leadership — THE IMPACT', 'description' => 'Explore the leadership structure guiding the vision, mission and work of THE IMPACT.'],
             'hero' => ['eyebrow' => 'Leadership', 'title' => 'People entrusted with purpose.', 'description' => 'Leadership is a responsibility to serve. Meet the roles that guide the vision, steward the mission and support the work of THE IMPACT.', 'action' => 'Explore our leadership'],
-            'notice' => ['title' => 'Leadership directory.', 'text' => 'Profiles labelled SAMPLE PROFILE are illustrative content, not confirmed appointments.'],
-            'directory' => ['label' => 'LEADERSHIP', 'sample_label' => 'SAMPLE PROFILE', 'empty_label' => 'PROFILES TO FOLLOW', 'empty_text' => 'Leadership profiles for this group will be published once confirmed.', 'groups' => $groups],
+            'directory' => ['label' => 'LEADERSHIP', 'groups' => $groups],
             'closing' => ['eyebrow' => 'ONE NETWORK. ONE SHARED PURPOSE.', 'title_line_one' => 'Meet the mission', 'title_emphasis' => 'behind the people.', 'button_label' => 'Vision & Mission'],
         ];
     }

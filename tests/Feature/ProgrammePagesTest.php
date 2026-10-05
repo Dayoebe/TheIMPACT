@@ -34,11 +34,10 @@ class ProgrammePagesTest extends TestCase
                 ->assertSee('<title>'.e($programme['name'].' — Programmes | THE IMPACT').'</title>', false)
                 ->assertSee($programme['overview'])
                 ->assertSee($programme['audience'])
-                ->assertSee($programme['duration'])
-                ->assertSee('Illustrative programme.')
-                ->assertSee('This preview does not collect personal information or reserve a place.');
+                ->assertDontSee('Illustrative programme.')
+                ->assertDontSee('SAMPLE PROFILE');
 
-            foreach (['overview', 'objectives', 'audience', 'curriculum', 'facilitators', 'cohorts', 'registration'] as $section) {
+            foreach (['overview', 'objectives', 'audience', 'curriculum'] as $section) {
                 $response->assertSee('id="'.$section.'"', false);
             }
             foreach ($programme['curriculum'] as $module) {
@@ -57,16 +56,16 @@ class ProgrammePagesTest extends TestCase
         }
     }
 
-    public function test_missing_programme_schedule_fields_have_honest_fallbacks(): void
+    public function test_missing_programme_schedule_fields_are_not_exposed_as_incomplete_sections(): void
     {
         Programme::importDefaultsIfEmpty();
         Programme::query()->where('slug', 'christian-leadership')->update(['duration' => null, 'facilitators' => [], 'cohorts' => []]);
 
         $this->get(route('programmes.show', 'christian-leadership'))->assertOk()
-            ->assertSee('To be announced')
-            ->assertSee('Facilitators will be announced')
-            ->assertSee('No upcoming cohorts have been announced.')
-            ->assertSee('Preview registration');
+            ->assertDontSee('id="facilitators"', false)
+            ->assertDontSee('id="cohorts"', false)
+            ->assertDontSee('id="registration"', false)
+            ->assertDontSee('To be announced');
     }
 
     public function test_programme_content_is_escaped(): void

@@ -28,7 +28,7 @@ class LeadershipContentManagementTest extends TestCase
 
         $this->actingAs($administrator)->get(route('admin.leadership.edit'))->assertOk()
             ->assertSee('Edit Leadership.')
-            ->assertSee('Directory disclosure')
+            ->assertSee('Leadership directory')
             ->assertSee('Founder / President')
             ->assertSee('Pst. Feyisara Samuel');
     }
@@ -71,6 +71,8 @@ class LeadershipContentManagementTest extends TestCase
 
         Livewire::actingAs($administrator)
             ->test(LeadershipEditor::class)
+            ->call('addPerson', 1)
+            ->call('addPerson', 1)
             ->set('profileImages.1.0', UploadedFile::fake()->image('board-chair.jpg', 800, 1000))
             ->set('content.directory.groups.1.people.0.photo_alt', 'Portrait of the board chair.')
             ->call('save')
@@ -83,7 +85,7 @@ class LeadershipContentManagementTest extends TestCase
         $this->get(route('leadership'))->assertOk()
             ->assertSee(Storage::disk('public')->url($photo), false)
             ->assertSee('Portrait of the board chair.')
-            ->assertSee('SM');
+            ->assertSee('NP');
     }
 
     public function test_restore_defaults_replaces_edited_content(): void
