@@ -19,7 +19,7 @@
                 <a href="{{ route('admin.dashboard') }}" aria-label="THE IMPACT dashboard"><x-brand-logo /></a>
                 <button type="button" class="admin-sidebar-close grid size-10 place-items-center rounded-full border border-white/15 text-2xl lg:hidden" @click="sidebarOpen = false" aria-label="Close menu">×</button>
             </div>
-            <div class="admin-identity mx-4 mt-4.5 mb-1.5 flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 p-3.5">
+            <div class="admin-identity mx-4 mt-4.5 mb-1.5 flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 p-3.5 [&_>_span:last-child]:grid [&_strong]:text-xs [&_small]:mt-0.5 [&_small]:text-[9px] [&_small]:text-white/55">
                 <span class="admin-avatar grid size-10 place-items-center rounded-full bg-gold text-[11px] font-extrabold text-ink">SA</span>
                 <span><strong>{{ auth()->user()->name }}</strong><small>Super administrator</small></span>
             </div>
@@ -37,7 +37,7 @@
                     </section>
                 @endforeach
             </nav>
-            <form action="{{ route('admin.logout') }}" method="POST" class="admin-logout mx-3.5 mb-5 border-t border-white/10 pt-4">
+            <form action="{{ route('admin.logout') }}" method="POST" class="admin-logout mx-3.5 mb-5 border-t border-white/10 pt-4 [&_button]:flex [&_button]:min-h-11 [&_button]:w-full [&_button]:items-center [&_button]:gap-3 [&_button]:rounded-lg [&_button]:px-3 [&_button]:text-xs [&_button]:font-semibold [&_button]:text-white/70 [&_button]:hover:bg-white/10 [&_button]:hover:text-white">
                 @csrf
                 <button type="submit"><span aria-hidden="true">↪</span> Sign out</button>
             </form>

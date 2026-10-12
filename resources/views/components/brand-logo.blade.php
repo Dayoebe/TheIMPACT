@@ -1,6 +1,6 @@
 @props(['compact' => false])
 
-<span {{ $attributes->class(['brand-lockup', 'brand-lockup-compact' => $compact]) }}>
+<span {{ $attributes->class(['brand-lockup inline-flex items-center gap-2.5', 'brand-lockup-compact' => $compact]) }}>
     <svg class="brand-mark size-12 shrink-0 overflow-visible" viewBox="0 0 82 82" role="img" aria-label="The IMPACT emblem">
         <path class="brand-mark-base-gold fill-gold" d="M7 69.5C24 60.8 57.4 60.8 75 69.5C54.2 64.2 27.3 64.2 7 69.5Z" />
         <path class="brand-mark-base fill-ink" d="M9 72.5C25.5 65.5 56.5 65.5 73 72.5C53 68.8 28.8 68.8 9 72.5Z" />

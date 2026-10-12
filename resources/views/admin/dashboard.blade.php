@@ -32,7 +32,7 @@
             </div>
         </section>
 
-        <aside class="admin-panel rounded-2xl border border-line bg-paper p-5 lg:rounded-lg lg:p-7 admin-status-panel grid [&_ul]:grid [&_ul]:gap-4 [&_ul]:py-5 [&_li]:flex [&_li]:items-center [&_li]:gap-3">
+        <aside class="admin-panel rounded-2xl border border-line bg-paper p-5 lg:rounded-lg lg:p-7 admin-status-panel grid content-start [&_ul]:grid [&_ul]:gap-4 [&_ul]:py-5 [&_li]:flex [&_li]:items-start [&_li]:gap-3 [&_li_>_span]:mt-1 [&_li_>_span]:size-2.5 [&_li_>_span]:shrink-0 [&_li_>_span]:rounded-full [&_li_div]:grid [&_li_small]:mt-0.5 [&_li_small]:text-[10px] [&_li_small]:text-muted">
             <div class="admin-panel-heading flex items-start justify-between gap-4 border-b border-line pb-5 [&_h2]:mt-2 [&_h2]:text-3xl"><div><p class="eyebrow text-[10px] leading-[1.8] font-bold tracking-[1.5px] uppercase">System status</p><h2>Ready to build.</h2></div></div>
             <ul>
                 <li><span class="is-ready bg-emerald-600!"></span><div><strong>Secure access</strong><small>Super-admin protection active</small></div></li>
@@ -40,7 +40,7 @@
                 <li><span class="is-ready bg-emerald-600!"></span><div><strong>Content architecture</strong><small>Menu map configured</small></div></li>
                 <li><span class="is-planned bg-[#f3e8d7] text-[#95682f]"></span><div><strong>Management modules</strong><small>Awaiting implementation</small></div></li>
             </ul>
-            <div class="admin-next-step rounded-xl bg-[#f1e7ec] p-4.5 [&_strong]:my-2 [&_strong]:block [&_strong]:font-display [&_strong]:text-2xl"><span>Next recommended module</span><strong>Website content management</strong><p>Move the current public-page content from configuration files into editable, validated records.</p></div>
+            <div class="admin-next-step rounded-xl bg-[#f1e7ec] p-4.5 [&_>_span]:text-[9px] [&_>_span]:font-extrabold [&_>_span]:tracking-wide [&_>_span]:text-plum [&_>_span]:uppercase [&_strong]:my-2 [&_strong]:block [&_strong]:font-display [&_strong]:text-2xl [&_p]:text-[11px] [&_p]:leading-[1.7] [&_p]:text-muted"><span>Current priority</span><strong>Keep programme content current</strong><p>Review programmes, cohort schedules and media from their dedicated dashboard modules.</p></div>
         </aside>
     </div>
 @endsection
