@@ -32,10 +32,15 @@ class ProgrammeManager extends Component
 
     public bool $saved = false;
 
-    /** @var array{type: string, title: string, external_url: string} */
-    public array $mediaForm = ['type' => 'image', 'title' => '', 'external_url' => ''];
+    /** @var array<string, array{title: string, external_url: string}> */
+    public array $mediaForms = [
+        'image' => ['title' => '', 'external_url' => ''],
+        'audio' => ['title' => '', 'external_url' => ''],
+        'video' => ['title' => '', 'external_url' => ''],
+    ];
 
-    public mixed $mediaFile = null;
+    /** @var array<string, mixed> */
+    public array $mediaFiles = [];
 
     public function mount(): void
     {
@@ -190,24 +195,26 @@ class ProgrammeManager extends Component
         $this->programme['cohorts'] = array_values($this->programme['cohorts']);
     }
 
-    public function addMedia(): void
+    public function addMedia(string $type): void
     {
         abort_if($this->programmeId === null, 404);
+        abort_unless(in_array($type, ['image', 'audio', 'video'], true), 404);
 
         $rules = [
-            'mediaForm.type' => ['required', Rule::in(['image', 'audio', 'video'])],
-            'mediaForm.title' => ['required', 'string', 'max:200'],
-            'mediaForm.external_url' => ['nullable', 'url:http,https', 'max:2000'],
+            "mediaForms.$type.title" => ['required', 'string', 'max:200'],
+            "mediaForms.$type.external_url" => ['nullable', 'url:http,https', 'max:2000'],
         ];
-        $rules['mediaFile'] = match ($this->mediaForm['type']) {
+        $rules["mediaFiles.$type"] = match ($type) {
             'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
             'audio' => ['nullable', 'file', 'mimes:mp3,wav,ogg,m4a,aac', 'max:51200'],
             'video' => ['nullable', 'file', 'mimes:mp4,webm,mov,m4v', 'max:204800'],
         };
         $this->validate($rules);
+        $mediaFile = $this->mediaFiles[$type] ?? null;
+        $mediaForm = $this->mediaForms[$type];
 
-        if (! $this->mediaFile && blank($this->mediaForm['external_url'])) {
-            $this->addError('mediaFile', 'Choose a local file or enter an external media URL.');
+        if (! $mediaFile && blank($mediaForm['external_url'])) {
+            $this->addError("mediaFiles.$type", 'Choose a local file or enter an external media URL.');
 
             return;
         }
@@ -216,23 +223,23 @@ class ProgrammeManager extends Component
         $media = $programme->media ?? [];
         $item = [
             'id' => (string) Str::uuid(),
-            'type' => $this->mediaForm['type'],
-            'title' => $this->mediaForm['title'],
+            'type' => $type,
+            'title' => $mediaForm['title'],
         ];
 
-        if ($this->mediaFile) {
+        if ($mediaFile) {
             $item['source'] = 'upload';
-            $item['path'] = $this->mediaFile->store('programme-media/'.$programme->id.'/'.$this->mediaForm['type'], 'public');
-            $item['mime'] = $this->mediaFile->getMimeType();
+            $item['path'] = $mediaFile->store('programme-media/'.$programme->id.'/'.$type, 'public');
+            $item['mime'] = $mediaFile->getMimeType();
         } else {
             $item['source'] = 'link';
-            $item['url'] = $this->mediaForm['external_url'];
+            $item['url'] = $mediaForm['external_url'];
         }
 
         $media[] = $item;
         $programme->update(['media' => $media, 'updated_by' => auth()->id()]);
         $this->programme['media'] = $media;
-        $this->resetMediaForm();
+        $this->resetMediaForm($type);
         $this->saved = true;
         $this->notifyDashboard(ucfirst($item['type']).' added to the programme media library.');
     }
@@ -277,10 +284,22 @@ class ProgrammeManager extends Component
         return view('livewire.admin.programme-manager');
     }
 
-    private function resetMediaForm(): void
+    private function resetMediaForm(?string $type = null): void
     {
-        $this->mediaForm = ['type' => 'image', 'title' => '', 'external_url' => ''];
-        $this->reset('mediaFile');
+        if ($type !== null) {
+            $this->mediaForms[$type] = ['title' => '', 'external_url' => ''];
+            unset($this->mediaFiles[$type]);
+            $this->resetValidation();
+
+            return;
+        }
+
+        $this->mediaForms = [
+            'image' => ['title' => '', 'external_url' => ''],
+            'audio' => ['title' => '', 'external_url' => ''],
+            'video' => ['title' => '', 'external_url' => ''],
+        ];
+        $this->mediaFiles = [];
         $this->resetValidation();
     }
 }

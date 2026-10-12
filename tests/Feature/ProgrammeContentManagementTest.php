@@ -104,10 +104,9 @@ class ProgrammeContentManagementTest extends TestCase
         $component = Livewire::actingAs($administrator)
             ->test(ProgrammeManager::class)
             ->call('selectProgramme', $programme->id)
-            ->set('mediaForm.type', 'image')
-            ->set('mediaForm.title', 'Leadership workshop')
-            ->set('mediaFile', UploadedFile::fake()->image('workshop.jpg', 1200, 800))
-            ->call('addMedia')
+            ->set('mediaForms.image.title', 'Leadership workshop')
+            ->set('mediaFiles.image', UploadedFile::fake()->image('workshop.jpg', 1200, 800))
+            ->call('addMedia', 'image')
             ->assertHasNoErrors()
             ->assertDispatched('dashboard-toast', message: 'Image added to the programme media library.', type: 'success');
 
@@ -115,30 +114,25 @@ class ProgrammeContentManagementTest extends TestCase
         Storage::disk('public')->assertExists($image['path']);
 
         $component
-            ->set('mediaForm.type', 'image')
-            ->set('mediaForm.title', 'Online programme picture')
-            ->set('mediaForm.external_url', 'https://images.example.org/programme.jpg')
-            ->call('addMedia')
+            ->set('mediaForms.image.title', 'Online programme picture')
+            ->set('mediaForms.image.external_url', 'https://images.example.org/programme.jpg')
+            ->call('addMedia', 'image')
             ->assertHasNoErrors()
-            ->set('mediaForm.type', 'audio')
-            ->set('mediaForm.title', 'Leadership conversation')
-            ->set('mediaForm.external_url', 'https://open.spotify.com/episode/123ABC')
-            ->call('addMedia')
+            ->set('mediaForms.audio.title', 'Leadership conversation')
+            ->set('mediaForms.audio.external_url', 'https://open.spotify.com/episode/123ABC')
+            ->call('addMedia', 'audio')
             ->assertHasNoErrors()
-            ->set('mediaForm.type', 'audio')
-            ->set('mediaForm.title', 'Uploaded programme audio')
-            ->set('mediaFile', UploadedFile::fake()->create('programme-audio.mp3', 1024, 'audio/mpeg'))
-            ->call('addMedia')
+            ->set('mediaForms.audio.title', 'Uploaded programme audio')
+            ->set('mediaFiles.audio', UploadedFile::fake()->create('programme-audio.mp3', 1024, 'audio/mpeg'))
+            ->call('addMedia', 'audio')
             ->assertHasNoErrors()
-            ->set('mediaForm.type', 'video')
-            ->set('mediaForm.title', 'Programme introduction')
-            ->set('mediaForm.external_url', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ')
-            ->call('addMedia')
+            ->set('mediaForms.video.title', 'Programme introduction')
+            ->set('mediaForms.video.external_url', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+            ->call('addMedia', 'video')
             ->assertHasNoErrors()
-            ->set('mediaForm.type', 'video')
-            ->set('mediaForm.title', 'Uploaded programme video')
-            ->set('mediaFile', UploadedFile::fake()->create('programme-video.mp4', 2048, 'video/mp4'))
-            ->call('addMedia')
+            ->set('mediaForms.video.title', 'Uploaded programme video')
+            ->set('mediaFiles.video', UploadedFile::fake()->create('programme-video.mp4', 2048, 'video/mp4'))
+            ->call('addMedia', 'video')
             ->assertHasNoErrors();
 
         $media = $programme->fresh()->media;
@@ -167,10 +161,9 @@ class ProgrammeContentManagementTest extends TestCase
         $component = Livewire::actingAs($administrator)
             ->test(ProgrammeManager::class)
             ->call('selectProgramme', $programme->id)
-            ->set('mediaForm.type', 'image')
-            ->set('mediaForm.title', 'Temporary picture')
-            ->set('mediaFile', UploadedFile::fake()->image('temporary.jpg'))
-            ->call('addMedia');
+            ->set('mediaForms.image.title', 'Temporary picture')
+            ->set('mediaFiles.image', UploadedFile::fake()->image('temporary.jpg'))
+            ->call('addMedia', 'image');
 
         $path = $programme->fresh()->media[0]['path'];
         Storage::disk('public')->assertExists($path);

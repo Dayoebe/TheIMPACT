@@ -24,15 +24,23 @@
 
             <section class="editor-section programme-media-editor"><div class="editor-section-heading"><div><span>07</span><h2>Pictures, audio & video</h2><p>Upload a local file or add an online media link. Saved items appear below and on the public programme page.</p></div><x-admin-icon name="media" /></div>
                 @if($programmeId)
-                    <div class="programme-media-form">
-                        <div class="editor-field-grid">
-                            <label>Media type<select wire:model.live="mediaForm.type"><option value="image">Picture</option><option value="audio">Audio</option><option value="video">Video</option></select></label>
-                            <label>Title<input type="text" wire:model="mediaForm.title" placeholder="Give this media a clear title">@error('mediaForm.title')<small class="editor-error">{{ $message }}</small>@enderror</label>
-                            <label class="is-wide">Online link<input type="url" wire:model="mediaForm.external_url" placeholder="YouTube, Spotify, Audiomack, Vimeo, SoundCloud or a direct media URL">@error('mediaForm.external_url')<small class="editor-error">{{ $message }}</small>@enderror</label>
-                        </div>
-                        <div class="programme-media-upload"><div><strong>Or upload from your device</strong><p>@if($mediaForm['type'] === 'image')JPG, PNG or WebP, up to 5 MB.@elseif($mediaForm['type'] === 'audio')MP3, WAV, OGG, M4A or AAC, up to 50 MB.@else MP4, WebM, MOV or M4V, up to 200 MB.@endif</p></div><label class="editor-file-button">Choose {{ $mediaForm['type'] }}<input type="file" wire:model="mediaFile" @if($mediaForm['type'] === 'image') accept="image/jpeg,image/png,image/webp" @elseif($mediaForm['type'] === 'audio') accept="audio/mpeg,audio/mp4,audio/wav,audio/ogg,audio/aac" @else accept="video/mp4,video/webm,video/quicktime" @endif></label><div wire:loading wire:target="mediaFile" class="editor-uploading">Preparing preview…</div>@error('mediaFile')<small class="editor-error">{{ $message }}</small>@enderror</div>
-                        @if($mediaFile)<div class="programme-media-pending"><strong>Ready to save:</strong> {{ $mediaFile->getClientOriginalName() }}</div>@endif
-                        <button type="button" class="editor-add-button" wire:click="addMedia" wire:loading.attr="disabled" wire:target="addMedia,mediaFile"><span wire:loading.remove wire:target="addMedia">＋ Add to media library</span><span wire:loading wire:target="addMedia">Saving media…</span></button>
+                    <div class="programme-media-options">
+                        @foreach([
+                            'image' => ['heading' => 'Pictures', 'action' => 'picture', 'accept' => 'image/jpeg,image/png,image/webp', 'help' => 'JPG, PNG or WebP, up to 5 MB.', 'placeholder' => 'Direct image URL'],
+                            'audio' => ['heading' => 'Audio', 'action' => 'audio', 'accept' => 'audio/mpeg,audio/mp4,audio/wav,audio/ogg,audio/aac', 'help' => 'MP3, WAV, OGG, M4A or AAC, up to 50 MB.', 'placeholder' => 'Spotify, Audiomack, SoundCloud or direct audio URL'],
+                            'video' => ['heading' => 'Video', 'action' => 'video', 'accept' => 'video/mp4,video/webm,video/quicktime', 'help' => 'MP4, WebM, MOV or M4V, up to 200 MB.', 'placeholder' => 'YouTube, Vimeo or direct video URL'],
+                        ] as $type => $settings)
+                            <fieldset class="programme-media-form" wire:key="programme-media-form-{{ $type }}">
+                                <legend>{{ $settings['heading'] }}</legend>
+                                <div class="programme-media-fields">
+                                    <label>Title<input type="text" wire:model="mediaForms.{{ $type }}.title" placeholder="Give this {{ $settings['action'] }} a clear title">@error("mediaForms.$type.title")<small class="editor-error">{{ $message }}</small>@enderror</label>
+                                    <label>Online link<input type="url" wire:model="mediaForms.{{ $type }}.external_url" placeholder="{{ $settings['placeholder'] }}">@error("mediaForms.$type.external_url")<small class="editor-error">{{ $message }}</small>@enderror</label>
+                                </div>
+                                <div class="programme-media-upload"><div><strong>Or upload from your device</strong><p>{{ $settings['help'] }}</p></div><label class="editor-file-button">Choose {{ $settings['action'] }}<input type="file" wire:model="mediaFiles.{{ $type }}" accept="{{ $settings['accept'] }}"></label><div wire:loading wire:target="mediaFiles.{{ $type }}" class="editor-uploading">Preparing preview…</div>@error("mediaFiles.$type")<small class="editor-error">{{ $message }}</small>@enderror</div>
+                                @if($mediaFiles[$type] ?? null)<div class="programme-media-pending"><strong>Ready to save:</strong> {{ $mediaFiles[$type]->getClientOriginalName() }}</div>@endif
+                                <button type="button" class="editor-add-button" wire:click="addMedia('{{ $type }}')" wire:loading.attr="disabled" wire:target="addMedia('{{ $type }}'),mediaFiles.{{ $type }}"><span wire:loading.remove wire:target="addMedia('{{ $type }}')">＋ Add {{ $settings['action'] }}</span><span wire:loading wire:target="addMedia('{{ $type }}')">Saving {{ $settings['action'] }}…</span></button>
+                            </fieldset>
+                        @endforeach
                     </div>
 
                     <div class="programme-media-library">

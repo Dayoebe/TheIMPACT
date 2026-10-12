@@ -283,7 +283,9 @@
 @utility is-wide { @apply md:col-span-2; }
 @utility editor-image-control { @apply my-5 grid grid-cols-1 gap-4.5 rounded-xl bg-surface p-4 md:grid-cols-[.8fr_1.2fr]; }
 @utility editor-image-preview { @apply aspect-[3/2] overflow-hidden rounded-lg bg-[#f1e7ec]; }
-@utility programme-media-form { @apply mb-6 grid gap-4 rounded-xl border border-line bg-surface p-4.5; }
+@utility programme-media-options { @apply mb-6 grid gap-4 xl:grid-cols-3; }
+@utility programme-media-form { @apply grid min-w-0 content-start gap-4 rounded-xl border border-line bg-surface p-4.5; }
+@utility programme-media-fields { @apply grid gap-4; }
 @utility programme-media-upload { @apply flex flex-col items-start gap-3 rounded-xl border border-dashed border-plum/40 bg-paper p-4 sm:flex-row sm:items-center sm:justify-between; }
 @utility programme-media-pending { @apply rounded-lg bg-amber-50 px-4 py-3 text-xs text-amber-900; }
 @utility programme-media-library { @apply grid gap-4 md:grid-cols-2; }
@@ -490,6 +492,9 @@
     .editor-field-grid input, .editor-field-grid select, .editor-two-column input { @apply h-11; }
     .editor-image-preview img { @apply size-full object-cover; }
     .programme-media-upload p { @apply mt-1 text-xs text-muted; }
+    .programme-media-form legend { @apply px-2 font-display text-2xl font-semibold text-plum; }
+    .programme-media-fields label { @apply grid content-start text-[9px] font-extrabold text-ink; }
+    .programme-media-fields input { @apply mt-1.5 h-11 w-full rounded-lg border border-line bg-white px-3 py-2.5 font-sans text-xs font-medium text-ink outline-none focus:border-plum focus:ring-3 focus:ring-plum/10; }
     .programme-media-preview img, .programme-media-preview video, .programme-public-media-preview img, .programme-public-media-preview video { @apply size-full object-cover; }
     .programme-media-preview iframe, .programme-public-media-preview iframe { @apply aspect-video size-full border-0; }
     .programme-media-preview audio, .programme-public-media-preview audio { @apply w-[calc(100%-32px)]; }
