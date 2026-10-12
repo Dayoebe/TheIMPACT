@@ -6,7 +6,10 @@ use App\Livewire\Admin\ProgrammeManager;
 use App\Models\Programme;
 use App\Models\ProgrammePageContent;
 use App\Models\User;
+use App\Support\ProgrammeMedia;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -89,5 +92,111 @@ class ProgrammeContentManagementTest extends TestCase
 
         $this->assertSame($administrator->id, ProgrammePageContent::current()->updated_by);
         $this->get(route('programmes.index'))->assertOk()->assertSee('A renewed programme directory.');
+    }
+
+    public function test_administrator_can_add_and_preview_uploaded_and_linked_programme_media(): void
+    {
+        Storage::fake('public');
+        $administrator = User::factory()->superAdmin()->create();
+        Programme::importDefaultsIfEmpty();
+        $programme = Programme::query()->where('slug', 'christian-leadership')->firstOrFail();
+
+        $component = Livewire::actingAs($administrator)
+            ->test(ProgrammeManager::class)
+            ->call('selectProgramme', $programme->id)
+            ->set('mediaForm.type', 'image')
+            ->set('mediaForm.title', 'Leadership workshop')
+            ->set('mediaFile', UploadedFile::fake()->image('workshop.jpg', 1200, 800))
+            ->call('addMedia')
+            ->assertHasNoErrors()
+            ->assertDispatched('dashboard-toast', message: 'Image added to the programme media library.', type: 'success');
+
+        $image = $programme->fresh()->media[0];
+        Storage::disk('public')->assertExists($image['path']);
+
+        $component
+            ->set('mediaForm.type', 'image')
+            ->set('mediaForm.title', 'Online programme picture')
+            ->set('mediaForm.external_url', 'https://images.example.org/programme.jpg')
+            ->call('addMedia')
+            ->assertHasNoErrors()
+            ->set('mediaForm.type', 'audio')
+            ->set('mediaForm.title', 'Leadership conversation')
+            ->set('mediaForm.external_url', 'https://open.spotify.com/episode/123ABC')
+            ->call('addMedia')
+            ->assertHasNoErrors()
+            ->set('mediaForm.type', 'audio')
+            ->set('mediaForm.title', 'Uploaded programme audio')
+            ->set('mediaFile', UploadedFile::fake()->create('programme-audio.mp3', 1024, 'audio/mpeg'))
+            ->call('addMedia')
+            ->assertHasNoErrors()
+            ->set('mediaForm.type', 'video')
+            ->set('mediaForm.title', 'Programme introduction')
+            ->set('mediaForm.external_url', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+            ->call('addMedia')
+            ->assertHasNoErrors()
+            ->set('mediaForm.type', 'video')
+            ->set('mediaForm.title', 'Uploaded programme video')
+            ->set('mediaFile', UploadedFile::fake()->create('programme-video.mp4', 2048, 'video/mp4'))
+            ->call('addMedia')
+            ->assertHasNoErrors();
+
+        $media = $programme->fresh()->media;
+        $this->assertCount(6, $media);
+        Storage::disk('public')->assertExists($media[3]['path']);
+        Storage::disk('public')->assertExists($media[5]['path']);
+        $this->get(route('programmes.show', $programme->slug))->assertOk()
+            ->assertSee('Leadership workshop')
+            ->assertSee('Online programme picture')
+            ->assertSee('https://images.example.org/programme.jpg', false)
+            ->assertSee('Leadership conversation')
+            ->assertSee('https://open.spotify.com/embed/episode/123ABC', false)
+            ->assertSee('Uploaded programme audio')
+            ->assertSee('Programme introduction')
+            ->assertSee('https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ', false)
+            ->assertSee('Uploaded programme video');
+    }
+
+    public function test_removing_uploaded_media_deletes_its_managed_file(): void
+    {
+        Storage::fake('public');
+        $administrator = User::factory()->superAdmin()->create();
+        Programme::importDefaultsIfEmpty();
+        $programme = Programme::query()->where('slug', 'christian-leadership')->firstOrFail();
+
+        $component = Livewire::actingAs($administrator)
+            ->test(ProgrammeManager::class)
+            ->call('selectProgramme', $programme->id)
+            ->set('mediaForm.type', 'image')
+            ->set('mediaForm.title', 'Temporary picture')
+            ->set('mediaFile', UploadedFile::fake()->image('temporary.jpg'))
+            ->call('addMedia');
+
+        $path = $programme->fresh()->media[0]['path'];
+        Storage::disk('public')->assertExists($path);
+
+        $component->call('removeMedia', 0)->assertHasNoErrors();
+
+        Storage::disk('public')->assertMissing($path);
+        $this->assertSame([], $programme->fresh()->media);
+    }
+
+    public function test_supported_media_platform_links_are_converted_to_safe_embeds(): void
+    {
+        $this->assertSame(
+            'https://audiomack.com/embed/impact/song/leadership-conversation',
+            ProgrammeMedia::embedUrl(['type' => 'audio', 'source' => 'link', 'url' => 'https://audiomack.com/impact/song/leadership-conversation']),
+        );
+        $this->assertSame(
+            'https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fimpact%2Fleadership',
+            ProgrammeMedia::embedUrl(['type' => 'audio', 'source' => 'link', 'url' => 'https://soundcloud.com/impact/leadership']),
+        );
+        $this->assertSame(
+            'https://player.vimeo.com/video/123456789',
+            ProgrammeMedia::embedUrl(['type' => 'video', 'source' => 'link', 'url' => 'https://vimeo.com/123456789']),
+        );
+        $this->assertNull(
+            ProgrammeMedia::embedUrl(['type' => 'video', 'source' => 'link', 'url' => 'https://untrusted.example.org/watch/123']),
+        );
     }
 }

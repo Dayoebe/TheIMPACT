@@ -257,7 +257,7 @@ class ProgrammeManager extends Component
     }
 
     /** @param array<string, mixed> $media
-     *  @return array<string, mixed>
+     * @return array<string, mixed>
      */
     public function mediaPreview(array $media): array
     {

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Storage;
 class ProgrammeMedia
 {
     /** @param array<string, mixed> $media
-     *  @return array<string, mixed>
+     * @return array<string, mixed>
      */
     public static function present(array $media): array
     {
