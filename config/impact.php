@@ -26,8 +26,4 @@ return [
         'advisors' => ['title' => 'Advisors', 'icon' => 'mentor', 'description' => 'Experienced voices offering perspective, counsel and specialist insight to strengthen the network’s work.', 'people' => []],
         'other-leadership' => ['title' => 'Other key leadership', 'icon' => 'connect', 'description' => 'Additional leadership responsibilities that support the network’s communities, partnerships and shared work.', 'people' => []],
     ],
-    'mentorship' => [
-        'mentor_application_url' => null,
-        'mentee_application_url' => null,
-    ],
 ];
