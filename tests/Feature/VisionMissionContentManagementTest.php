@@ -76,7 +76,7 @@ class VisionMissionContentManagementTest extends TestCase
     {
         $response = $this->get(route('about.vision-mission'))->assertOk();
 
-        $response->assertSee('class="nav-dropdown"', false)
+        $response->assertSee('class="nav-dropdown ', false)
             ->assertSee('About overview')
             ->assertSee('Vision &amp; Mission', false)
             ->assertSee('href="'.route('about').'"', false)

@@ -71,7 +71,7 @@ class PublicPagesTest extends TestCase
             foreach (['home', 'about', 'about.vision-mission', 'about.philosophy-focus', 'leadership', 'programmes.index', 'programmes.cohorts', 'mentorship'] as $destination) {
                 $response->assertSee('href="'.route($destination).'"', false);
             }
-            preg_match('/<nav class="app-nav".*?<\/nav>/s', $response->getContent(), $matches);
+            preg_match('/<nav class="app-nav [^"]*".*?<\/nav>/s', $response->getContent(), $matches);
             $this->assertNotEmpty($matches, $routeName);
             $this->assertSame(1, substr_count($matches[0], 'aria-current="page"'), $routeName);
         }

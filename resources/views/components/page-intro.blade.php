@@ -1,7 +1,7 @@
 @props(['eyebrow', 'title', 'description', 'icon' => 'compass', 'parent' => null, 'parentUrl' => null])
-<section class="inner-hero">
-    <div class="shell">
-        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ route('home') }}">Home</a><span aria-hidden="true">/</span>@if($parent)<a href="{{ $parentUrl }}">{{ $parent }}</a><span aria-hidden="true">/</span>@endif<span aria-current="page">{{ $eyebrow }}</span></nav>
-        <div class="inner-hero-grid"><div><p class="eyebrow section-label">{{ $eyebrow }}</p><h1>{{ $title }}</h1><p class="inner-lead">{{ $description }}</p>{{ $slot }}</div><div class="inner-emblem" aria-hidden="true"><span><x-icon :name="$icon" /></span><p>FAITH · PURPOSE · CONTRIBUTION</p></div></div>
+<section class="inner-hero border-b border-line bg-surface [&_h1]:mt-0 [&_h1]:max-w-200 [&_h1]:text-[clamp(42px,10.5vw,74px)]">
+    <div class="shell mx-auto w-[min(1240px,calc(100%-40px))] md:w-[min(1240px,calc(100%-64px))]">
+        <nav class="breadcrumb flex flex-wrap items-center gap-3 py-3 text-[11px] text-muted" aria-label="Breadcrumb"><a href="{{ route('home') }}">Home</a><span aria-hidden="true">/</span>@if($parent)<a href="{{ $parentUrl }}">{{ $parent }}</a><span aria-hidden="true">/</span>@endif<span aria-current="page">{{ $eyebrow }}</span></nav>
+        <div class="inner-hero-grid grid grid-cols-1 gap-6 py-5 pb-9 lg:grid-cols-[1fr_auto] lg:items-center lg:py-12"><div><p class="eyebrow text-[10px] leading-[1.8] font-bold tracking-[1.5px] uppercase section-label mb-4 text-plum tracking-[1.8px]">{{ $eyebrow }}</p><h1>{{ $title }}</h1><p class="inner-lead mb-6 max-w-152 text-base leading-[1.85] text-muted">{{ $description }}</p>{{ $slot }}</div><div class="inner-emblem hidden lg:grid lg:place-items-center lg:gap-5 lg:px-12 [&_>_span]:grid [&_>_span]:h-55 [&_>_span]:w-45 [&_>_span]:place-items-center [&_>_span]:rounded-t-full [&_>_span]:border [&_>_span]:border-line [&_>_span]:text-[#95682f] [&_p]:text-[8px] [&_p]:tracking-[2px] [&_p]:text-[#95682f]" aria-hidden="true"><span><x-icon :name="$icon" /></span><p>FAITH · PURPOSE · CONTRIBUTION</p></div></div>
     </div>
 </section>

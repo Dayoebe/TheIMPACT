@@ -16,7 +16,7 @@
     @livewireStyles
 </head>
 <body>
-    <a href="#main" class="skip-link">Skip to content</a>
+    <a href="#main" class="skip-link fixed -top-24 left-5 z-100 bg-gold p-4 focus:top-3">Skip to content</a>
     {{ $slot }}
     @livewireScripts
 </body>
