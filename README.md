@@ -18,7 +18,7 @@ THE IMPACT is the public website for a network focused on developing Christ-cent
 
 The site presents the organisation's identity, vision, mission, leadership structure, programmes and mentorship initiative. Its public experience is built mobile-first and progressively adapts into a spacious editorial layout for tablets and desktops.
 
-The project is currently in active development. Leadership names, facilitator profiles, dates, addresses, cohorts and application details shown in the interface are clearly identified as sample or illustrative content. They are intended to be replaced with verified information through a future administration dashboard.
+Administrators manage the homepage, organisational pages, programmes, cohorts, mentorship, leadership profiles and user access through the protected dashboard.
 
 ## Vision and mission
 
@@ -41,10 +41,10 @@ The network's philosophy connects six ideas: **Faith → Leadership → Competen
 | Home | `/` | Introduces the network, its focus areas and journey. |
 | About | `/about` | Explains who THE IMPACT is, why it exists and what makes it different. |
 | Vision & Mission | `/about/vision-mission` | Presents the vision, five-step mission and six-part philosophy. |
-| Leadership | `/leadership` | Shows the leadership structure and clearly labelled sample profiles. |
+| Leadership | `/leadership` | Shows confirmed leadership profiles and responsibilities. |
 | Programmes | `/programmes` | Lists the six programme pathways. |
-| Programme detail | `/programmes/{slug}` | Provides objectives, audience, curriculum, duration, facilitators, cohorts and a registration preview. |
-| Mentorship | `/mentorship` | Explains mentors, mentees, matching, mentorship areas and participation previews. |
+| Programme detail | `/programmes/{slug}` | Provides objectives, audience, curriculum and available participation details. |
+| Mentorship | `/mentorship` | Explains mentors, mentees, matching, mentorship areas and participation routes. |
 
 Current programme slugs:
 
@@ -66,7 +66,7 @@ Unknown or malformed programme slugs return a standard `404` response.
 - Data-driven programme directory and programme detail pages.
 - Accessible landmarks, skip navigation, visible focus states and keyboard-friendly controls.
 - Responsive, locally served WebP imagery and locally hosted fonts.
-- Honest empty and preview states when information or applications are not confirmed.
+- Protected content management for every principal public page.
 - Feature tests covering public routes, page content, dynamic programmes, metadata, fallbacks and navigation.
 
 ## Technology
@@ -152,24 +152,22 @@ vendor/bin/pint --dirty --format agent
 php artisan route:list --except-vendor
 ```
 
-## Content configuration
+## Content management
 
-Public organisational content is currently stored in two configuration files:
+Default organisational content is defined in two configuration files:
 
-- [`config/impact.php`](config/impact.php) contains the vision, mission, philosophy, leadership groups and mentorship application settings.
-- [`config/programmes.php`](config/programmes.php) contains programme copy, curricula, durations, facilitators, cohorts and registration links.
+- [`config/impact.php`](config/impact.php) contains the vision, mission, philosophy and initial leadership structure.
+- [`config/programmes.php`](config/programmes.php) contains the initial programme catalogue and curricula.
 
-Set a programme's `registration_url` to a verified application URL to replace its preview button. The mentorship page behaves the same way with `mentor_application_url` and `mentee_application_url` in `config/impact.php`.
-
-Sample entries should remain visibly labelled until they are replaced with confirmed data. Do not remove those labels while placeholder names, dates, locations or roles are still present.
+The database stores editable page content, programme records, cohort details, application links and leadership profiles. Administrators should publish only verified organisational information.
 
 ## Project structure
 
 ```text
 app/Livewire/                 Public page components
-config/impact.php             Organisation and mentorship content
-config/programmes.php         Programme catalogue and detail content
-public/images/                Responsive public imagery
+config/impact.php             Organisation defaults
+config/programmes.php         Programme defaults
+public/images/                Public imagery
 resources/css/app.css         Design system and responsive styles
 resources/fonts/              Locally hosted fonts and licences
 resources/views/components/   Shared Blade interface components
@@ -182,7 +180,7 @@ tests/Feature/                Public-page and programme feature tests
 
 The visual system uses Cormorant Garamond for editorial headings and Manrope for interface and body copy. Its core palette combines deep aubergine, warm ivory, champagne and muted rose.
 
-Responsive images use `srcset` so mobile devices receive smaller files. The current people-focused images are AI-generated illustrations used to communicate the organisation's values; they do not document real events or identify actual members. Their disclosure is also displayed in the site footer.
+The people-focused illustrations communicate the organisation's values; they do not document real events or identify actual members. The President and Convener portrait is a supplied organisational asset.
 
 When changing the interface, preserve:
 
@@ -191,7 +189,7 @@ When changing the interface, preserve:
 - keyboard access to menus, accordions and dialogs;
 - visible focus styles and meaningful alt text;
 - reduced-motion support;
-- honest labels for illustrative or unconfirmed information.
+- factual organisational content and verified participation links.
 
 ## Testing
 
@@ -221,13 +219,13 @@ For a production deployment:
 6. Run `php artisan optimize`.
 7. Point the web server document root to the project's `public/` directory.
 
-Never deploy the sample leadership, schedule, address or application data as confirmed information. Replace it with verified organisational content first.
+Review public content and participation links in the dashboard before deployment.
 
 ## Contributing
 
 1. Create a focused branch from `main`.
 2. Follow the existing Laravel, Livewire and Blade conventions.
-3. Keep public copy factual and label placeholders clearly.
+3. Keep public copy factual and do not publish invented organisational information.
 4. Add or update focused feature tests when behaviour changes.
 5. Run Pint, the relevant tests and the production build.
 6. Open a pull request that explains the user-facing change and its validation.
