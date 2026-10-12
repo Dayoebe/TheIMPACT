@@ -271,6 +271,42 @@ class ProgrammeManager extends Component
         return ProgrammeMedia::present($media);
     }
 
+    /** @return array<string, mixed>|null */
+    public function pendingMediaPreview(string $type): ?array
+    {
+        if (! in_array($type, ['image', 'audio', 'video'], true)) {
+            return null;
+        }
+
+        $mediaFile = $this->mediaFiles[$type] ?? null;
+
+        if ($mediaFile) {
+            try {
+                return [
+                    'type' => $type,
+                    'source' => 'temporary',
+                    'resolved_url' => $mediaFile->temporaryUrl(),
+                    'embed_url' => null,
+                    'direct_playable' => true,
+                ];
+            } catch (\Throwable) {
+                return null;
+            }
+        }
+
+        $url = trim($this->mediaForms[$type]['external_url'] ?? '');
+
+        if ($url === '' || filter_var($url, FILTER_VALIDATE_URL) === false) {
+            return null;
+        }
+
+        return ProgrammeMedia::present([
+            'type' => $type,
+            'source' => 'link',
+            'url' => $url,
+        ]);
+    }
+
     public function restorePageDefaults(): void
     {
         $this->pageContent = ProgrammeDefaults::page();

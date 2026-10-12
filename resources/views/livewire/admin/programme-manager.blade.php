@@ -34,10 +34,31 @@
                                 <legend>{{ $settings['heading'] }}</legend>
                                 <div class="programme-media-fields grid gap-4 [&_label]:grid [&_label]:content-start [&_label]:text-[9px] [&_label]:font-extrabold [&_label]:text-ink [&_input]:mt-1.5 [&_input]:h-11 [&_input]:w-full [&_input]:rounded-lg [&_input]:border [&_input]:border-line [&_input]:bg-white [&_input]:px-3 [&_input]:py-2.5 [&_input]:font-sans [&_input]:text-xs [&_input]:font-medium [&_input]:text-ink [&_input]:outline-none [&_input]:focus:border-plum [&_input]:focus:ring-3 [&_input]:focus:ring-plum/10">
                                     <label>Title<input type="text" wire:model="mediaForms.{{ $type }}.title" placeholder="Give this {{ $settings['action'] }} a clear title">@error("mediaForms.$type.title")<small class="editor-error mt-2 block text-[9px] text-red-700">{{ $message }}</small>@enderror</label>
-                                    <label>Online link<input type="url" wire:model="mediaForms.{{ $type }}.external_url" placeholder="{{ $settings['placeholder'] }}">@error("mediaForms.$type.external_url")<small class="editor-error mt-2 block text-[9px] text-red-700">{{ $message }}</small>@enderror</label>
+                                    <label>Online link<input type="url" wire:model.live.debounce.500ms="mediaForms.{{ $type }}.external_url" placeholder="{{ $settings['placeholder'] }}">@error("mediaForms.$type.external_url")<small class="editor-error mt-2 block text-[9px] text-red-700">{{ $message }}</small>@enderror</label>
                                 </div>
                                 <div class="programme-media-upload flex flex-col items-start gap-3 rounded-xl border border-dashed border-plum/40 bg-paper p-4 sm:flex-row sm:items-center sm:justify-between [&_p]:mt-1 [&_p]:text-xs [&_p]:text-muted"><div><strong>Or upload from your device</strong><p>{{ $settings['help'] }}</p></div><label class="editor-file-button inline-flex min-h-10 items-center rounded-lg bg-ink px-3 py-2 text-[9px] font-extrabold text-white [&_input]:absolute [&_input]:size-px [&_input]:overflow-hidden [&_input]:opacity-0">Choose {{ $settings['action'] }}<input type="file" wire:model="mediaFiles.{{ $type }}" accept="{{ $settings['accept'] }}"></label><div wire:loading wire:target="mediaFiles.{{ $type }}" class="editor-uploading mt-2 text-[9px] text-plum">Preparing preview…</div>@error("mediaFiles.$type")<small class="editor-error mt-2 block text-[9px] text-red-700">{{ $message }}</small>@enderror</div>
                                 @if($mediaFiles[$type] ?? null)<div class="programme-media-pending rounded-lg bg-amber-50 px-4 py-3 text-xs text-amber-900"><strong>Ready to save:</strong> {{ $mediaFiles[$type]->getClientOriginalName() }}</div>@endif
+                                @php($pendingPreview = $this->pendingMediaPreview($type))
+                                @if($pendingPreview)
+                                    <div class="grid gap-2 rounded-xl border border-line bg-paper p-3" wire:key="pending-media-preview-{{ $type }}-{{ md5($pendingPreview['resolved_url']) }}">
+                                        <span class="text-[9px] font-extrabold tracking-wide text-plum uppercase">Instant preview</span>
+                                        <div class="grid aspect-video min-h-28 place-items-center overflow-hidden rounded-lg bg-ink [&_img]:size-full [&_img]:object-cover [&_video]:size-full [&_video]:object-cover [&_iframe]:aspect-video [&_iframe]:size-full [&_iframe]:border-0 [&_audio]:w-[calc(100%-32px)] [&_>_a]:flex [&_>_a]:min-h-28 [&_>_a]:w-full [&_>_a]:flex-col [&_>_a]:items-center [&_>_a]:justify-center [&_>_a]:gap-2 [&_>_a]:p-4 [&_>_a]:text-center [&_>_a]:text-xs [&_>_a]:text-gold">
+                                            @if($type === 'image')
+                                                <img src="{{ $pendingPreview['resolved_url'] }}" alt="Picture preview">
+                                            @elseif($type === 'audio' && $pendingPreview['embed_url'])
+                                                <iframe src="{{ $pendingPreview['embed_url'] }}" title="Audio preview" allow="autoplay; clipboard-write; encrypted-media"></iframe>
+                                            @elseif($type === 'audio' && $pendingPreview['direct_playable'])
+                                                <audio controls preload="metadata" src="{{ $pendingPreview['resolved_url'] }}"></audio>
+                                            @elseif($type === 'video' && $pendingPreview['embed_url'])
+                                                <iframe src="{{ $pendingPreview['embed_url'] }}" title="Video preview" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                            @elseif($type === 'video' && $pendingPreview['direct_playable'])
+                                                <video controls preload="metadata" src="{{ $pendingPreview['resolved_url'] }}"></video>
+                                            @else
+                                                <a href="{{ $pendingPreview['resolved_url'] }}" target="_blank" rel="noopener noreferrer"><x-admin-icon name="external" /><span>Open link preview</span></a>
+                                            @endif
+                                        </div>
+                                    </div>
+                                @endif
                                 <button type="button" class="editor-add-button min-h-10 rounded-lg bg-ink px-3 py-2 text-[9px] font-extrabold text-white" wire:click="addMedia('{{ $type }}')" wire:loading.attr="disabled" wire:target="addMedia('{{ $type }}'),mediaFiles.{{ $type }}"><span wire:loading.remove wire:target="addMedia('{{ $type }}')">＋ Add {{ $settings['action'] }}</span><span wire:loading wire:target="addMedia('{{ $type }}')">Saving {{ $settings['action'] }}…</span></button>
                             </fieldset>
                         @endforeach

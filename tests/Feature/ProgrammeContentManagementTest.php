@@ -151,6 +151,28 @@ class ProgrammeContentManagementTest extends TestCase
             ->assertSee('Uploaded programme video');
     }
 
+    public function test_administrator_sees_media_previews_before_saving_them(): void
+    {
+        Storage::fake('public');
+        $administrator = User::factory()->superAdmin()->create();
+        Programme::importDefaultsIfEmpty();
+        $programme = Programme::query()->where('slug', 'christian-leadership')->firstOrFail();
+
+        $component = Livewire::actingAs($administrator)
+            ->test(ProgrammeManager::class)
+            ->call('selectProgramme', $programme->id)
+            ->set('mediaForms.video.external_url', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+            ->assertSee('Instant preview')
+            ->assertSee('https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ', false)
+            ->set('mediaForms.image.external_url', 'https://images.example.org/programme.jpg')
+            ->assertSee('https://images.example.org/programme.jpg', false)
+            ->set('mediaFiles.audio', UploadedFile::fake()->create('preview.mp3', 256, 'audio/mpeg'))
+            ->assertSee('<audio controls', false);
+
+        $this->assertNotEmpty($component->instance()->pendingMediaPreview('audio')['resolved_url']);
+        $this->assertNull($programme->fresh()->media);
+    }
+
     public function test_removing_uploaded_media_deletes_its_managed_file(): void
     {
         Storage::fake('public');
