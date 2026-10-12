@@ -22,6 +22,49 @@
 
             <section class="editor-section"><div class="editor-section-heading"><div><span>06</span><h2>Cohorts & registration</h2><p>Publish only confirmed schedules and use the registration URL when applications open.</p></div><button type="button" class="editor-add-button" wire:click="addCohort">＋ Add cohort</button></div><div class="editor-stack">@forelse($programme['cohorts'] as $index => $cohort)<fieldset wire:key="cohort-{{ $index }}"><legend><span>0{{ $index + 1 }}</span>{{ $cohort['name'] ?: 'New cohort' }}</legend><div class="editor-field-grid"><label class="is-wide">Cohort name<input type="text" wire:model="programme.cohorts.{{ $index }}.name"></label><label>Starts<input type="text" wire:model="programme.cohorts.{{ $index }}.starts"></label><label>Format<input type="text" wire:model="programme.cohorts.{{ $index }}.format"></label><label class="is-wide">Location<input type="text" wire:model="programme.cohorts.{{ $index }}.location"></label></div><button type="button" class="editor-remove-button" wire:click="removeCohort({{ $index }})">Remove cohort</button></fieldset>@empty<div class="admin-empty-state">No cohorts added.</div>@endforelse</div></section>
 
+            <section class="editor-section programme-media-editor"><div class="editor-section-heading"><div><span>07</span><h2>Pictures, audio & video</h2><p>Upload a local file or add an online media link. Saved items appear below and on the public programme page.</p></div><x-admin-icon name="media" /></div>
+                @if($programmeId)
+                    <div class="programme-media-form">
+                        <div class="editor-field-grid">
+                            <label>Media type<select wire:model.live="mediaForm.type"><option value="image">Picture</option><option value="audio">Audio</option><option value="video">Video</option></select></label>
+                            <label>Title<input type="text" wire:model="mediaForm.title" placeholder="Give this media a clear title">@error('mediaForm.title')<small class="editor-error">{{ $message }}</small>@enderror</label>
+                            <label class="is-wide">Online link<input type="url" wire:model="mediaForm.external_url" placeholder="YouTube, Spotify, Audiomack, Vimeo, SoundCloud or a direct media URL">@error('mediaForm.external_url')<small class="editor-error">{{ $message }}</small>@enderror</label>
+                        </div>
+                        <div class="programme-media-upload"><div><strong>Or upload from your device</strong><p>@if($mediaForm['type'] === 'image')JPG, PNG or WebP, up to 5 MB.@elseif($mediaForm['type'] === 'audio')MP3, WAV, OGG, M4A or AAC, up to 50 MB.@else MP4, WebM, MOV or M4V, up to 200 MB.@endif</p></div><label class="editor-file-button">Choose {{ $mediaForm['type'] }}<input type="file" wire:model="mediaFile" @if($mediaForm['type'] === 'image') accept="image/jpeg,image/png,image/webp" @elseif($mediaForm['type'] === 'audio') accept="audio/mpeg,audio/mp4,audio/wav,audio/ogg,audio/aac" @else accept="video/mp4,video/webm,video/quicktime" @endif></label><div wire:loading wire:target="mediaFile" class="editor-uploading">Preparing preview…</div>@error('mediaFile')<small class="editor-error">{{ $message }}</small>@enderror</div>
+                        @if($mediaFile)<div class="programme-media-pending"><strong>Ready to save:</strong> {{ $mediaFile->getClientOriginalName() }}</div>@endif
+                        <button type="button" class="editor-add-button" wire:click="addMedia" wire:loading.attr="disabled" wire:target="addMedia,mediaFile"><span wire:loading.remove wire:target="addMedia">＋ Add to media library</span><span wire:loading wire:target="addMedia">Saving media…</span></button>
+                    </div>
+
+                    <div class="programme-media-library">
+                        @forelse($programme['media'] as $index => $item)
+                            @php($preview = $this->mediaPreview($item))
+                            <article class="programme-media-item" wire:key="programme-media-{{ $item['id'] }}">
+                                <div class="programme-media-preview">
+                                    @if($item['type'] === 'image')
+                                        <img src="{{ $preview['resolved_url'] }}" alt="{{ $item['title'] }}" loading="lazy">
+                                    @elseif($item['type'] === 'audio' && $preview['embed_url'])
+                                        <iframe src="{{ $preview['embed_url'] }}" title="{{ $item['title'] }}" loading="lazy" allow="autoplay; clipboard-write; encrypted-media"></iframe>
+                                    @elseif($item['type'] === 'audio' && $preview['direct_playable'])
+                                        <audio controls preload="metadata" src="{{ $preview['resolved_url'] }}"></audio>
+                                    @elseif($item['type'] === 'video' && $preview['embed_url'])
+                                        <iframe src="{{ $preview['embed_url'] }}" title="{{ $item['title'] }}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    @elseif($item['type'] === 'video' && $preview['direct_playable'])
+                                        <video controls preload="metadata" src="{{ $preview['resolved_url'] }}"></video>
+                                    @else
+                                        <a href="{{ $preview['resolved_url'] }}" target="_blank" rel="noopener noreferrer"><x-admin-icon name="external" /><span>Open media link</span></a>
+                                    @endif
+                                </div>
+                                <div class="programme-media-meta"><span class="eyebrow">{{ $item['source'] }} {{ $item['type'] }}</span><h3>{{ $item['title'] }}</h3><button type="button" class="editor-remove-button" wire:click="removeMedia({{ $index }})" wire:confirm="Remove this media item?">Remove</button></div>
+                            </article>
+                        @empty
+                            <div class="admin-empty-state">No pictures, audio or video have been added to this programme.</div>
+                        @endforelse
+                    </div>
+                @else
+                    <div class="admin-empty-state">Save the programme as a draft first, then add its media.</div>
+                @endif
+            </section>
+
             <div class="editor-save-bar"><div><strong>{{ $programmeId ? 'Ready to save?' : 'Create this draft?' }}</strong><span>Published programmes update the public catalogue immediately.</span></div><button type="submit" wire:loading.attr="disabled"><span wire:loading.remove wire:target="saveProgramme">{{ $programmeId ? 'Save programme' : 'Create programme' }}</span><span wire:loading wire:target="saveProgramme">Saving…</span></button></div>
             @if($programmeId)<div class="editor-danger-zone"><div><strong>Delete this programme</strong><p>This permanently removes the programme from the dashboard and public website.</p></div><button type="button" wire:click="deleteProgramme" wire:confirm="Permanently delete this programme? This cannot be undone.">Delete programme</button></div>@endif
         </form>

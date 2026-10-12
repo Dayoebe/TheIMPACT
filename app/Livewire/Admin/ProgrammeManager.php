@@ -6,16 +6,21 @@ use App\Models\Programme;
 use App\Models\ProgrammePageContent;
 use App\Support\InteractsWithDashboardNotifications;
 use App\Support\ProgrammeDefaults;
+use App\Support\ProgrammeMedia;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 #[Layout('layouts.admin')]
 class ProgrammeManager extends Component
 {
     use InteractsWithDashboardNotifications;
+    use WithFileUploads;
 
     /** @var array<string, mixed> */
     public array $pageContent = [];
@@ -26,6 +31,11 @@ class ProgrammeManager extends Component
     public ?int $programmeId = null;
 
     public bool $saved = false;
+
+    /** @var array{type: string, title: string, external_url: string} */
+    public array $mediaForm = ['type' => 'image', 'title' => '', 'external_url' => ''];
+
+    public mixed $mediaFile = null;
 
     public function mount(): void
     {
@@ -47,6 +57,8 @@ class ProgrammeManager extends Component
         $record = Programme::query()->findOrFail($programmeId);
         $this->programmeId = $record->id;
         $this->programme = $record->only(['slug', 'name', 'headline', 'icon', 'category', 'summary', 'overview', 'audience', 'duration', 'registration_url', 'objectives', 'curriculum', 'facilitators', 'cohorts', 'status', 'sort_order']);
+        $this->programme['media'] = $record->media ?? [];
+        $this->resetMediaForm();
         $this->saved = false;
         $this->resetValidation();
     }
@@ -56,8 +68,9 @@ class ProgrammeManager extends Component
         $this->programmeId = null;
         $this->programme = [
             'slug' => '', 'name' => '', 'headline' => '', 'icon' => 'equip', 'category' => '', 'summary' => '', 'overview' => '', 'audience' => '', 'duration' => '', 'registration_url' => null,
-            'objectives' => [''], 'curriculum' => [['title' => '', 'description' => '']], 'facilitators' => [], 'cohorts' => [], 'status' => 'draft', 'sort_order' => (int) Programme::query()->max('sort_order') + 1,
+            'objectives' => [''], 'curriculum' => [['title' => '', 'description' => '']], 'facilitators' => [], 'cohorts' => [], 'media' => [], 'status' => 'draft', 'sort_order' => (int) Programme::query()->max('sort_order') + 1,
         ];
+        $this->resetMediaForm();
         $this->saved = false;
         $this->resetValidation();
     }
@@ -124,7 +137,9 @@ class ProgrammeManager extends Component
     public function deleteProgramme(): void
     {
         abort_if($this->programmeId === null, 404);
-        Programme::query()->findOrFail($this->programmeId)->delete();
+        $programme = Programme::query()->findOrFail($this->programmeId);
+        Storage::disk('public')->deleteDirectory('programme-media/'.$programme->id);
+        $programme->delete();
         $next = Programme::query()->orderBy('sort_order')->orderBy('id')->first();
         $next ? $this->selectProgramme($next->id) : $this->newProgramme();
         $this->saved = true;
@@ -175,6 +190,80 @@ class ProgrammeManager extends Component
         $this->programme['cohorts'] = array_values($this->programme['cohorts']);
     }
 
+    public function addMedia(): void
+    {
+        abort_if($this->programmeId === null, 404);
+
+        $rules = [
+            'mediaForm.type' => ['required', Rule::in(['image', 'audio', 'video'])],
+            'mediaForm.title' => ['required', 'string', 'max:200'],
+            'mediaForm.external_url' => ['nullable', 'url:http,https', 'max:2000'],
+        ];
+        $rules['mediaFile'] = match ($this->mediaForm['type']) {
+            'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
+            'audio' => ['nullable', 'file', 'mimes:mp3,wav,ogg,m4a,aac', 'max:51200'],
+            'video' => ['nullable', 'file', 'mimes:mp4,webm,mov,m4v', 'max:204800'],
+        };
+        $this->validate($rules);
+
+        if (! $this->mediaFile && blank($this->mediaForm['external_url'])) {
+            $this->addError('mediaFile', 'Choose a local file or enter an external media URL.');
+
+            return;
+        }
+
+        $programme = Programme::query()->findOrFail($this->programmeId);
+        $media = $programme->media ?? [];
+        $item = [
+            'id' => (string) Str::uuid(),
+            'type' => $this->mediaForm['type'],
+            'title' => $this->mediaForm['title'],
+        ];
+
+        if ($this->mediaFile) {
+            $item['source'] = 'upload';
+            $item['path'] = $this->mediaFile->store('programme-media/'.$programme->id.'/'.$this->mediaForm['type'], 'public');
+            $item['mime'] = $this->mediaFile->getMimeType();
+        } else {
+            $item['source'] = 'link';
+            $item['url'] = $this->mediaForm['external_url'];
+        }
+
+        $media[] = $item;
+        $programme->update(['media' => $media, 'updated_by' => auth()->id()]);
+        $this->programme['media'] = $media;
+        $this->resetMediaForm();
+        $this->saved = true;
+        $this->notifyDashboard(ucfirst($item['type']).' added to the programme media library.');
+    }
+
+    public function removeMedia(int $index): void
+    {
+        abort_if($this->programmeId === null, 404);
+        $programme = Programme::query()->findOrFail($this->programmeId);
+        $media = $programme->media ?? [];
+        abort_unless(isset($media[$index]), 404);
+
+        if (($media[$index]['source'] ?? null) === 'upload' && str_starts_with($media[$index]['path'] ?? '', 'programme-media/')) {
+            Storage::disk('public')->delete($media[$index]['path']);
+        }
+
+        unset($media[$index]);
+        $media = array_values($media);
+        $programme->update(['media' => $media, 'updated_by' => auth()->id()]);
+        $this->programme['media'] = $media;
+        $this->saved = true;
+        $this->notifyDashboard('Media removed from the programme.');
+    }
+
+    /** @param array<string, mixed> $media
+     *  @return array<string, mixed>
+     */
+    public function mediaPreview(array $media): array
+    {
+        return ProgrammeMedia::present($media);
+    }
+
     public function restorePageDefaults(): void
     {
         $this->pageContent = ProgrammeDefaults::page();
@@ -186,5 +275,12 @@ class ProgrammeManager extends Component
     public function render(): View
     {
         return view('livewire.admin.programme-manager');
+    }
+
+    private function resetMediaForm(): void
+    {
+        $this->mediaForm = ['type' => 'image', 'title' => '', 'external_url' => ''];
+        $this->reset('mediaFile');
+        $this->resetValidation();
     }
 }

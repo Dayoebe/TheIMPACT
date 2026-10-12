@@ -283,6 +283,16 @@
 @utility is-wide { @apply md:col-span-2; }
 @utility editor-image-control { @apply my-5 grid grid-cols-1 gap-4.5 rounded-xl bg-surface p-4 md:grid-cols-[.8fr_1.2fr]; }
 @utility editor-image-preview { @apply aspect-[3/2] overflow-hidden rounded-lg bg-[#f1e7ec]; }
+@utility programme-media-form { @apply mb-6 grid gap-4 rounded-xl border border-line bg-surface p-4.5; }
+@utility programme-media-upload { @apply flex flex-col items-start gap-3 rounded-xl border border-dashed border-plum/40 bg-paper p-4 sm:flex-row sm:items-center sm:justify-between; }
+@utility programme-media-pending { @apply rounded-lg bg-amber-50 px-4 py-3 text-xs text-amber-900; }
+@utility programme-media-library { @apply grid gap-4 md:grid-cols-2; }
+@utility programme-media-item { @apply overflow-hidden rounded-xl border border-line bg-paper; }
+@utility programme-media-preview { @apply grid aspect-video place-items-center overflow-hidden bg-ink; }
+@utility programme-media-meta { @apply grid gap-2 p-4; }
+@utility programme-public-media { @apply grid gap-5; }
+@utility programme-public-media-item { @apply overflow-hidden rounded-2xl border border-line bg-paper lg:rounded-md; }
+@utility programme-public-media-preview { @apply grid min-h-28 place-items-center overflow-hidden bg-ink; }
 @utility is-portrait { @apply aspect-[3/4] max-w-70; }
 @utility editor-file-button { @apply inline-flex min-h-10 items-center rounded-lg bg-ink px-3 py-2 text-[9px] font-extrabold text-white; }
 @utility editor-uploading { @apply mt-2 text-[9px] text-plum; }
@@ -479,6 +489,15 @@
     .editor-two-column input, .editor-two-column textarea, .editor-repeat-row textarea { @apply mt-1.5 w-full rounded-lg border border-line bg-white px-3 py-2.5 font-sans text-xs font-medium leading-relaxed text-ink outline-none focus:border-plum focus:ring-3 focus:ring-plum/10; }
     .editor-field-grid input, .editor-field-grid select, .editor-two-column input { @apply h-11; }
     .editor-image-preview img { @apply size-full object-cover; }
+    .programme-media-upload p { @apply mt-1 text-xs text-muted; }
+    .programme-media-preview img, .programme-media-preview video, .programme-public-media-preview img, .programme-public-media-preview video { @apply size-full object-cover; }
+    .programme-media-preview iframe, .programme-public-media-preview iframe { @apply aspect-video size-full border-0; }
+    .programme-media-preview audio, .programme-public-media-preview audio { @apply w-[calc(100%-32px)]; }
+    .programme-media-preview > a, .programme-public-media-preview > a { @apply flex min-h-28 w-full flex-col items-center justify-center gap-3 p-5 text-center text-sm text-gold; }
+    .programme-media-meta h3 { @apply text-xl; }
+    .programme-media-meta .editor-remove-button { @apply justify-self-start; }
+    .programme-public-media-item > div:last-child { @apply p-4.5; }
+    .programme-public-media-item h3 { @apply mt-1 text-2xl; }
     .editor-file-button input { @apply absolute size-px overflow-hidden opacity-0; }
     .editor-two-column fieldset, .editor-stack fieldset { @apply grid gap-3.5 rounded-xl border border-line p-4.5; }
     .editor-two-column legend, .editor-stack legend { @apply px-2 font-display text-2xl font-semibold text-plum; }

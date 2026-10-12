@@ -32,6 +32,7 @@ class ProgrammeFactory extends Factory
             'curriculum' => [['title' => fake()->sentence(3), 'description' => fake()->sentence()]],
             'facilitators' => [],
             'cohorts' => [],
+            'media' => [],
             'status' => 'draft',
             'sort_order' => 0,
             'updated_by' => null,

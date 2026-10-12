@@ -15,7 +15,7 @@ class Programme extends Model
     /** @use HasFactory<ProgrammeFactory> */
     use HasFactory;
 
-    protected $fillable = ['slug', 'name', 'headline', 'icon', 'category', 'summary', 'overview', 'audience', 'duration', 'registration_url', 'objectives', 'curriculum', 'facilitators', 'cohorts', 'status', 'sort_order', 'updated_by'];
+    protected $fillable = ['slug', 'name', 'headline', 'icon', 'category', 'summary', 'overview', 'audience', 'duration', 'registration_url', 'objectives', 'curriculum', 'facilitators', 'cohorts', 'media', 'status', 'sort_order', 'updated_by'];
 
     /** @return array<string, string> */
     protected function casts(): array
@@ -25,6 +25,7 @@ class Programme extends Model
             'curriculum' => 'array',
             'facilitators' => 'array',
             'cohorts' => 'array',
+            'media' => 'array',
             'sort_order' => 'integer',
         ];
     }

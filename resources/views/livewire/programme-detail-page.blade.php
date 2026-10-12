@@ -6,10 +6,34 @@
             <section id="objectives"><p class="eyebrow section-label">02 / OBJECTIVES</p><h2>What you’ll work towards.</h2><ul class="objective-list">@foreach($programme['objectives'] as $objective)<li><x-icon name="growth" /><span>{{ $objective }}</span></li>@endforeach</ul></section>
             <section id="audience"><p class="eyebrow section-label">03 / WHO IT’S FOR</p><h2>Is this your next step?</h2><p>{{ $programme['audience'] }}</p></section>
             <section id="curriculum"><p class="eyebrow section-label">04 / CURRICULUM OUTLINE</p><h2>A connected learning journey.</h2><div class="curriculum-list">@foreach($programme['curriculum'] as $module)<details @if($loop->first) open @endif><summary><span class="eyebrow">0{{ $loop->iteration }}</span>{{ $module['title'] }}<span class="details-indicator" aria-hidden="true">+</span></summary><p>{{ $module['description'] }}</p></details>@endforeach</div></section>
+            @if(filled($media))
+                <section id="media"><p class="eyebrow section-label">05 / MEDIA LIBRARY</p><h2>Watch, listen and explore.</h2><div class="programme-public-media">
+                    @foreach($media as $item)
+                        <article class="programme-public-media-item">
+                            <div class="programme-public-media-preview">
+                                @if($item['type'] === 'image')
+                                    <img src="{{ $item['resolved_url'] }}" alt="{{ $item['title'] }}" loading="lazy" decoding="async">
+                                @elseif($item['type'] === 'audio' && $item['embed_url'])
+                                    <iframe src="{{ $item['embed_url'] }}" title="{{ $item['title'] }}" loading="lazy" allow="autoplay; clipboard-write; encrypted-media"></iframe>
+                                @elseif($item['type'] === 'audio' && $item['direct_playable'])
+                                    <audio controls preload="metadata" src="{{ $item['resolved_url'] }}"></audio>
+                                @elseif($item['type'] === 'video' && $item['embed_url'])
+                                    <iframe src="{{ $item['embed_url'] }}" title="{{ $item['title'] }}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                @elseif($item['type'] === 'video' && $item['direct_playable'])
+                                    <video controls preload="metadata" src="{{ $item['resolved_url'] }}"></video>
+                                @else
+                                    <a href="{{ $item['resolved_url'] }}" target="_blank" rel="noopener noreferrer"><x-icon :name="$item['type'] === 'audio' ? 'mentor' : 'external'" /><span>Open on the media platform</span></a>
+                                @endif
+                            </div>
+                            <div><span class="eyebrow">{{ $item['type'] }}</span><h3>{{ $item['title'] }}</h3></div>
+                        </article>
+                    @endforeach
+                </div></section>
+            @endif
             @if(filled($programme['facilitators']))<section id="facilitators"><p class="eyebrow section-label">05 / FACILITATORS</p><h2>Learning with guidance.</h2>@foreach($programme['facilitators'] as $facilitator)<article class="facilitator-row"><span class="purpose-icon"><x-icon name="mentor" /></span><div><h3>{{ $facilitator['name'] }}</h3><p>{{ $facilitator['role'] }}</p></div></article>@endforeach</section>@endif
             @if(filled($programme['cohorts']))<section id="cohorts"><p class="eyebrow section-label">06 / UPCOMING COHORTS</p><h2>Plan your next step.</h2>@foreach($programme['cohorts'] as $cohort)<article class="cohort-card"><h3>{{ $cohort['name'] }}</h3><dl><div><dt>Starts</dt><dd>{{ $cohort['starts'] }}</dd></div><div><dt>Format</dt><dd>{{ $cohort['format'] }}</dd></div><div><dt>Location</dt><dd>{{ $cohort['location'] }}</dd></div></dl></article>@endforeach</section>@endif
         </div>
-        <aside class="programme-sidebar" aria-label="Programme at a glance"><div class="programme-summary"><p class="eyebrow section-label">AT A GLANCE</p><h2>{{ $programme['name'] }}</h2><dl>@if($programme['duration'])<div><dt>Duration</dt><dd>{{ $programme['duration'] }}</dd></div>@endif<div><dt>Focus</dt><dd>{{ $programme['category'] }}</dd></div>@if($programme['registration_url'])<div><dt>Registration</dt><dd>Application details available</dd></div>@endif</dl><nav aria-label="Programme sections"><a href="#overview">Overview</a><a href="#objectives">Objectives</a><a href="#audience">Who it’s for</a><a href="#curriculum">Curriculum</a>@if(filled($programme['facilitators']))<a href="#facilitators">Facilitators</a>@endif @if(filled($programme['cohorts']))<a href="#cohorts">Upcoming cohorts</a>@endif</nav>@if($programme['registration_url'])<div id="registration" class="registration-panel"><h3>Take the next step.</h3><a href="{{ $programme['registration_url'] }}" class="button button-dark">Register for this programme <span aria-hidden="true">↗</span></a></div>@endif</div></aside>
+        <aside class="programme-sidebar" aria-label="Programme at a glance"><div class="programme-summary"><p class="eyebrow section-label">AT A GLANCE</p><h2>{{ $programme['name'] }}</h2><dl>@if($programme['duration'])<div><dt>Duration</dt><dd>{{ $programme['duration'] }}</dd></div>@endif<div><dt>Focus</dt><dd>{{ $programme['category'] }}</dd></div>@if($programme['registration_url'])<div><dt>Registration</dt><dd>Application details available</dd></div>@endif</dl><nav aria-label="Programme sections"><a href="#overview">Overview</a><a href="#objectives">Objectives</a><a href="#audience">Who it’s for</a><a href="#curriculum">Curriculum</a>@if(filled($media))<a href="#media">Media library</a>@endif @if(filled($programme['facilitators']))<a href="#facilitators">Facilitators</a>@endif @if(filled($programme['cohorts']))<a href="#cohorts">Upcoming cohorts</a>@endif</nav>@if($programme['registration_url'])<div id="registration" class="registration-panel"><h3>Take the next step.</h3><a href="{{ $programme['registration_url'] }}" class="button button-dark">Register for this programme <span aria-hidden="true">↗</span></a></div>@endif</div></aside>
     </div>
     <section class="shell closing-section"><p class="eyebrow">KEEP EXPLORING</p><h2>More ways<br><em>to prepare.</em></h2><a href="{{ route('programmes.index') }}" class="button button-dark">All programmes <span aria-hidden="true">↗</span></a></section>
 </x-public-page>
